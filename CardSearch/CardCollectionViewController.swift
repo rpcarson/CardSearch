@@ -12,14 +12,20 @@ private let reuseIdentifier = "CardCellID"
 
 class CardCollectionViewController: UICollectionViewController {
     
+    var cardData = [Card]()
+    
+    var mtgAPISerivce = MTGAPIService()
+    
     @IBAction func loadData() {
-        collectionView?.reloadData()
-        print(dataArray.count)
-       
+        mtgAPISerivce.search(searchTerm: "zombie") {
+            results in
+           self.cardData = results
+            print("Closure called in func loadData")
+            self.collectionView?.reloadData()
+        }
+        
     }
     
-    let api = RestAPIManager()
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,8 +34,8 @@ class CardCollectionViewController: UICollectionViewController {
 
         // Register cell classes
         
-        api.runTask()
-    
+        
+        
 
         
     }
@@ -59,22 +65,21 @@ class CardCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return dataArray.count
+        return cardData.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CardCell
         
-        let name = dataArray[indexPath.row].name
+        let card = cardData[indexPath.row]
+        
         cell.backgroundColor = UIColor.red
-        cell.cardNameLabel.text = name
+        cell.cardNameLabel.text = card.name
         
-        print(name)
-        print(cell.cardNameLabel.text)
-        
-    
-        // Configure the cell
+        print(card)
+        print(card.name)
+
     
         return cell
     }

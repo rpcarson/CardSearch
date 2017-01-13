@@ -8,102 +8,107 @@
 
 import Foundation
 
-
-struct CardData {
-    let cardJson: [String:String] = [:]
-    
-    var name = ""
-    var color: String? = nil
+enum SearchParameter {
+    case name
+    case color
+    case cmc
 }
 
-var cardData = CardData()
-
-  var dataArray = [CardData]()
-
-
-class RestAPIManager: NSObject {
+struct MTGAPIService {
     
-    let config = URLSessionConfiguration.default
-    var session: URLSession {
-       return URLSession(configuration: config)
-    }
-    let url = URL(string: "https://api.magicthegathering.io/v1/cards?pageSize=1")
-
-    var task = URLSessionDataTask()
+    private let baseURLString = "https://api.magicthegathering.io/v1/cards?pageSize=3"
+    
+    private var searchParameter: SearchParameter = .name
+    
+    private var searchTerm: String = "default"
    
-    func runTask() {
-        
-        task = session.dataTask(with: url!, completionHandler: {
-            (data, response, error) in
+    private var fullURLString: String {
+        switch searchParameter {
+        case .name: return baseURLString + "&name=\(searchTerm)"
+        case .color: return baseURLString + "&colors=\(searchTerm)"
+        case .cmc: return baseURLString + "&cmc=\(searchTerm)"
             
-            if error != nil {
+        }
+    }
+
+    mutating func configSearch(parameter: SearchParameter) {
+        self.searchParameter = parameter
+    }
+    
+    mutating func search(searchTerm: String, completion: @escaping ([Card]) -> Void) {
+        self.searchTerm = searchTerm
+        
+        if let url = URL(string: fullURLString) {
+            
+            let networkOperation = NetworkOperation(url: url)
+            
+            networkOperation.retrieveJSON {
+                json in
                 
-                print(error!.localizedDescription)
-                
-            } else {
-                
-                do {
-                    
-                    if let json = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [String: Any]
-                    {
-                        print("JSON Call worked?")
-                        //Implement your logic
-                        print(json)
-                        
-                        if let cards = json["cards"] as? [[String:Any]] {
-                            print("Cards")
-                            for card in cards {
-                                
-                                var magicCard = CardData()
-                                
-                                if let name = card["name"] as? String {
-                                    print("Name")
-                                    magicCard.name = name
-                                }
-                               
-                                if let colors = card["colors"] as? [String] {
-                                    var array = [String]()
-                                    for color in colors {
-                                        array.append(color)
-                                    }
-                                    var colorString = ""
-                                    for color in array {
-                                            colorString += color
-                                    }
-                                    magicCard.color = colorString
-                                }
-                                
-                                print("Card Name: \(magicCard.name)")
-                                print("Card Name: \(magicCard.color != nil ? magicCard.color! : "nil")")
-                                
-                                dataArray.append(magicCard)
-                            }
-                           
-                           
-                        }
-                        
-                       
-                        
-                    
-                    
-                    }
-                    
-                } catch {
-                    
-                    print("error in JSONSerialization")
-                    
+                if let cards = JSONParser.parser.createCard(data: json!) {
+                    print("if let cards = json MTGAPI SEARCH")
+                    completion(cards)
                 }
-                
+               
+                print("/nMTGAPI Service: running search, json results: \(json != nil ? "Success" : "fail")")
                 
             }
             
-        })
-
-        task.resume()
+        }
+        
+        
     }
-
-   
+    
+    
 }
 
+
+
+class NetworkOperation {
+    
+    typealias JSONCompletion = ([String:Any]?) -> Void
+    
+    var session: URLSession {
+        return URLSession(configuration: URLSessionConfiguration.default)
+    }
+    
+    let queryURL: URL
+    init(url: URL) {
+        self.queryURL = url
+    }
+    
+    func retrieveJSON(completion: @escaping JSONCompletion) {
+        print("NetworkOperation: running retrieveJSON")
+        let request = URLRequest(url: queryURL)
+        
+        let dataTask = session.dataTask(with: request) { (data, response, error) in
+            
+            if let HTTPResponse = response as? HTTPURLResponse {
+                switch HTTPResponse.statusCode {
+                case 200:
+                    print("HTTP Response: 200 Success")
+                    
+                    let json = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String:Any]
+                    
+                    completion(json!)
+                    
+                case 400...499: print("HTTP Response: 400+ client error")
+                case 500...599: print("HTTP Response: 500+ server error")
+                    
+                default: print("HTTP Response: Some Error")
+                    
+                }
+           
+            } else { print("invalid http response")
+           
+            }
+            
+        }
+        
+        dataTask.resume()
+        
+    }
+
+}
 
 
