@@ -16,7 +16,7 @@ enum SearchParameter {
 
 struct MTGAPIService {
     
-    private let baseURLString = "https://api.magicthegathering.io/v1/cards?pageSize=3"
+    private let baseURLString = "https://api.magicthegathering.io/v1/cards?pageSize=20"
     
     private var searchParameter: SearchParameter = .name
     
@@ -50,7 +50,7 @@ struct MTGAPIService {
                     completion(cards)
                 }
                
-                print("/nMTGAPI Service: running search, json results: \(json != nil ? "Success" : "fail")")
+                print("\nMTGAPI Service: running search, json results: \(json != nil ? "Success" : "fail")")
                 
             }
             

@@ -12,31 +12,26 @@ private let reuseIdentifier = "CardCellID"
 
 class CardCollectionViewController: UICollectionViewController {
     
-    var cardData = [Card]()
+    var cardData = [Card]() 
     
     var mtgAPISerivce = MTGAPIService()
     
     @IBAction func loadData() {
         mtgAPISerivce.search(searchTerm: "zombie") {
             results in
-           self.cardData = results
-            print("Closure called in func loadData")
-            self.collectionView?.reloadData()
+            self.cardData = results
+            DispatchQueue.main.async {
+                print("Closure called in func loadData")
+                self.collectionView?.reloadData()
+            }
         }
         
     }
     
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        
-        
-        
-
         
     }
 
@@ -73,13 +68,21 @@ class CardCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CardCell
         
         let card = cardData[indexPath.row]
+        cell.cardData = card
         
         cell.backgroundColor = UIColor.red
-        cell.cardNameLabel.text = card.name
+        cell.cardNameLabel.text = cell.cardData.name
         
-        print(card)
-        print(card.name)
-
+        if let image = JSONParser.parser.getImage(imageURL: cell.cardData.imageURL) {
+               cell.cardImageView.image = image
+        } else {
+            print("getting card image failed at cell creation")
+        }
+      
+        
+     
+    
+        print("Cell Created, imageURL = \(cell.cardData.imageURL)")
     
         return cell
     }

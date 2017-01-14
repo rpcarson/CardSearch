@@ -12,5 +12,26 @@ class CardCell: UICollectionViewCell {
     
     @IBOutlet weak var cardNameLabel: UILabel!
     
+    @IBOutlet weak var cardImageView: UIImageView!
     
+     var cardImage: UIImage {
+        var image: UIImage?
+        var imageData: Data? {
+            do {
+               return try Data(contentsOf: URL(string: cardData.imageURL)!, options: [])
+            } catch {
+                print("invalid image URL")
+                return nil
+            }
+        }
+        if let data = imageData {
+            image = UIImage(data: data)
+            print("image data loaded")
+        }
+       
+        return image!
+    }
+    
+    var cardData = Card()
+
 }

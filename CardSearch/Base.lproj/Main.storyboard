@@ -22,7 +22,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CardCellID" id="7gl-zO-Mth" customClass="CardCell" customModule="CardSearch" customModuleProvider="target">
-                                <rect key="frame" x="88" y="0.0" width="200" height="200"/>
+                                <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -33,15 +33,21 @@
                                             <color key="textColor" red="0.89342123055721567" green="1" blue="0.46174024206895858" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="8.png" translatesAutoresizingMaskIntoConstraints="NO" id="Wkv-yD-yM1"/>
                                     </subviews>
                                 </view>
                                 <color key="backgroundColor" red="1" green="0.18259365071022793" blue="0.20157242979885315" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="xcZ-RL-is2" firstAttribute="centerY" secondItem="7gl-zO-Mth" secondAttribute="centerY" id="9zc-DX-IEe"/>
+                                    <constraint firstItem="Wkv-yD-yM1" firstAttribute="leading" secondItem="7gl-zO-Mth" secondAttribute="leading" id="Avz-db-vMu"/>
+                                    <constraint firstItem="Wkv-yD-yM1" firstAttribute="top" secondItem="7gl-zO-Mth" secondAttribute="top" id="cUV-Nv-v7t"/>
+                                    <constraint firstAttribute="bottom" secondItem="Wkv-yD-yM1" secondAttribute="bottom" id="ezJ-Xu-TQb"/>
                                     <constraint firstItem="xcZ-RL-is2" firstAttribute="centerX" secondItem="7gl-zO-Mth" secondAttribute="centerX" id="htS-ff-t4N"/>
+                                    <constraint firstAttribute="trailing" secondItem="Wkv-yD-yM1" secondAttribute="trailing" id="jnS-gp-vQa"/>
                                 </constraints>
                                 <size key="customSize" width="200" height="200"/>
                                 <connections>
+                                    <outlet property="cardImageView" destination="Wkv-yD-yM1" id="hAa-4N-gKk"/>
                                     <outlet property="cardNameLabel" destination="xcZ-RL-is2" id="RpA-Aa-CLv"/>
                                 </connections>
                             </collectionViewCell>
@@ -86,4 +92,7 @@
             <point key="canvasLocation" x="248.80000000000001" y="-0.44977511244377816"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="8.png" width="120" height="80"/>
+    </resources>
 </document>

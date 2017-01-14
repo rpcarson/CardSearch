@@ -6,7 +6,7 @@
 //  Copyright © 2017 Reed Carson. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol Parser {
     func createCard(data: [String:Any]) -> [Card]?
@@ -15,6 +15,30 @@ protocol Parser {
 
 class JSONParser: Parser {
     static let parser = JSONParser()
+    
+    func getImage(imageURL: String) -> UIImage? {
+        
+      
+        if let url = URL(string: imageURL) {
+            do {
+                let imageData = try Data(contentsOf: url)
+                
+                let image = UIImage(data: imageData)
+                
+                print("returning image")
+                return image
+                
+            } catch {
+                print("bad image data")
+                return nil
+            }
+            
+        }
+        
+   print("returning nil")
+        return nil
+        
+    }
     
     
     func createCard(data: [String:Any]) -> [Card]? {
@@ -69,6 +93,10 @@ class JSONParser: Parser {
                 
                 if let flavor = card["flavor"] as? String {
                     newCard.flavor = flavor
+                }
+                
+                if let imageURL = card["imageUrl"] as? String {
+                    newCard.imageURL = imageURL
                 }
 
                 cardArray.append(newCard)
