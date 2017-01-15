@@ -14,6 +14,8 @@ class CardCell: UICollectionViewCell {
     
     @IBOutlet weak var cardImageView: UIImageView!
     
+    
+    /*
      var cardImage: UIImage {
         var image: UIImage?
         var imageData: Data? {
@@ -31,6 +33,7 @@ class CardCell: UICollectionViewCell {
        
         return image!
     }
+ */
     
     var cardData = Card()
 

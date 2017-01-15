@@ -16,7 +16,7 @@ enum SearchParameter {
 
 struct MTGAPIService {
     
-    private let baseURLString = "https://api.magicthegathering.io/v1/cards?pageSize=20"
+    private let baseURLString = "https://api.magicthegathering.io/v1/cards?pageSize=30"
     
     private var searchParameter: SearchParameter = .name
     

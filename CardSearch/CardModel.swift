@@ -43,6 +43,10 @@ struct Card {
     
     var rarity: String
     
+    var id: Int
+    
+    var otherVersionIDs: [Int]
+    
     init() {
         name = "blank"
         colors = ["blank"]
@@ -56,6 +60,8 @@ struct Card {
         flavor = "blank"
         imageURL = "blank"
         rarity = "blank"
+        id = 0
+        otherVersionIDs = [0]
     }
 }
 

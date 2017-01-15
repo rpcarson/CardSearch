@@ -17,7 +17,6 @@ class JSONParser: Parser {
     static let parser = JSONParser()
     
     func getImage(imageURL: String) -> UIImage? {
-        
       
         if let url = URL(string: imageURL) {
             do {
@@ -97,6 +96,10 @@ class JSONParser: Parser {
                 
                 if let imageURL = card["imageUrl"] as? String {
                     newCard.imageURL = imageURL
+                }
+                
+                if let id = card["multiverseid"] as? Int {
+                    newCard.id = id
                 }
 
                 cardArray.append(newCard)

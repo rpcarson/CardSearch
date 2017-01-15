@@ -33,7 +33,7 @@
                                             <color key="textColor" red="0.89342123055721567" green="1" blue="0.46174024206895858" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="8.png" translatesAutoresizingMaskIntoConstraints="NO" id="Wkv-yD-yM1"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wkv-yD-yM1"/>
                                     </subviews>
                                 </view>
                                 <color key="backgroundColor" red="1" green="0.18259365071022793" blue="0.20157242979885315" alpha="1" colorSpace="calibratedRGB"/>
@@ -60,7 +60,7 @@
                     <navigationItem key="navigationItem" id="Y6A-CF-zMG">
                         <nil key="title"/>
                         <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Lqt-xq-TQC">
-                            <rect key="frame" x="113" y="7" width="150" height="30"/>
+                            <rect key="frame" x="112.5" y="7" width="150" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="LOAD"/>
                             <connections>
@@ -92,7 +92,4 @@
             <point key="canvasLocation" x="248.80000000000001" y="-0.44977511244377816"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="8.png" width="120" height="80"/>
-    </resources>
 </document>

@@ -8,7 +8,78 @@
 
 import UIKit
 
+
+let dummyData = false
+
 private let reuseIdentifier = "CardCellID"
+
+
+struct CardSorter {
+    
+    static func removeDuplicatesByName(cards:[Card])->[Card] {
+        
+        var uniqueNames = [String]()
+        
+        var uniqueCards = [Card]()
+        
+        for card in cards {
+            
+            if !uniqueNames.contains(card.name) {
+                uniqueCards.append(card)
+                print("uniqe card appended \(card.name)")
+            }
+            
+            uniqueNames.append(card.name)
+            
+        }
+        
+        return uniqueCards
+        
+        
+    }
+   static func removeDuplicatesByID(cards: [Card]) -> [Card] {
+        
+        var uniqueIDs = [Int]()
+        
+        var uniqueCards = [Card]()
+    
+        for card in cards {
+           
+            if !uniqueIDs.contains(card.id) {
+                uniqueCards.append(card)
+                print("uniqe card appended \(card.id)")
+            }
+            
+            uniqueIDs.append(card.id)
+
+        }
+        
+        return uniqueCards
+        
+        
+        
+//        var validID = [Int]()
+//        
+//        var uniqueID = Set(validID)
+//        
+//        var filteredCardArray = [Card]()
+//        
+//        for card in cards {
+//            validID.append(card.id)
+//        }
+//        
+//        for id in uniqueID {
+//            for card in cards {
+//                if card.id == id {
+//                    filteredCardArray.append(card)
+//                    uniqueID.remove(id)
+//                }
+//            }
+//            
+//        }
+//       return filteredCardArray
+    }
+}
 
 class CardCollectionViewController: UICollectionViewController {
     
@@ -16,15 +87,37 @@ class CardCollectionViewController: UICollectionViewController {
     
     var mtgAPISerivce = MTGAPIService()
     
+    
+    let cardsPerRow: CGFloat = 3
+    let sectionInsets = UIEdgeInsets(top: 40.0, left: 15.0, bottom: 40.0, right: 15.0)
+    let cardSize = CGSize(width: 63, height: 88)
+    var cardSizeRatio: CGFloat {
+        return cardSize.height/cardSize.width
+    }
+    
+    
     @IBAction func loadData() {
-        mtgAPISerivce.search(searchTerm: "zombie") {
-            results in
-            self.cardData = results
-            DispatchQueue.main.async {
-                print("Closure called in func loadData")
+        
+        if dummyData {
+            for _ in 1...21 {
+                cardData.append(Card())
                 self.collectionView?.reloadData()
             }
+        } else {
+            
+            mtgAPISerivce.search(searchTerm: "zombie") {
+                results in
+                self.cardData = CardSorter.removeDuplicatesByName(cards: results)
+                
+                DispatchQueue.main.async {
+                    print("Closure called in func loadData")
+                    self.collectionView?.reloadData()
+                }
+            }
+            
         }
+        
+      
         
     }
     
@@ -32,6 +125,8 @@ class CardCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       
         
     }
 
@@ -68,20 +163,27 @@ class CardCollectionViewController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CardCell
         
         let card = cardData[indexPath.row]
+
         cell.cardData = card
         
-        cell.backgroundColor = UIColor.red
+        if dummyData {
+            cell.cardNameLabel.text = String(describing: indexPath.row)
+            cell.backgroundColor = UIColor.gray
+            
+            
+            return cell
+        }
+        
         cell.cardNameLabel.text = cell.cardData.name
         
+        
         if let image = JSONParser.parser.getImage(imageURL: cell.cardData.imageURL) {
-               cell.cardImageView.image = image
+             cell.cardImageView.image = image
+            
         } else {
             print("getting card image failed at cell creation")
         }
       
-        
-     
-    
         print("Cell Created, imageURL = \(cell.cardData.imageURL)")
     
         return cell
@@ -119,3 +221,36 @@ class CardCollectionViewController: UICollectionViewController {
     */
 
 }
+
+extension CardCollectionViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let paddingSpace = sectionInsets.left * (cardsPerRow + 1)
+        let availableWidth = view.frame.width - paddingSpace
+        let widthPerItem = availableWidth / cardsPerRow
+        let height = widthPerItem * cardSizeRatio
+        
+        return CGSize(width: widthPerItem, height: height)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        return sectionInsets
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return sectionInsets.left
+    }
+}
+
+
+
+
+
+
+
+
+
+//
