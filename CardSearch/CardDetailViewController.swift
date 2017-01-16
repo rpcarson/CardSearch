@@ -12,18 +12,32 @@ class CardDetailViewController: UIViewController {
     
     let storyboardID = "cardDetailControllerID"
     
+    var swipeRecognizer = UISwipeGestureRecognizer()
     
     @IBOutlet weak var cardView: UIImageView!
     
     var image: UIImage?
     
+    func swipeToDismiss() {
+        print("swipe detected")
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func setupGestureRecognizer() {
+        swipeRecognizer.addTarget(self, action: #selector(CardDetailViewController.swipeToDismiss))
+        cardView.addGestureRecognizer(swipeRecognizer)
+        cardView.isUserInteractionEnabled = true
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupGestureRecognizer()
 
         cardView.image = image
         
-        
+        print("card detail viewloaded")
         
     }
 

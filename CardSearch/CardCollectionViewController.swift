@@ -92,6 +92,8 @@ class CardCollectionViewController: UICollectionViewController  {
         }
         
         
+        currentSearch = Search()
+        
         searchField.delegate = self
         
         
