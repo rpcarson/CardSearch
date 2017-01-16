@@ -8,56 +8,75 @@
 
 import Foundation
 
-enum SearchParameter {
-    case name
-    case color
-    case cmc
-}
+
 
 struct MTGAPIService {
     
-    private let baseURLString = "https://api.magicthegathering.io/v1/cards?pageSize=30"
+    private let baseURLString = "https://api.magicthegathering.io/v1/cards?pageSize=12"
     
-    private var searchParameter: SearchParameter = .name
-    
-    private var searchTerm: String = "default"
-   
-    private var fullURLString: String {
-        switch searchParameter {
-        case .name: return baseURLString + "&name=\(searchTerm)"
-        case .color: return baseURLString + "&colors=\(searchTerm)"
-        case .cmc: return baseURLString + "&cmc=\(searchTerm)"
-            
+    func performSearch(search: Search, completion: @escaping ([Card]) -> Void) {
+      
+        guard let fullURL = search.getSearchURL(baseURL: baseURLString) else {
+            print("MTGAPIService performSearch fullURL failed")
+            return
         }
-    }
-
-    mutating func configSearch(parameter: SearchParameter) {
-        self.searchParameter = parameter
-    }
-    
-    mutating func search(searchTerm: String, completion: @escaping ([Card]) -> Void) {
-        self.searchTerm = searchTerm
         
-        if let url = URL(string: fullURLString) {
+        let networkOperation = NetworkOperation(url: fullURL)
+        
+        networkOperation.retrieveJSON {
+            json in
             
-            let networkOperation = NetworkOperation(url: url)
-            
-            networkOperation.retrieveJSON {
-                json in
-                
-                if let cards = JSONParser.parser.createCard(data: json!) {
-                    print("if let cards = json MTGAPI SEARCH")
-                    completion(cards)
-                }
-               
-                print("\nMTGAPI Service: running search, json results: \(json != nil ? "Success" : "fail")")
-                
+            if let cards = JSONParser.parser.createCard(data: json!) {
+                print("MTGAPIService JSONParser created cards succesfully")
+                completion(cards)
             }
             
+            print("\nMTGAPI Service: running search, json results: \(json != nil ? "Success" : "fail")")
+            
         }
         
-        
     }
+    
+    //    private var searchParameter: SearchParameter = .name
+    //
+    //    private var searchTerm: String = "default"
+    //
+    //    private var fullURLString: String {
+    //        switch searchParameter {
+    //        case .name: return baseURLString + "&name=\(searchTerm)"
+    //        case .color: return baseURLString + "&colors=\(searchTerm)"
+    //        case .cmc: return baseURLString + "&cmc=\(searchTerm)"
+    //
+    //        }
+    //    }
+    //
+    //    mutating func configSearch(parameter: SearchParameter) {
+    //        self.searchParameter = parameter
+    //    }
+    
+//    mutating func search(searchTerm: String, completion: @escaping ([Card]) -> Void) {
+//        self.searchTerm = searchTerm
+//        
+//        if let url = URL(string: fullURLString) {
+//            
+//            let networkOperation = NetworkOperation(url: url)
+//            
+//            networkOperation.retrieveJSON {
+//                json in
+//                
+//                if let cards = JSONParser.parser.createCard(data: json!) {
+//                    print("if let cards = json MTGAPI SEARCH")
+//                    completion(cards)
+//                }
+//               
+//                print("\nMTGAPI Service: running search, json results: \(json != nil ? "Success" : "fail")")
+//                
+//            }
+//            
+//        }
+//        
+//        
+//    }
     
     
 }

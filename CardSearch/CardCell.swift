@@ -14,6 +14,16 @@ class CardCell: UICollectionViewCell {
     
     @IBOutlet weak var cardImageView: UIImageView!
     
+    var cardImage: UIImage? {
+        if let image = JSONParser.parser.getImage(imageURL: cardData.imageURL) {
+            print("CardCell cardImage created")
+            return image
+        }
+        print("CardCell cardImage creation failed")
+        return nil
+    }
+    
+    
     
     /*
      var cardImage: UIImage {

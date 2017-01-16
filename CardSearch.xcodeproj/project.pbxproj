@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B37F2831E2C6EB4007442B2 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B37F2821E2C6EB4007442B2 /* SearchManager.swift */; };
 		5B8811841E292A1B00647253 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8811831E292A1B00647253 /* CardModel.swift */; };
 		5B8811861E292E4B00647253 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8811851E292E4B00647253 /* Parser.swift */; };
+		5BA8AAAB1E2D756700B895B5 /* CardSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA8AAAA1E2D756700B895B5 /* CardSorter.swift */; };
+		5BA8AAAD1E2D7E4C00B895B5 /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA8AAAC1E2D7E4C00B895B5 /* CardDetailViewController.swift */; };
 		5BD1DDF31E29B81B00D52C8B /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BD1DDF21E29B81B00D52C8B /* 8.png */; };
 		5BFE71F51E284AF3003666B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFE71F41E284AF3003666B5 /* AppDelegate.swift */; };
 		5BFE71FA1E284AF3003666B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BFE71F81E284AF3003666B5 /* Main.storyboard */; };
@@ -20,8 +23,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B37F2821E2C6EB4007442B2 /* SearchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
 		5B8811831E292A1B00647253 /* CardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		5B8811851E292E4B00647253 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		5BA8AAAA1E2D756700B895B5 /* CardSorter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSorter.swift; sourceTree = "<group>"; };
+		5BA8AAAC1E2D7E4C00B895B5 /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
 		5BD1DDF21E29B81B00D52C8B /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
 		5BFE71F11E284AF3003666B5 /* CardSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BFE71F41E284AF3003666B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +51,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5BA8AAAE1E2D7E5800B895B5 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5BA8AAAC1E2D7E4C00B895B5 /* CardDetailViewController.swift */,
+				5BFE72061E284B2A003666B5 /* CardCollectionViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		5BA8AAAF1E2D7E6C00B895B5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5BA8AAAA1E2D756700B895B5 /* CardSorter.swift */,
+				5BFE72081E284B4D003666B5 /* MTGCardSearch.swift */,
+				5B37F2821E2C6EB4007442B2 /* SearchManager.swift */,
+				5B8811831E292A1B00647253 /* CardModel.swift */,
+				5B8811851E292E4B00647253 /* Parser.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		5BA8AAB01E2D7E9000B895B5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5BFE720A1E284BA2003666B5 /* CardCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		5BFE71E81E284AF3003666B5 = {
 			isa = PBXGroup;
 			children = (
@@ -66,15 +101,13 @@
 			children = (
 				5BFE71F41E284AF3003666B5 /* AppDelegate.swift */,
 				5BFE71F81E284AF3003666B5 /* Main.storyboard */,
-				5BFE72061E284B2A003666B5 /* CardCollectionViewController.swift */,
-				5BFE720A1E284BA2003666B5 /* CardCell.swift */,
-				5BFE72081E284B4D003666B5 /* MTGCardSearch.swift */,
-				5B8811831E292A1B00647253 /* CardModel.swift */,
-				5B8811851E292E4B00647253 /* Parser.swift */,
 				5BFE71FB1E284AF3003666B5 /* Assets.xcassets */,
 				5BD1DDF21E29B81B00D52C8B /* 8.png */,
 				5BFE71FD1E284AF3003666B5 /* LaunchScreen.storyboard */,
 				5BFE72001E284AF3003666B5 /* Info.plist */,
+				5BA8AAB01E2D7E9000B895B5 /* Views */,
+				5BA8AAAF1E2D7E6C00B895B5 /* Models */,
+				5BA8AAAE1E2D7E5800B895B5 /* ViewControllers */,
 			);
 			path = CardSearch;
 			sourceTree = "<group>";
@@ -154,8 +187,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BFE72071E284B2A003666B5 /* CardCollectionViewController.swift in Sources */,
+				5B37F2831E2C6EB4007442B2 /* SearchManager.swift in Sources */,
 				5BFE72091E284B4D003666B5 /* MTGCardSearch.swift in Sources */,
 				5B8811861E292E4B00647253 /* Parser.swift in Sources */,
+				5BA8AAAD1E2D7E4C00B895B5 /* CardDetailViewController.swift in Sources */,
+				5BA8AAAB1E2D756700B895B5 /* CardSorter.swift in Sources */,
 				5BFE71F51E284AF3003666B5 /* AppDelegate.swift in Sources */,
 				5BFE720B1E284BA2003666B5 /* CardCell.swift in Sources */,
 				5B8811841E292A1B00647253 /* CardModel.swift in Sources */,
