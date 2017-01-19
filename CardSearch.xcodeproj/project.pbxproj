@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B04C0281E304AAA00CFD58A /* CardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B04C0271E304AAA00CFD58A /* CardManager.swift */; };
 		5B37F2831E2C6EB4007442B2 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B37F2821E2C6EB4007442B2 /* SearchManager.swift */; };
 		5B8811841E292A1B00647253 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8811831E292A1B00647253 /* CardModel.swift */; };
 		5B8811861E292E4B00647253 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8811851E292E4B00647253 /* Parser.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B04C0271E304AAA00CFD58A /* CardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardManager.swift; sourceTree = "<group>"; };
 		5B37F2821E2C6EB4007442B2 /* SearchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
 		5B8811831E292A1B00647253 /* CardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		5B8811851E292E4B00647253 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				5BFE72081E284B4D003666B5 /* MTGCardSearch.swift */,
 				5B37F2821E2C6EB4007442B2 /* SearchManager.swift */,
 				5B8811831E292A1B00647253 /* CardModel.swift */,
+				5B04C0271E304AAA00CFD58A /* CardManager.swift */,
 				5B8811851E292E4B00647253 /* Parser.swift */,
 			);
 			name = Models;
@@ -189,6 +192,7 @@
 				5BFE72071E284B2A003666B5 /* CardCollectionViewController.swift in Sources */,
 				5B37F2831E2C6EB4007442B2 /* SearchManager.swift in Sources */,
 				5BFE72091E284B4D003666B5 /* MTGCardSearch.swift in Sources */,
+				5B04C0281E304AAA00CFD58A /* CardManager.swift in Sources */,
 				5B8811861E292E4B00647253 /* Parser.swift in Sources */,
 				5BA8AAAD1E2D7E4C00B895B5 /* CardDetailViewController.swift in Sources */,
 				5BA8AAAB1E2D756700B895B5 /* CardSorter.swift in Sources */,

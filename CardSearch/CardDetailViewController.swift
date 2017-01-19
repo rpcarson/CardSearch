@@ -16,7 +16,13 @@ class CardDetailViewController: UIViewController {
     
     @IBOutlet weak var cardView: UIImageView!
     
-    var image: UIImage?
+    var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    
+    var image: UIImage? {
+        didSet {
+            print("image set")
+        }
+    }
     
     func swipeToDismiss() {
         print("swipe detected")
@@ -33,9 +39,15 @@ class CardDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        cardView.image = image
+        
         setupGestureRecognizer()
 
-        cardView.image = image
+//        if image == nil {
+//            cardView.addSubview(activityIndicator)
+//            activityIndicator.frame = cardView.bounds
+//            activityIndicator.startAnimating()
+//        }
         
         print("card detail viewloaded")
         

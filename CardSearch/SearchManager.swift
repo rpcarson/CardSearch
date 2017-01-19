@@ -25,6 +25,10 @@ struct Search: SearchType {
     var searchTerm: String
     var searchParamter: SearchParameter
     var parameters: [SearchParameter] = [.name]
+    var sizeLimit: String = "100"
+    var sizeString: String {
+        return "page=\(sizeLimit)"
+    }
     
     init() {
         searchTerm = "zombie"

@@ -23,6 +23,8 @@ class CardCell: UICollectionViewCell {
         return nil
     }
     
+    var image: UIImage?
+    
     
     
     /*

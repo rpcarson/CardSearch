@@ -6,10 +6,11 @@
 //  Copyright © 2017 Reed Carson. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 
 struct Card {
+    
     var name: String
     
     var colors: [String]
@@ -47,6 +48,10 @@ struct Card {
     
     var otherVersionIDs: [Int]
     
+    var image: UIImage?
+
+
+    
     init() {
         name = "blank"
         colors = ["blank"]
@@ -63,5 +68,6 @@ struct Card {
         id = 0
         otherVersionIDs = [0]
     }
+    
 }
 

@@ -13,9 +13,47 @@ import Foundation
 struct MTGAPIService {
     
     private let baseURLString = "https://api.magicthegathering.io/v1/cards?pageSize=12"
+    private let baseURLNoSize = "https://api.magicthegathering.io/v1/cards?"
     
-    func performSearch(search: Search, completion: @escaping ([Card]) -> Void) {
+    
+    func getJSON(search: Search, completion: @escaping ([String:Any]) -> Void) {
+        
+        guard let fullURL = search.getSearchURL(baseURL: baseURLString) else {
+            print("MTGAPIService performSearch fullURL failed")
+            return
+        }
+        
+        let networkOperation = NetworkOperation(url: fullURL)
+        
+        networkOperation.retrieveJSON {
+            json in
+            if let data = json {
+                completion(data)
+            }
+            
+            print("\nMTGAPI Service: running search, json results: \(json != nil ? "Success" : "fail")")
+        }
+    }
+    
+    func performSearch(search: Search, completion: @escaping ([String:Any]) -> Void) {
+        
+        guard let fullURL = search.getSearchURL(baseURL: baseURLString) else {
+            print("MTGAPIService performSearch fullURL failed")
+            return
+        }
+        
+        let networkOperation = NetworkOperation(url: fullURL)
+        
+        networkOperation.retrieveJSON {
+            json in
+            if let data = json {
+                completion(data)
+            }
+            
+            print("\nMTGAPI Service: running search, json results: \(json != nil ? "Success" : "fail")")
+        }
       
+        /*
         guard let fullURL = search.getSearchURL(baseURL: baseURLString) else {
             print("MTGAPIService performSearch fullURL failed")
             return
@@ -34,7 +72,7 @@ struct MTGAPIService {
             print("\nMTGAPI Service: running search, json results: \(json != nil ? "Success" : "fail")")
             
         }
-        
+ */
     }
     
     //    private var searchParameter: SearchParameter = .name
@@ -96,7 +134,7 @@ class NetworkOperation {
         self.queryURL = url
     }
     
-    func retrieveJSON(completion: @escaping JSONCompletion) {
+    func retrieveJSON(completion: @escaping ([String:Any]?) -> Void) {
         print("NetworkOperation: running retrieveJSON")
         let request = URLRequest(url: queryURL)
         

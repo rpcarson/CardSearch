@@ -14,6 +14,8 @@ struct CardSorter {
     // TODO: - Consolidate remove duplicates functions
     
 
+    
+    
     static func removeDuplicatesByName(cards:[Card])->[Card] {
         var uniqueNames = [String]()
         var uniqueCards = [Card]()

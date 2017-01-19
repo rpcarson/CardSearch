@@ -11,9 +11,11 @@ import UIKit
 
 let dummyData = false
 
-let useDebuggerCells = true
+let useDebuggerCells = false
 
 private let reuseIdentifier = "CardCellID"
+
+//let testParse = true
 
 
 
@@ -25,11 +27,11 @@ class CardCollectionViewController: UICollectionViewController  {
     
     var mtgAPISerivce = MTGAPIService()
     
-    
     var currentSearch: Search?
     
     var selectedCell: CardCell?
     
+    var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
     
     @IBOutlet weak var searchField: UITextField!
@@ -45,10 +47,10 @@ class CardCollectionViewController: UICollectionViewController  {
     
     @IBAction func loadData() {
         
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         searchField.addSubview(activityIndicator)
         activityIndicator.frame = searchField.bounds
         activityIndicator.startAnimating()
+        
         
         if dummyData {
             for _ in 1...21 {
@@ -56,27 +58,52 @@ class CardCollectionViewController: UICollectionViewController  {
                 activityIndicator.stopAnimating()
                 self.collectionView?.reloadData()
             }
+        
         } else {
-            
-            
             guard let search = currentSearch else {
                 print("(controller, loadData(): No search configured")
-                activityIndicator.stopAnimating()
-
+                self.activityIndicator.stopAnimating()
                 return
             }
+            
             mtgAPISerivce.performSearch(search: search) {
                 results in
-                self.cardData = CardSorter.removeDuplicatesByName(cards: results)
+               
+                if let cards = JSONParser.parser.createCardsRemovingDuplicatesByName(data: results) {
+                    self.cardData = cards
+                    print("carddata set")
+                    
+        
+                }
+//                for (index, _) in self.cardData.enumerated() {
+//                    print("enumeration")
+//                    let card = self.cardData[index]
+//                    if card.image == nil {
+//                        JSONParser.parser.imageFromURL(imageURL: card.imageURL) {
+//                            result in
+//                            self.cardData[index].image = result
+//                            print("cardimage added")
+//                        }
+//                    }
+//                }
                 
-
+                print("right after apiservice call, cardaat set")
+                
+                for (index, _) in self.cardData.enumerated() {
+                    let card = self.cardData[index]
+                        self.cardData[index].image = JSONParser.parser.getImageNoQueue(imageURL: card.imageURL)
+                }
+                
                 DispatchQueue.main.async {
                     print("Closure called in func loadData")
-                    activityIndicator.stopAnimating()
-
+                    self.activityIndicator.stopAnimating()
                     self.collectionView?.reloadData()
                 }
             }
+            
+            
+            
+            print("right before end of load data")
             
         }
         
@@ -111,7 +138,10 @@ class CardCollectionViewController: UICollectionViewController  {
         if segue.identifier == "cardDetailSegue" {
             if let card = sender as? CardCell {
                 let destinationController = segue.destination as! CardDetailViewController
-                destinationController.image = card.cardImage
+                print("Card image \(card.cardData.image)")
+                print("Card name \(card.cardData.name)")
+                destinationController.image = card.cardData.image
+         
             }
         }
         
@@ -127,7 +157,7 @@ class CardCollectionViewController: UICollectionViewController  {
         
         selectedCell = cell as CardCell
         
-        print(selectedCell)
+        print("cell tapped")
         
     }
     
@@ -159,20 +189,15 @@ class CardCollectionViewController: UICollectionViewController  {
         if useDebuggerCells {
             cell.cardNameLabel.text = "# \(indexPath.row), \(card.name)"
             cell.backgroundColor = UIColor.gray
+            //cell.cardImageView.image = cell.cardData.image
             return cell
         }
         
-        cell.cardNameLabel.text = cell.cardData.name
+        cell.cardNameLabel.isHidden = true
+
+        cell.cardImageView.image = cell.cardData.image
         
-        
-        if let image = JSONParser.parser.getImage(imageURL: cell.cardData.imageURL) {
-            cell.cardImageView.image = image
-            
-        } else {
-            print("getting card image failed at cell creation")
-        }
-        
-        print("Cell Created, imageURL = \(cell.cardData.imageURL)")
+       // print("Cell Created, imageURL = \(cell.cardData.imageURL)")
         
         return cell
     }
@@ -289,7 +314,7 @@ extension CardCollectionViewController: UIViewControllerPreviewingDelegate {
         
         detailVC.image = image
         
-        detailVC.preferredContentSize = CGSize(width: 0.0, height: 300)
+        detailVC.preferredContentSize = CGSize(width: 100, height: 100*cardSizeRatio)
         
         previewingContext.sourceRect = cell.frame
         
