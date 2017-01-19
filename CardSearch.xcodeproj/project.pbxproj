@@ -14,6 +14,7 @@
 		5BA8AAAB1E2D756700B895B5 /* CardSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA8AAAA1E2D756700B895B5 /* CardSorter.swift */; };
 		5BA8AAAD1E2D7E4C00B895B5 /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA8AAAC1E2D7E4C00B895B5 /* CardDetailViewController.swift */; };
 		5BD1DDF31E29B81B00D52C8B /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BD1DDF21E29B81B00D52C8B /* 8.png */; };
+		5BD32DE81E314E4000A1E070 /* ConfigSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD32DE71E314E4000A1E070 /* ConfigSearchVC.swift */; };
 		5BFE71F51E284AF3003666B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFE71F41E284AF3003666B5 /* AppDelegate.swift */; };
 		5BFE71FA1E284AF3003666B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BFE71F81E284AF3003666B5 /* Main.storyboard */; };
 		5BFE71FC1E284AF3003666B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BFE71FB1E284AF3003666B5 /* Assets.xcassets */; };
@@ -31,6 +32,7 @@
 		5BA8AAAA1E2D756700B895B5 /* CardSorter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSorter.swift; sourceTree = "<group>"; };
 		5BA8AAAC1E2D7E4C00B895B5 /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
 		5BD1DDF21E29B81B00D52C8B /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
+		5BD32DE71E314E4000A1E070 /* ConfigSearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigSearchVC.swift; sourceTree = "<group>"; };
 		5BFE71F11E284AF3003666B5 /* CardSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BFE71F41E284AF3003666B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BFE71F91E284AF3003666B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 			children = (
 				5BA8AAAC1E2D7E4C00B895B5 /* CardDetailViewController.swift */,
 				5BFE72061E284B2A003666B5 /* CardCollectionViewController.swift */,
+				5BD32DE71E314E4000A1E070 /* ConfigSearchVC.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 				5BFE71F51E284AF3003666B5 /* AppDelegate.swift in Sources */,
 				5BFE720B1E284BA2003666B5 /* CardCell.swift in Sources */,
 				5B8811841E292A1B00647253 /* CardModel.swift in Sources */,
+				5BD32DE81E314E4000A1E070 /* ConfigSearchVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

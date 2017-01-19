@@ -26,7 +26,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CardCellID" id="7gl-zO-Mth" customClass="CardCell" customModule="CardSearch" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
+                                <rect key="frame" x="88" y="0.0" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -97,6 +97,11 @@
                                     <action selector="configSearch" destination="Mgm-ks-V31" eventType="touchUpInside" id="uLs-Nf-7Lg"/>
                                 </connections>
                             </button>
+                            <connections>
+                                <segue destination="jYc-DP-Fbz" kind="popoverPresentation" identifier="ConfigSearchSegue" popoverAnchorBarButtonItem="Npt-2n-7Xp" id="v0S-Qf-IH2">
+                                    <popoverArrowDirection key="popoverArrowDirection" left="YES"/>
+                                </segue>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -106,6 +111,59 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3kB-eR-Ji2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1188" y="-0.44977511244377816"/>
+        </scene>
+        <!--Config SearchVC-->
+        <scene sceneID="IXC-hU-EuO">
+            <objects>
+                <viewController id="jYc-DP-Fbz" customClass="ConfigSearchVC" customModule="CardSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8AA-i0-mEI"/>
+                        <viewControllerLayoutGuide type="bottom" id="3no-e9-HiO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="y7x-Y4-6od">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dTP-di-yG0">
+                                <rect key="frame" x="164" y="2" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="backToCollectionView" destination="jYc-DP-Fbz" eventType="touchUpInside" id="x77-OM-lR8"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="JvY-Yl-Djw">
+                                <rect key="frame" x="16" y="40" width="343" height="627"/>
+                                <subviews>
+                                    <pickerView tag="1" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IjE-XO-gz9">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="195"/>
+                                    </pickerView>
+                                    <pickerView tag="2" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l11-HS-gyh">
+                                        <rect key="frame" x="0.0" y="195" width="343" height="216"/>
+                                    </pickerView>
+                                    <pickerView tag="3" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UXD-Qc-d0J">
+                                        <rect key="frame" x="0.0" y="411" width="343" height="216"/>
+                                    </pickerView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="JvY-Yl-Djw" secondAttribute="trailing" id="2uo-02-OTu"/>
+                            <constraint firstItem="JvY-Yl-Djw" firstAttribute="leading" secondItem="y7x-Y4-6od" secondAttribute="leadingMargin" id="6ZD-SL-wwv"/>
+                            <constraint firstItem="JvY-Yl-Djw" firstAttribute="top" secondItem="8AA-i0-mEI" secondAttribute="bottom" constant="20" id="75T-EU-3sM"/>
+                            <constraint firstItem="3no-e9-HiO" firstAttribute="top" secondItem="JvY-Yl-Djw" secondAttribute="bottom" id="Yr0-9Q-zeB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="cmcPicker" destination="UXD-Qc-d0J" id="fAR-lv-9OJ"/>
+                        <outlet property="colorPicker" destination="IjE-XO-gz9" id="G4d-p6-STD"/>
+                        <outlet property="typePicker" destination="l11-HS-gyh" id="dAU-bA-Vku"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Sz-nk-cxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2205" y="298"/>
         </scene>
         <!--Card Detail View Controller-->
         <scene sceneID="73M-th-oN4">
@@ -139,24 +197,6 @@
             </objects>
             <point key="canvasLocation" x="2225" y="-397"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="p8h-47-UO6">
-            <objects>
-                <viewController id="eAg-Is-ZdO" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Y65-2K-WBn"/>
-                        <viewControllerLayoutGuide type="bottom" id="7Hs-Kf-jZ0"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="pcA-1t-NO0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5kj-ho-44I" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2225" y="419"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="6Bg-xY-u12">
             <objects>
@@ -168,12 +208,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Mgm-ks-V31" kind="relationship" relationship="rootViewController" id="60U-ss-NOB"/>
+                        <segue destination="Mgm-ks-V31" kind="relationship" relationship="rootViewController" id="P0i-jc-ZSt"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jXy-96-rWl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="248.80000000000001" y="-0.44977511244377816"/>
+            <point key="canvasLocation" x="289" y="0.0"/>
         </scene>
     </scenes>
 </document>

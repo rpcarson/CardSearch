@@ -8,10 +8,16 @@
 
 import UIKit
 
+let configSearchSegueID = "ConfigSearchSegue"
 
-let dummyData = false
+let dummyData = true
 
-let useDebuggerCells = false
+let useDebuggerCells = true
+
+let testManager = true
+
+let useImages = false
+
 
 private let reuseIdentifier = "CardCellID"
 
@@ -34,6 +40,16 @@ class CardCollectionViewController: UICollectionViewController  {
     var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
     
+    var cardManager: CardManager?
+    
+    
+    var configVC: ConfigSearchVC?
+    
+    
+    var resultsLimit: Int = 12
+    
+    
+    
     @IBOutlet weak var searchField: UITextField!
     
     
@@ -53,10 +69,13 @@ class CardCollectionViewController: UICollectionViewController  {
         
         
         if dummyData {
-            for _ in 1...21 {
+            for _ in 1...resultsLimit {
                 cardData.append(Card())
                 activityIndicator.stopAnimating()
                 self.collectionView?.reloadData()
+            }
+            for (index, _) in cardData.enumerated() {
+                cardData[index].image = UIImage(named: "8.png")
             }
         
         } else {
@@ -68,31 +87,30 @@ class CardCollectionViewController: UICollectionViewController  {
             
             mtgAPISerivce.performSearch(search: search) {
                 results in
-               
-                if let cards = JSONParser.parser.createCardsRemovingDuplicatesByName(data: results) {
-                    self.cardData = cards
-                    print("carddata set")
+                
+                if testManager {
+                    self.cardManager = CardManager(json: results)
+                    if let cards = self.cardManager?.returnUniqueCardsByAmount(amount: 6) {
+                        self.cardData = cards
+                        print("cardManager cards set")
+                    }
+                } else {
+                   
+                    if let cards = JSONParser.parser.createCardsRemovingDuplicatesByName(data: results) {
+                        self.cardData = cards
+                        print("carddata set")
+                    }
                     
-        
                 }
-//                for (index, _) in self.cardData.enumerated() {
-//                    print("enumeration")
-//                    let card = self.cardData[index]
-//                    if card.image == nil {
-//                        JSONParser.parser.imageFromURL(imageURL: card.imageURL) {
-//                            result in
-//                            self.cardData[index].image = result
-//                            print("cardimage added")
-//                        }
-//                    }
-//                }
-                
-                print("right after apiservice call, cardaat set")
-                
-                for (index, _) in self.cardData.enumerated() {
-                    let card = self.cardData[index]
+               
+                if useImages {
+                    for (index, _) in self.cardData.enumerated() {
+                        let card = self.cardData[index]
                         self.cardData[index].image = JSONParser.parser.getImageNoQueue(imageURL: card.imageURL)
+                    }
                 }
+                
+              
                 
                 DispatchQueue.main.async {
                     print("Closure called in func loadData")
@@ -141,8 +159,14 @@ class CardCollectionViewController: UICollectionViewController  {
                 print("Card image \(card.cardData.image)")
                 print("Card name \(card.cardData.name)")
                 destinationController.image = card.cardData.image
-         
+              
             }
+        }
+        
+        if segue.identifier == configSearchSegueID {
+            let destinationVC = segue.destination as! ConfigSearchVC
+            destinationVC.collectionView = self
+            configVC = destinationVC
         }
         
      }
@@ -162,13 +186,11 @@ class CardCollectionViewController: UICollectionViewController  {
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return cardData.count
     }
     
@@ -186,7 +208,7 @@ class CardCollectionViewController: UICollectionViewController  {
             return cell
         }
         
-        if useDebuggerCells {
+        if !useImages {
             cell.cardNameLabel.text = "# \(indexPath.row), \(card.name)"
             cell.backgroundColor = UIColor.gray
             //cell.cardImageView.image = cell.cardData.image
@@ -238,6 +260,9 @@ class CardCollectionViewController: UICollectionViewController  {
 //MARK: - FlowLayout delegate extension
 
 extension CardCollectionViewController: UICollectionViewDelegateFlowLayout {
+    
+   
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let paddingSpace = sectionInsets.left * (cardsPerRow + 1)
@@ -257,6 +282,10 @@ extension CardCollectionViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInsets.left
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
     }
 }
 
@@ -283,13 +312,6 @@ extension CardCollectionViewController: UITextFieldDelegate {
 
 
 
-extension CardCollectionViewController {
-    
-    @IBAction func configSearch() {
-        
-    }
-}
-
 
 
 
@@ -314,7 +336,9 @@ extension CardCollectionViewController: UIViewControllerPreviewingDelegate {
         
         detailVC.image = image
         
-        detailVC.preferredContentSize = CGSize(width: 100, height: 100*cardSizeRatio)
+        let width = view.frame.width/4
+        
+        detailVC.preferredContentSize = CGSize(width: width, height: width*cardSizeRatio)
         
         previewingContext.sourceRect = cell.frame
         
@@ -330,6 +354,14 @@ extension CardCollectionViewController: UIViewControllerPreviewingDelegate {
 
 
 
+
+extension CardCollectionViewController {
+    
+    @IBAction func configSearch() {
+     print("config pressed")
+        performSegue(withIdentifier: configSearchSegueID, sender: nil)
+    }
+}
 
 
 

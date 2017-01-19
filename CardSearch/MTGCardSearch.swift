@@ -12,32 +12,32 @@ import Foundation
 
 struct MTGAPIService {
     
-    private let baseURLString = "https://api.magicthegathering.io/v1/cards?pageSize=12"
+    private let baseURLString = "https://api.magicthegathering.io/v1/cards?pageSize=100"
     private let baseURLNoSize = "https://api.magicthegathering.io/v1/cards?"
     
     
-    func getJSON(search: Search, completion: @escaping ([String:Any]) -> Void) {
-        
-        guard let fullURL = search.getSearchURL(baseURL: baseURLString) else {
-            print("MTGAPIService performSearch fullURL failed")
-            return
-        }
-        
-        let networkOperation = NetworkOperation(url: fullURL)
-        
-        networkOperation.retrieveJSON {
-            json in
-            if let data = json {
-                completion(data)
-            }
-            
-            print("\nMTGAPI Service: running search, json results: \(json != nil ? "Success" : "fail")")
-        }
-    }
+//    func getJSON(search: Search, completion: @escaping ([String:Any]) -> Void) {
+//        
+//        guard let fullURL = search.getSearchURL(baseURL: baseURLString) else {
+//            print("MTGAPIService performSearch fullURL failed")
+//            return
+//        }
+//        
+//        let networkOperation = NetworkOperation(url: fullURL)
+//        
+//        networkOperation.retrieveJSON {
+//            json in
+//            if let data = json {
+//                completion(data)
+//            }
+//            
+//            print("\nMTGAPI Service: running search, json results: \(json != nil ? "Success" : "fail")")
+//        }
+//    }
     
     func performSearch(search: Search, completion: @escaping ([String:Any]) -> Void) {
         
-        guard let fullURL = search.getSearchURL(baseURL: baseURLString) else {
+        guard let fullURL = search.getSearchURL(baseURL: baseURLNoSize) else {
             print("MTGAPIService performSearch fullURL failed")
             return
         }
