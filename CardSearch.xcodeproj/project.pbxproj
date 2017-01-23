@@ -15,6 +15,10 @@
 		5BA8AAAD1E2D7E4C00B895B5 /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA8AAAC1E2D7E4C00B895B5 /* CardDetailViewController.swift */; };
 		5BD1DDF31E29B81B00D52C8B /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BD1DDF21E29B81B00D52C8B /* 8.png */; };
 		5BD32DE81E314E4000A1E070 /* ConfigSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD32DE71E314E4000A1E070 /* ConfigSearchVC.swift */; };
+		5BEB60FC1E341991009A81EB /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB60FB1E341991009A81EB /* NetworkServices.swift */; };
+		5BFC78921E359085009960B5 /* OptionsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFC78911E359085009960B5 /* OptionsPicker.swift */; };
+		5BFC78941E35A0B3009960B5 /* ParameterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFC78931E35A0B3009960B5 /* ParameterButton.swift */; };
+		5BFC78981E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFC78971E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift */; };
 		5BFE71F51E284AF3003666B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFE71F41E284AF3003666B5 /* AppDelegate.swift */; };
 		5BFE71FA1E284AF3003666B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BFE71F81E284AF3003666B5 /* Main.storyboard */; };
 		5BFE71FC1E284AF3003666B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BFE71FB1E284AF3003666B5 /* Assets.xcassets */; };
@@ -33,6 +37,10 @@
 		5BA8AAAC1E2D7E4C00B895B5 /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
 		5BD1DDF21E29B81B00D52C8B /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
 		5BD32DE71E314E4000A1E070 /* ConfigSearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigSearchVC.swift; sourceTree = "<group>"; };
+		5BEB60FB1E341991009A81EB /* NetworkServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkServices.swift; sourceTree = "<group>"; };
+		5BFC78911E359085009960B5 /* OptionsPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsPicker.swift; sourceTree = "<group>"; };
+		5BFC78931E35A0B3009960B5 /* ParameterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterButton.swift; sourceTree = "<group>"; };
+		5BFC78971E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameteTableViewExtensionCSVC.swift; sourceTree = "<group>"; };
 		5BFE71F11E284AF3003666B5 /* CardSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CardSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BFE71F41E284AF3003666B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BFE71F91E284AF3003666B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -61,6 +69,7 @@
 				5BA8AAAC1E2D7E4C00B895B5 /* CardDetailViewController.swift */,
 				5BFE72061E284B2A003666B5 /* CardCollectionViewController.swift */,
 				5BD32DE71E314E4000A1E070 /* ConfigSearchVC.swift */,
+				5BFC78971E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -70,6 +79,7 @@
 			children = (
 				5BA8AAAA1E2D756700B895B5 /* CardSorter.swift */,
 				5BFE72081E284B4D003666B5 /* MTGCardSearch.swift */,
+				5BEB60FB1E341991009A81EB /* NetworkServices.swift */,
 				5B37F2821E2C6EB4007442B2 /* SearchManager.swift */,
 				5B8811831E292A1B00647253 /* CardModel.swift */,
 				5B04C0271E304AAA00CFD58A /* CardManager.swift */,
@@ -81,6 +91,8 @@
 		5BA8AAB01E2D7E9000B895B5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5BFC78931E35A0B3009960B5 /* ParameterButton.swift */,
+				5BFC78911E359085009960B5 /* OptionsPicker.swift */,
 				5BFE720A1E284BA2003666B5 /* CardCell.swift */,
 			);
 			name = Views;
@@ -195,12 +207,16 @@
 				5BFE72071E284B2A003666B5 /* CardCollectionViewController.swift in Sources */,
 				5B37F2831E2C6EB4007442B2 /* SearchManager.swift in Sources */,
 				5BFE72091E284B4D003666B5 /* MTGCardSearch.swift in Sources */,
+				5BFC78941E35A0B3009960B5 /* ParameterButton.swift in Sources */,
 				5B04C0281E304AAA00CFD58A /* CardManager.swift in Sources */,
 				5B8811861E292E4B00647253 /* Parser.swift in Sources */,
 				5BA8AAAD1E2D7E4C00B895B5 /* CardDetailViewController.swift in Sources */,
+				5BFC78921E359085009960B5 /* OptionsPicker.swift in Sources */,
+				5BEB60FC1E341991009A81EB /* NetworkServices.swift in Sources */,
 				5BA8AAAB1E2D756700B895B5 /* CardSorter.swift in Sources */,
 				5BFE71F51E284AF3003666B5 /* AppDelegate.swift in Sources */,
 				5BFE720B1E284BA2003666B5 /* CardCell.swift in Sources */,
+				5BFC78981E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift in Sources */,
 				5B8811841E292A1B00647253 /* CardModel.swift in Sources */,
 				5BD32DE81E314E4000A1E070 /* ConfigSearchVC.swift in Sources */,
 			);

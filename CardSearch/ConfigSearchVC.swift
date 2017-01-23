@@ -8,120 +8,123 @@
 
 import UIKit
 
-class ColorPVSource: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
-    let data = ["red", "green", "blue", "white", "black", "colorless"]
-   
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return data[row]
-    }
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return data.count
-    }
+enum ID: Int {
+    case colorPicker = 1
+    case setPicker = 2
+    case typePicker = 3
+    case cmcPicker = 4
 }
-class TypePVSource: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
-    let data = ["creature", "sorcery", "instant"]
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return data[row]
-    }
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return data.count
-    }
-}
-class NumberPVSource: NSObject, UIPickerViewDataSource, UIPickerViewDelegate {
-    let data = ["6", "12", "18", "24"]
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return data[row]
-    }
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return data.count
-    }
-}
+
+
+
 
 class ConfigSearchVC: UIViewController {
-
-    @IBOutlet weak var colorPicker: UIPickerView!
-     @IBOutlet weak var typePicker: UIPickerView!
-     @IBOutlet weak var cmcPicker: UIPickerView!
-    
-    let colorDatasource = ColorPVSource()
-    let typeDatasource = TypePVSource()
-    let cmcDatasource = NumberPVSource()
     
     var collectionView: CardCollectionViewController?
+    
+    var searchParameters = [SearchParameter:String]()
+    
+    
+    @IBOutlet weak var parameterTableView: UITableView!
+
+    
+    @IBOutlet weak var colorPicker: OptionsPicker!
+    @IBOutlet weak var typePicker: OptionsPicker!
+    @IBOutlet weak var cmcPicker: OptionsPicker!
+    @IBOutlet weak var setPicker: OptionsPicker!
+    
+    @IBOutlet var addParameterButtons: [ParameterButton]!
+    @IBOutlet var removeParameterButtons: [ParameterButton]!
+    
+    @IBAction func addRemoveParameter(sender: ParameterButton) {
+        guard let id = ID(rawValue: sender.tag) else {
+            print("addParameter:sender  - invalid button id") ; return
+        }
+        
+        switch id {
+        case ID.colorPicker:
+            if sender.buttonFunc == .add {
+                print("addcolorparam")
+            } else {
+                print("remove color parameter")
+            }
+        case ID.setPicker:
+            if sender.buttonFunc == .add {
+                print("add set parameter")
+            } else {
+                print("remove set parameter")
+            }
+        case ID.typePicker:
+            if sender.buttonFunc == .add {
+                print("add type parameter")
+            } else {
+                print("remove type parameter")
+            }
+        case ID.cmcPicker:
+            if sender.buttonFunc == .add {
+                print("add cmc parameter")
+            } else {
+                print("remove cmc parameter")
+            }
+        }
+    }
     
     
     @IBAction func backToCollectionView() {
         print("backToCollectionView called")
         let index = cmcPicker.selectedRow(inComponent: 0)
         
-        print(cmcDatasource.data.count)
+        print(cmcPicker.data.count)
         
-        if let limit = Int(cmcDatasource.data[index]) {
+        if let limit = Int(cmcPicker.data[index]) {
             print("pickerview selection \(limit)")
             collectionView?.resultsLimit = limit
         }
         self.dismiss(animated: true, completion: nil)
     }
     
-
-
+    func configPickers() {
+        colorPicker.configPicker(pickerType: .color)
+        typePicker.configPicker(pickerType: .type)
+        cmcPicker.configPicker(pickerType: .cmc)
+        setPicker.configPicker(pickerType: .set)
+    }
+    func configButtons() {
+        for button in addParameterButtons {
+            button.buttonFunc = .add
+        }
+        for button in removeParameterButtons {
+            button.buttonFunc = .remove
+        }
+    }
     
-//    func configNavbar() {
-//        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(ConfigSearchVC.backToCollectionView))
-//        navigationItem.setRightBarButton(doneButton, animated: true)
-//    }
-    
-//    func backToCollectionView() {
-//        print("backToCollectionView called")
-//        let index = cmcPicker.selectedRow(inComponent: 1)
-//        if let limit = Int(cmcDatasource.data[index]) {
-//            print("pickerview selection \(limit)")
-//            collectionView?.resultsLimit = limit
-//        }
-//         dismiss(animated: true, completion: nil)
-//    }
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      //  configNavbar()
+        configPickers()
+        configButtons()
         
-        colorPicker.dataSource = colorDatasource
-        colorPicker.delegate = colorDatasource
-        typePicker.dataSource = typeDatasource
-        typePicker.delegate = typeDatasource
-        cmcPicker.dataSource = cmcDatasource
-        cmcPicker.delegate = cmcDatasource
-
-        // Do any additional setup after loading the view.
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
- 
-
 }
+
+
+
+
+
+

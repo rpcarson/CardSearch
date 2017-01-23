@@ -296,7 +296,7 @@ extension CardCollectionViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         
         if let searchTerm = textField.text {
-            self.currentSearch = Search(term: searchTerm, parameter: .name)
+            self.currentSearch = Search(term: searchTerm, parameters: .name)
         }
         
         
