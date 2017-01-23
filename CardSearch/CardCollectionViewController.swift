@@ -48,6 +48,8 @@ class CardCollectionViewController: UICollectionViewController  {
     
     var resultsLimit: Int = 12
     
+    var searchManager = SearchManager()
+    
     
     
     @IBOutlet weak var searchField: UITextField!

@@ -16,14 +16,15 @@ enum ID: Int {
 }
 
 
-
-
 class ConfigSearchVC: UIViewController {
     
     var collectionView: CardCollectionViewController?
     
-    var searchParameters = [SearchParameter:String]()
-    
+    var searchParameters = [[String:String]]() {
+        didSet {
+            parameterTableView.reloadData()
+        }
+    }
     
     @IBOutlet weak var parameterTableView: UITableView!
 
@@ -36,51 +37,39 @@ class ConfigSearchVC: UIViewController {
     @IBOutlet var addParameterButtons: [ParameterButton]!
     @IBOutlet var removeParameterButtons: [ParameterButton]!
     
-    @IBAction func addRemoveParameter(sender: ParameterButton) {
-        guard let id = ID(rawValue: sender.tag) else {
-            print("addParameter:sender  - invalid button id") ; return
+    @IBOutlet weak var colorButton: ParameterButton!
+    @IBOutlet weak var typeButton: ParameterButton!
+    @IBOutlet weak var setButton: ParameterButton!
+    @IBOutlet weak var cmcButton: ParameterButton!
+    
+   
+    
+    @IBAction func addParameter(sender: ParameterButton) {
+        
+        guard let picker = sender.associatedPicker else {
+            print("addParamter: bad picker")
+            return
         }
         
-        switch id {
-        case ID.colorPicker:
-            if sender.buttonFunc == .add {
-                print("addcolorparam")
-            } else {
-                print("remove color parameter")
-            }
-        case ID.setPicker:
-            if sender.buttonFunc == .add {
-                print("add set parameter")
-            } else {
-                print("remove set parameter")
-            }
-        case ID.typePicker:
-            if sender.buttonFunc == .add {
-                print("add type parameter")
-            } else {
-                print("remove type parameter")
-            }
-        case ID.cmcPicker:
-            if sender.buttonFunc == .add {
-                print("add cmc parameter")
-            } else {
-                print("remove cmc parameter")
-            }
-        }
+        let pickerIndex = picker.selectedRow(inComponent: 0)
+        
+        let value = (picker.data[pickerIndex]) as String
+        
+        let searchParameter = picker.parameterType.rawValue
+        
+        let parameter: [String:String] = [searchParameter:value]
+        
+        searchParameters.append(parameter)
+        
     }
-    
-    
+  
     @IBAction func backToCollectionView() {
-        print("backToCollectionView called")
-        let index = cmcPicker.selectedRow(inComponent: 0)
         
-        print(cmcPicker.data.count)
-        
-        if let limit = Int(cmcPicker.data[index]) {
-            print("pickerview selection \(limit)")
-            collectionView?.resultsLimit = limit
-        }
+        print(searchParameters)
+        collectionView?.searchManager.search.parameters = searchParameters
         self.dismiss(animated: true, completion: nil)
+        
+    
     }
     
     func configPickers() {
@@ -88,21 +77,41 @@ class ConfigSearchVC: UIViewController {
         typePicker.configPicker(pickerType: .type)
         cmcPicker.configPicker(pickerType: .cmc)
         setPicker.configPicker(pickerType: .set)
-    }
+   }
+
+    //    func configButtons() {
+//        for button in addParameterButtons {
+//            button.buttonFunc = .add
+//            
+//            switch button.tag {
+//            case ID.colorPicker.rawValue: button.associatedPicker = colorPicker
+//            case ID.cmcPicker.rawValue: button.associatedPicker = cmcPicker
+//            case ID.typePicker.rawValue: button.associatedPicker = typePicker
+//            case ID.setPicker.rawValue: button.associatedPicker = setPicker
+//            default: print("unable to set button associated value")
+//            }
+//            
+//            
+//        }
+//        for button in removeParameterButtons {
+//            button.buttonFunc = .remove
+//        }
+//    }
+//    
     func configButtons() {
-        for button in addParameterButtons {
-            button.buttonFunc = .add
-        }
-        for button in removeParameterButtons {
-            button.buttonFunc = .remove
-        }
+        colorButton.setPicker(picker: colorPicker)
+        setButton.setPicker(picker: setPicker)
+        cmcButton.setPicker(picker: cmcPicker)
+        typeButton.setPicker(picker: typePicker)
     }
+        
+        
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configPickers()
         configButtons()
+        configPickers()
         
         
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum PickerType {
+enum PickerType: String {
     case color
     case cmc
     case set
@@ -17,10 +17,11 @@ enum PickerType {
 
 class OptionsPicker: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {
     
-    
     var pickerType: PickerType = .color
     
-    
+    var parameterType: SearchParameter {
+        return SearchParameter(rawValue: pickerType.rawValue)!
+    }
     
     var data: [String] {
         switch pickerType {

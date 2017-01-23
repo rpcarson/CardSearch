@@ -15,7 +15,12 @@ enum ButtonFunc {
 
 class ParameterButton: UIButton {
     
-    let associatedPicker: PickerType = .color
+    var associatedPicker: OptionsPicker?
+    
+    func setPicker(picker: OptionsPicker) {
+        associatedPicker = picker
+    }
+
     var buttonFunc: ButtonFunc = .add
 
 }

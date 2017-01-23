@@ -29,6 +29,7 @@ enum SearchParameter: String {
     case color
     case cmc
     case set
+    case type
 }
 
 
@@ -39,10 +40,10 @@ protocol SearchType {
     var parameters: [String:String] { get set }
 }
 
-struct Search: SearchType {
+struct Search {
     var searchTerm: String
     var searchParamter: SearchParameter
-    var parameters = [String:String]()
+    var parameters = [[String:String]]()
     var sizeLimit: String = "2"
     var sizeString: String {
         return "pageSize=\(sizeLimit)"
@@ -51,7 +52,7 @@ struct Search: SearchType {
     init() {
         searchTerm = "zombie"
         searchParamter = .name
-        parameters = ["name":"blank"]
+        parameters = [["name":"blank"]]
     }
     
     init(term: String, parameters: SearchParameter) {
@@ -61,7 +62,7 @@ struct Search: SearchType {
     
     func getSearchURL(baseURL: String) -> URL? {
         
-        var urlString: String
+        var urlString: String = ""
         
         
         // TODO: url endpoints(correct term?) shouldnt be hardcoded here
@@ -71,6 +72,7 @@ struct Search: SearchType {
         case .color: urlString = baseURL + "&colors=\(searchTerm)"
         case .cmc: urlString = baseURL + "&cmc=\(searchTerm)"
         case .set:urlString = baseURL + "&set=\(searchTerm)"
+        default: urlString = ""
         }
         
         
@@ -86,20 +88,20 @@ struct Search: SearchType {
     mutating func addParameter(searchParameter: SearchParameter, value: String) {
         
         let key = searchParameter.rawValue
-        parameters.updateValue(value, forKey: key)
+     
         
     }
 }
 
 
 
-struct SearchManager {
+class SearchManager {
     
     
-    var search: Search
+    var search: Search = Search()
     
     
-    mutating func configureSearch(sizeLimit: Int, searchTerm: String, parameters: [SearchParameter]) {
+    func configureSearch(sizeLimit: Int, searchTerm: String, parameters: [SearchParameter]) {
         
     }
     
