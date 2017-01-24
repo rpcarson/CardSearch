@@ -85,12 +85,6 @@ struct Search {
         
     }
     
-    mutating func addParameter(searchParameter: SearchParameter, value: String) {
-        
-        let key = searchParameter.rawValue
-     
-        
-    }
 }
 
 
@@ -110,6 +104,9 @@ class SearchManager {
         urlComponents.scheme = "https"
         urlComponents.host = "api.magicthegathering.io/v1"
         urlComponents.path = "/cards"
+        
+        
+       
         
         
         

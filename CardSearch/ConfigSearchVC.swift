@@ -26,6 +26,8 @@ class ConfigSearchVC: UIViewController {
         }
     }
     
+    var parametersWithLogicState = [[String:[String:String]]]()
+    
     @IBOutlet weak var parameterTableView: UITableView!
 
     
@@ -62,12 +64,42 @@ class ConfigSearchVC: UIViewController {
         searchParameters.append(parameter)
         
     }
+    
+    func getLogicState() {
+        
+        var i = -1
+        for x in searchParameters {
+            i += 1
+            
+            if i >= 0 {
+                let indexPath: IndexPath = IndexPath(row: i, section: 0)
+                let cell = parameterTableView.cellForRow(at: indexPath) as! ParameterCell
+                let state = cell.logicState.rawValue
+                parametersWithLogicState.append([state:x])
+                
+            }
+            
+        }
+        
+        
+       
+      
+    }
+    
   
     @IBAction func backToCollectionView() {
         
         print(searchParameters)
-        collectionView?.searchManager.search.parameters = searchParameters
-        self.dismiss(animated: true, completion: nil)
+        
+        getLogicState()
+        
+        print(parametersWithLogicState)
+        
+        
+       // collectionView?.searchManager.search.parameters = searchParameters
+        
+        
+       // self.dismiss(animated: true, completion: nil)
         
     
     }
@@ -78,26 +110,7 @@ class ConfigSearchVC: UIViewController {
         cmcPicker.configPicker(pickerType: .cmc)
         setPicker.configPicker(pickerType: .set)
    }
-
-    //    func configButtons() {
-//        for button in addParameterButtons {
-//            button.buttonFunc = .add
-//            
-//            switch button.tag {
-//            case ID.colorPicker.rawValue: button.associatedPicker = colorPicker
-//            case ID.cmcPicker.rawValue: button.associatedPicker = cmcPicker
-//            case ID.typePicker.rawValue: button.associatedPicker = typePicker
-//            case ID.setPicker.rawValue: button.associatedPicker = setPicker
-//            default: print("unable to set button associated value")
-//            }
-//            
-//            
-//        }
-//        for button in removeParameterButtons {
-//            button.buttonFunc = .remove
-//        }
-//    }
-//    
+   
     func configButtons() {
         colorButton.setPicker(picker: colorPicker)
         setButton.setPicker(picker: setPicker)

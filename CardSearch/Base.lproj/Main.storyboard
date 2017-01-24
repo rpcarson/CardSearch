@@ -229,29 +229,38 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GzI-cI-BlF">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GzI-cI-BlF" customClass="ParameterCellLogicSelector" customModule="CardSearch" customModuleProvider="target">
                                                     <rect key="frame" x="298" y="0.0" width="45" height="43.5"/>
                                                     <color key="backgroundColor" red="1" green="0.18086733150140022" blue="0.34640991839835922" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="rT0-Lh-c45"/>
                                                     </constraints>
                                                     <state key="normal" title="NOT"/>
+                                                    <connections>
+                                                        <action selector="selectLogicStateWithSender:" destination="F6k-pw-c1Y" eventType="touchUpInside" id="M3q-31-rrb"/>
+                                                    </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="olC-xq-Vb0">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="olC-xq-Vb0" customClass="ParameterCellLogicSelector" customModule="CardSearch" customModuleProvider="target">
                                                     <rect key="frame" x="253" y="0.0" width="45" height="43.5"/>
                                                     <color key="backgroundColor" red="1" green="0.83248516539838679" blue="0.51225464474481686" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="sPQ-qc-tll"/>
                                                     </constraints>
                                                     <state key="normal" title="OR"/>
+                                                    <connections>
+                                                        <action selector="selectLogicStateWithSender:" destination="F6k-pw-c1Y" eventType="touchUpInside" id="k5s-YR-7Mv"/>
+                                                    </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nls-6H-Fud">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nls-6H-Fud" customClass="ParameterCellLogicSelector" customModule="CardSearch" customModuleProvider="target">
                                                     <rect key="frame" x="208" y="0.0" width="45" height="43.5"/>
                                                     <color key="backgroundColor" red="0.40954236728022386" green="1" blue="0.29845409431743541" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="ULV-kY-hEn"/>
                                                     </constraints>
                                                     <state key="normal" title="IS"/>
+                                                    <connections>
+                                                        <action selector="selectLogicStateWithSender:" destination="F6k-pw-c1Y" eventType="touchUpInside" id="hf3-fy-EEn"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
