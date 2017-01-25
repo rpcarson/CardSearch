@@ -16,17 +16,27 @@ enum ID: Int {
 }
 
 
+struct Parameter {
+    var logicState: LogicState = ._is
+    var parameterType: SearchParameter = .color
+    var value = ""
+}
+
+
 class ConfigSearchVC: UIViewController {
     
-    var collectionView: CardCollectionViewController?
-    
-    var searchParameters = [[String:String]]() {
+    var parameters = [Parameter]() {
         didSet {
-            parameterTableView.reloadData()
+          parameters = parameters.sorted {param1, param2 in
+            print("sorted")
+              return   param1.parameterType.rawValue < param2.parameterType.rawValue
+            
+            }
         }
     }
     
-    var parametersWithLogicState = [[String:[String:String]]]()
+    var collectionView: CardCollectionViewController?
+
     
     @IBOutlet weak var parameterTableView: UITableView!
 
@@ -48,6 +58,9 @@ class ConfigSearchVC: UIViewController {
     
     @IBAction func addParameter(sender: ParameterButton) {
         
+        var parameter = Parameter()
+        
+        
         guard let picker = sender.associatedPicker else {
             print("addParamter: bad picker")
             return
@@ -56,50 +69,39 @@ class ConfigSearchVC: UIViewController {
         let pickerIndex = picker.selectedRow(inComponent: 0)
         
         let value = (picker.data[pickerIndex]) as String
+        parameter.parameterType = picker.parameterType
+        parameter.value = value
         
-        let searchParameter = picker.parameterType.rawValue
+        parameters.append(parameter)
         
-        let parameter: [String:String] = [searchParameter:value]
-        
-        searchParameters.append(parameter)
-        
+        parameterTableView.reloadData()
+
     }
     
-    func getLogicState() {
+    
+    func getLogicStateForParameters() {
         
-        var i = -1
-        for x in searchParameters {
-            i += 1
-            
-            if i >= 0 {
-                let indexPath: IndexPath = IndexPath(row: i, section: 0)
-                let cell = parameterTableView.cellForRow(at: indexPath) as! ParameterCell
-                let state = cell.logicState.rawValue
-                parametersWithLogicState.append([state:x])
-                
+        for (i, _) in parameters.enumerated() {
+            let indexPath = IndexPath(row: i, section: 0)
+            if let cell = parameterTableView.cellForRow(at: indexPath) as? ParameterCell {
+                let state = cell.logicState
+                parameters[i].logicState = state
+                print("state set")
             }
-            
-        }
-        
-        
-       
+           
+        }  
       
     }
     
-  
     @IBAction func backToCollectionView() {
         
-        print(searchParameters)
+        getLogicStateForParameters()
         
-        getLogicState()
+        collectionView?.searchManager.search.parameters = parameters
         
-        print(parametersWithLogicState)
+        print(parameters)
         
-        
-       // collectionView?.searchManager.search.parameters = searchParameters
-        
-        
-       // self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         
     
     }

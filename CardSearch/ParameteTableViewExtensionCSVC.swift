@@ -21,16 +21,10 @@ class ParameterCellLogicSelector: UIButton {
 enum LogicState: String {
     case _not = "not"
     case _is = "is"
-    case _or = "or"  
-    case greaterThanOrEqualTo  //3
-    case lessThanOrEqualTo //4
+    case _or = "or"
+    //    case greaterThanOrEqualTo  //3
+    //    case lessThanOrEqualTo //4
     
-}
-
-
-enum LogicSelector {
-    case _not
-
 }
 
 class ParameterCell: UITableViewCell {
@@ -42,18 +36,17 @@ class ParameterCell: UITableViewCell {
     
     var logicState: LogicState = ._is
     
-    func toggle(button: ParameterCellLogicSelector, isNumber: Bool = false) {
-        
-        
+    func toggle(button: ParameterCellLogicSelector) {
         andSelector.isSelected = false
         orSelector.isSelected = false
         notSelector.isSelected = false
         
         button.isSelected = true
+        print("toggle")
     }
     
     @IBAction func selectLogicState(sender: ParameterCellLogicSelector) {
-
+        
         toggle(button: sender)
         
         print("logic selector pressed")
@@ -83,26 +76,18 @@ extension ConfigSearchVC: UITableViewDelegate, UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: parameterCellReuseID, for: indexPath) as! ParameterCell
         
-        let param = searchParameters[indexPath.row]
+        let parameter = parameters[indexPath.row]
+        
+        cell.label.text = "\(parameter.parameterType.rawValue): \(parameter.value)"
         
         
+        //        switch parameter.logicState {
+        //        case ._is: cell.andSelector.isSelected = true ; print("andIs")
+        //        case ._or: cell.orSelector.isSelected = true ; print("or is")
+        //        case ._not: cell.notSelector.isSelected = true ; print("not is")
+        //        }
         
-        for (_, item) in param.enumerated() {
-            
-            if item.key == "cmc" {
-                cell.orSelector.setTitle("<", for: .normal)
-                cell.andSelector.setTitle("=", for: .normal)
-                cell.notSelector.setTitle(">", for: .normal)
-            }
-            
-            let title = item.key
-            let value = item.value
-            cell.label.text = "\(title): \(value)"
-        }
-        
-        cell.andSelector.isSelected = true
-        
-        cell.backgroundColor = UIColor.gray
+        cell.backgroundColor = UIColor.lightGray
         
         return cell
         
@@ -113,7 +98,7 @@ extension ConfigSearchVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchParameters.count
+        return parameters.count
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -121,13 +106,21 @@ extension ConfigSearchVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
+
         if editingStyle == .delete {
-                searchParameters.remove(at: indexPath.row)
-            }
+                 parameters.remove(at: indexPath.row)
+                tableView.reloadData()
         }
-        
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 30
+    }
+
+}
+
+
+
 
 
 

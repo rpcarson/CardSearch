@@ -43,7 +43,7 @@ protocol SearchType {
 struct Search {
     var searchTerm: String
     var searchParamter: SearchParameter
-    var parameters = [[String:String]]()
+    var parameters = [Parameter]()
     var sizeLimit: String = "2"
     var sizeString: String {
         return "pageSize=\(sizeLimit)"
@@ -52,7 +52,7 @@ struct Search {
     init() {
         searchTerm = "zombie"
         searchParamter = .name
-        parameters = [["name":"blank"]]
+       
     }
     
     init(term: String, parameters: SearchParameter) {

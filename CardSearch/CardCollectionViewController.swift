@@ -169,6 +169,12 @@ class CardCollectionViewController: UICollectionViewController  {
             let destinationVC = segue.destination as! ConfigSearchVC
             destinationVC.collectionView = self
             configVC = destinationVC
+            
+            let parameters = searchManager.search.parameters
+            if !parameters.isEmpty {
+                destinationVC.parameters = parameters
+            }
+            
         }
         
      }
