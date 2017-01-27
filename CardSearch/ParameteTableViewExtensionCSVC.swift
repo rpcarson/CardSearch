@@ -20,8 +20,8 @@ class ParameterCellLogicSelector: UIButton {
 
 enum LogicState: String {
     case _not = "not"
-    case _is = "is"
-    case _or = "or"
+    case _is = ","
+    case _or = "|"
     //    case greaterThanOrEqualTo  //3
     //    case lessThanOrEqualTo //4
     

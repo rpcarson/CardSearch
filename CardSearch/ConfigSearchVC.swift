@@ -102,7 +102,8 @@ class ConfigSearchVC: UIViewController {
         
         getLogicStateForParameters()
         
-        collectionView?.searchManager.search.parameters = parameters
+        //collectionView?.searchManager.search.parameters = parameters
+        collectionView?.searchManager.updateParameters(parameters: parameters)
         
         print(parameters.description)
         

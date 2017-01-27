@@ -17,19 +17,16 @@ class CardManager {
     
     var uniqueJSONResults = JSONResults()
     
-    
     var jsonChunks = [Int:JSONResults]()
+   
     var cards = [Card]()
-    
-    
-    
-    
+
     func getUniqueJSON() {
         uniqueJSONResults = JSONParser.parser.sortJSONByRemovingDuplicateNames(json: allJSONResults)
     }
     
     
-    func returnUniqueCardsByAmount(amount: Int) -> [Card] {
+    func returnUniqueCards(amount: Int) -> [Card] {
         
         getUniqueJSON()
         

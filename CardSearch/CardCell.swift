@@ -24,8 +24,8 @@ class CardCell: UICollectionViewCell {
     }
     
     var image: UIImage?
-    
-    
+   
+   
     
     /*
      var cardImage: UIImage {

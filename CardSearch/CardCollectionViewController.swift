@@ -10,13 +10,13 @@ import UIKit
 
 let configSearchSegueID = "ConfigSearchSegue"
 
-let dummyData = false
+let useDummyData = false
 
 let useDebuggerCells = true
 
 let testManager = true
 
-let useImages = true
+let useImages = false
 
 
 private let reuseIdentifier = "CardCellID"
@@ -29,11 +29,11 @@ private let reuseIdentifier = "CardCellID"
 
 class CardCollectionViewController: UICollectionViewController  {
     
-    var cardData = [Card]()
+    var dummyData = [Card]()
     
     var mtgAPISerivce = MTGAPIService()
     
-    var currentSearch: Search?
+   // var currentSearch: Search?
     
     var selectedCell: CardCell?
     
@@ -46,7 +46,7 @@ class CardCollectionViewController: UICollectionViewController  {
     var configVC: ConfigSearchVC?
     
     
-    var resultsLimit: Int = 12
+    //var resultsLimit: Int = 12
     
     var searchManager = SearchManager()
     
@@ -70,49 +70,60 @@ class CardCollectionViewController: UICollectionViewController  {
         activityIndicator.startAnimating()
         
         
-        if dummyData {
-            for _ in 1...resultsLimit {
-                cardData.append(Card())
-                activityIndicator.stopAnimating()
-                self.collectionView?.reloadData()
+        if useDummyData {
+            for _ in 1...12 {
+                dummyData.append(Card())
+              
             }
-            for (index, _) in cardData.enumerated() {
-                cardData[index].image = UIImage(named: "8.png")
+            for (index, _) in dummyData.enumerated() {
+                dummyData[index].image = UIImage(named: "8.png")
             }
+            
+            activityIndicator.stopAnimating()
+            self.collectionView?.reloadData()
         
         } else {
-            guard let search = currentSearch else {
-                print("(controller, loadData(): No search configured")
-                self.activityIndicator.stopAnimating()
+//            guard let search = searchManager.search else {
+//                print("(controller, loadData(): No search configured")
+//                self.activityIndicator.stopAnimating()
+//                return
+//            }
+//            guard let term = searchField.text else {
+//                print("searchFiled text invalid")
+//                return
+//            }
+//            searchManager.updateSearchTerm(term: term)
+          
+            
+            guard let url = searchManager.constructURLWithComponents() else {
+                print("CardCollecitonViewController loadData construct URL fail")
                 return
             }
-            guard let text = searchField.text else {
-                print("searchFiled text invalid")
-                return
-            }
-            searchManager.search.searchTerm = text
-            mtgAPISerivce.performSearch(search: searchManager.search) {
+            
+            mtgAPISerivce.performSearch(url: url) {
                 results in
+                
+              //  print(results)
                 
                 if testManager {
                     self.cardManager = CardManager(json: results)
-                    if let cards = self.cardManager?.returnUniqueCardsByAmount(amount: 12) {
-                        self.cardData = cards
+                    if let cards = self.cardManager?.returnUniqueCards(amount: 12) {
+                        self.dummyData = cards
                         print("cardManager cards set")
                     }
                 } else {
                    
                     if let cards = JSONParser.parser.createCardsRemovingDuplicatesByName(data: results) {
-                        self.cardData = cards
+                        self.dummyData = cards
                         print("carddata set")
                     }
                     
                 }
                
                 if useImages {
-                    for (index, _) in self.cardData.enumerated() {
-                        let card = self.cardData[index]
-                        self.cardData[index].image = JSONParser.parser.getImageNoQueue(imageURL: card.imageURL)
+                    for (index, _) in self.dummyData.enumerated() {
+                        let card = self.dummyData[index]
+                        self.dummyData[index].image = JSONParser.parser.getImageNoQueue(imageURL: card.imageURL)
                     }
                 }
                 
@@ -139,11 +150,8 @@ class CardCollectionViewController: UICollectionViewController  {
         super.viewDidLoad()
         
         if traitCollection.forceTouchCapability == .available {
-            registerForPreviewing(with: self, sourceView: view)
+            registerForPreviewing(with: self, sourceView: collectionView!)
         }
-        
-        
-        currentSearch = Search()
         
         searchField.delegate = self
         
@@ -204,18 +212,18 @@ class CardCollectionViewController: UICollectionViewController  {
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cardData.count
+        return dummyData.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CardCell
         
-        let card = cardData[indexPath.row]
+        let card = dummyData[indexPath.row]
         
         cell.cardData = card
         
-        if dummyData {
+        if useDummyData {
             cell.cardNameLabel.text = String(describing: indexPath.row)
             cell.backgroundColor = UIColor.gray
             return cell
@@ -232,10 +240,10 @@ class CardCollectionViewController: UICollectionViewController  {
 
         cell.cardImageView.image = cell.cardData.image
         
-       // print("Cell Created, imageURL = \(cell.cardData.imageURL)")
         
         return cell
     }
+    
     
     // MARK: UICollectionViewDelegate
     
@@ -309,13 +317,9 @@ extension CardCollectionViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         
         if let searchTerm = textField.text {
-            self.currentSearch = Search(term: searchTerm, parameters: .name)
+            searchManager.updateSearchTerm(term: searchTerm)
         }
-        
-        
         return true
-        
-        
     }
 
     
@@ -331,10 +335,14 @@ extension CardCollectionViewController: UITextFieldDelegate {
 extension CardCollectionViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
+        
+      
+
         guard let indexPath = collectionView?.indexPathForItem(at: location) else {
-            print("previewingContext  indexpath fail")
+            print("previewingContext  indexpath fail, got path: \(location)")
             return nil
         }
+        print(indexPath)
         guard let cell = collectionView?.cellForItem(at: indexPath) as? CardCell else {
             print("previewingContext get cell for indexpath fail")
             return nil
@@ -345,15 +353,19 @@ extension CardCollectionViewController: UIViewControllerPreviewingDelegate {
             return nil
         }
         
+        
         let image = cell.cardData.image
         
         detailVC.image = image
         
-        let width = view.frame.width/4
+        let width = view.frame.width/3
+        
         
         detailVC.preferredContentSize = CGSize(width: width, height: width*cardSizeRatio)
-        
-        previewingContext.sourceRect = cell.frame
+//
+  
+       
+        previewingContext.sourceRect = CGRect(x: view.frame.width/2, y: view.frame.height/2, width: width, height: width*cardSizeRatio)
         
         return detailVC
         

@@ -32,6 +32,8 @@ class OptionsPicker: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource 
         }
     }
     
+    var cmcLessThanGreaterThan = ["=",">","<",">=","<="]
+    
     func configPicker(pickerType: PickerType) {
         self.pickerType = pickerType
         self.dataSource = self
@@ -40,21 +42,38 @@ class OptionsPicker: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource 
     
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        
+        if pickerType == .cmc {
+            return 2
+        }
         return 1
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        if pickerType == .cmc {
+            if component == 0 {
+                return cmcLessThanGreaterThan[row]
+            }
+            if component == 1 {
+                return data[row]
+            }
+        }
+        
         return data[row]
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+       
+        if pickerType == .cmc {
+            if component == 0 {
+                return cmcLessThanGreaterThan.count
+            }
+            if component == 1 {
+                return data.count
+            }
+        }
+        
         return data.count
     }
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
 
 }

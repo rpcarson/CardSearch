@@ -34,22 +34,19 @@ struct MTGAPIService {
     //        }
     //    }
     
-    func performSearch(search: Search, completion: @escaping ([String:Any]) -> Void) {
+    func performSearch(url: URL, completion: @escaping ([String:Any]) -> Void) {
         
-        guard let fullURL = search.getSearchURL(baseURL: baseURLNoSize) else {
-            print("MTGAPIService performSearch fullURL failed")
-            return
-        }
-        
-        let items = search.getQueryItemsFromParameters()
-        guard let componentBasedURL = search.getURLWithComponents(queryItems: items) else {
-            print("base url form compnents fail")
-            return
-        }
-        
-       
-        
-      let  networkOperation = NetworkOperation(url: componentBasedURL)
+//        guard let fullURL = search.getSearchURL(baseURL: baseURLNoSize) else {
+//            print("MTGAPIService performSearch fullURL failed")
+//            return
+//        }
+//        
+//        let items = search.getQueryItemsFromParameters()
+//        guard let componentBasedURL = search.getURLWithComponents(queryItems: items) else {
+//            print("base url form compnents fail")
+//            return
+//        }
+      let  networkOperation = NetworkOperation(url: url)
 
         
         networkOperation.retrieveJSON {
@@ -138,6 +135,7 @@ class NetworkOperation {
     }
     
     let queryURL: URL
+    
     init(url: URL) {
         self.queryURL = url
     }
