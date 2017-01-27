@@ -10,13 +10,13 @@ import UIKit
 
 let configSearchSegueID = "ConfigSearchSegue"
 
-let dummyData = true
+let dummyData = false
 
 let useDebuggerCells = true
 
 let testManager = true
 
-let useImages = false
+let useImages = true
 
 
 private let reuseIdentifier = "CardCellID"
@@ -86,13 +86,17 @@ class CardCollectionViewController: UICollectionViewController  {
                 self.activityIndicator.stopAnimating()
                 return
             }
-            
-            mtgAPISerivce.performSearch(search: search) {
+            guard let text = searchField.text else {
+                print("searchFiled text invalid")
+                return
+            }
+            searchManager.search.searchTerm = text
+            mtgAPISerivce.performSearch(search: searchManager.search) {
                 results in
                 
                 if testManager {
                     self.cardManager = CardManager(json: results)
-                    if let cards = self.cardManager?.returnUniqueCardsByAmount(amount: 6) {
+                    if let cards = self.cardManager?.returnUniqueCardsByAmount(amount: 12) {
                         self.cardData = cards
                         print("cardManager cards set")
                     }
@@ -341,7 +345,7 @@ extension CardCollectionViewController: UIViewControllerPreviewingDelegate {
             return nil
         }
         
-        let image = cell.cardImage
+        let image = cell.cardData.image
         
         detailVC.image = image
         

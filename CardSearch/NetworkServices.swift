@@ -41,7 +41,16 @@ struct MTGAPIService {
             return
         }
         
-        let networkOperation = NetworkOperation(url: fullURL)
+        let items = search.getQueryItemsFromParameters()
+        guard let componentBasedURL = search.getURLWithComponents(queryItems: items) else {
+            print("base url form compnents fail")
+            return
+        }
+        
+       
+        
+      let  networkOperation = NetworkOperation(url: componentBasedURL)
+
         
         networkOperation.retrieveJSON {
             json in

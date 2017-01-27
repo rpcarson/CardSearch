@@ -85,6 +85,77 @@ struct Search {
         
     }
     
+    /*
+     name|name|name   = or
+     "red,white,blue"  = not black, green or colorless
+     not black = "red,white,green,blue,colorless"
+ 
+ */
+    
+    
+    func getQueryItemsFromParameters() -> [URLQueryItem] {
+      
+        var queryItems = [URLQueryItem]()
+        
+        var colors = ""
+        var cmc = ""
+        var types = ""
+        var sets = ""
+        
+        for parameter in parameters {
+           
+            switch parameter.parameterType {
+           
+            case .color:
+                if colors == "" {
+                    colors += parameter.value
+                } else {
+                    colors += ",\(parameter.value)"
+                }
+                
+            case .cmc:
+                cmc += parameter.value
+                
+            case .type:
+                types += parameter.value
+                
+                
+            case .set:
+                sets += parameter.value
+                
+            default: print("getQueryItems FAIL")
+                
+            
+            }
+            
+            
+        }
+        let name = URLQueryItem(name: "name", value: searchTerm)
+        let color = URLQueryItem(name: "colors", value: colors)
+        return [name,color]
+    }
+    
+    func getURLWithComponents(queryItems: [URLQueryItem]) -> URL? {
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.magicthegathering.io"
+        urlComponents.path = "/v1/cards"
+        
+        var items = queryItems
+       // let name = URLQueryItem(name: "name", value: "")
+      //  let item = URLQueryItem(name: "colors", value: "blue")
+        let item2 = URLQueryItem(name: "pageSize", value: "20")
+       // items.append(name)
+        items.append(item2)
+      //  queryItems.append(item)
+        
+        urlComponents.queryItems = items
+        
+        print(urlComponents.url)
+        
+        return urlComponents.url
+    }
+    
 }
 
 
@@ -102,24 +173,25 @@ class SearchManager {
     private func formatParameters() {
         let parameters = search.parameters
         
-        var parameter = [String:[String]]()
         
         
     }
     
-    func getURLWithComponents() -> NSURL? {
-        let urlComponents = NSURLComponents()
+    func getURLWithComponents() -> URL? {
+        var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.magicthegathering.io/v1"
         urlComponents.path = "/cards"
         
+        var queryItems = [URLQueryItem]()
+        let item = URLQueryItem(name: "colors", value: "black")
+        let item2 = URLQueryItem(name: "pageSize", value: "20")
+        queryItems.append(item2)
+        queryItems.append(item)
         
-       
-        
-        
-        
-        
-        return NSURL(string: "url")
+        urlComponents.queryItems = queryItems
+
+        return urlComponents.url
     }
     
     
