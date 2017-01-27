@@ -27,7 +27,13 @@ enum LogicState: String {
     
 }
 
+protocol LogicDelegate {
+    func didChangeLogicState()
+}
+
 class ParameterCell: UITableViewCell {
+    
+    var logicDelegate: LogicDelegate?
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var andSelector: ParameterCellLogicSelector!
@@ -35,7 +41,7 @@ class ParameterCell: UITableViewCell {
     @IBOutlet weak var notSelector: ParameterCellLogicSelector!
     
     var logicState: LogicState = ._is
-    
+ 
     func toggle(button: ParameterCellLogicSelector) {
         andSelector.isSelected = false
         orSelector.isSelected = false
@@ -61,6 +67,8 @@ class ParameterCell: UITableViewCell {
         case ">": logicState = ._or ; print(">")
         default: print("NOCASE DEFINED")
         }
+    
+        logicDelegate?.didChangeLogicState()
         
         
     }
@@ -70,7 +78,14 @@ class ParameterCell: UITableViewCell {
 
 
 
-extension ConfigSearchVC: UITableViewDelegate, UITableViewDataSource {
+extension ConfigSearchVC: UITableViewDelegate, UITableViewDataSource, LogicDelegate {
+    
+    func didChangeLogicState() {
+        
+        getLogicStateForParameters()
+        
+    }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -80,18 +95,23 @@ extension ConfigSearchVC: UITableViewDelegate, UITableViewDataSource {
         
         cell.label.text = "\(parameter.parameterType.rawValue): \(parameter.value)"
         
+        cell.logicState = parameter.logicState
         
-        //        switch parameter.logicState {
-        //        case ._is: cell.andSelector.isSelected = true ; print("andIs")
-        //        case ._or: cell.orSelector.isSelected = true ; print("or is")
-        //        case ._not: cell.notSelector.isSelected = true ; print("not is")
-        //        }
+        switch cell.logicState {
+        case ._is: cell.toggle(button: cell.andSelector)
+        case ._or: cell.toggle(button: cell.orSelector)
+        case ._not: cell.toggle(button: cell.notSelector)
+
+        }
         
         cell.backgroundColor = UIColor.lightGray
+        
+        cell.logicDelegate = self
         
         return cell
         
     }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -106,17 +126,17 @@ extension ConfigSearchVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-
+        
         if editingStyle == .delete {
-                 parameters.remove(at: indexPath.row)
-                tableView.reloadData()
+            parameters.remove(at: indexPath.row)
+            tableView.reloadData()
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 30
     }
-
+    
 }
 
 

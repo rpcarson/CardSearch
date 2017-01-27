@@ -99,6 +99,14 @@ class SearchManager {
         
     }
     
+    private func formatParameters() {
+        let parameters = search.parameters
+        
+        var parameter = [String:[String]]()
+        
+        
+    }
+    
     func getURLWithComponents() -> NSURL? {
         let urlComponents = NSURLComponents()
         urlComponents.scheme = "https"

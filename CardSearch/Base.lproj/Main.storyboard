@@ -125,7 +125,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dTP-di-yG0">
-                                <rect key="frame" x="16" y="596" width="343" height="51"/>
+                                <rect key="frame" x="76" y="596" width="283" height="51"/>
                                 <color key="backgroundColor" red="0.45891815808972014" green="1" blue="0.43377447690638038" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <state key="normal" title="S E A R C H">
@@ -136,19 +136,28 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="pky-g1-OGe">
-                                <rect key="frame" x="16" y="40" width="343" height="75"/>
+                                <rect key="frame" x="16" y="40" width="343" height="85"/>
                                 <subviews>
                                     <pickerView contentMode="scaleToFill" horizontalCompressionResistancePriority="1" translatesAutoresizingMaskIntoConstraints="NO" id="A91-HO-kqz" userLabel="ColorPicker" customClass="OptionsPicker" customModule="CardSearch" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="313.5" height="75"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="258" height="85"/>
                                         <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="75" id="RlX-ap-bZh"/>
+                                            <constraint firstAttribute="height" constant="85" id="RlX-ap-bZh"/>
                                         </constraints>
                                     </pickerView>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o7H-tk-jXa" customClass="ParameterButton" customModule="CardSearch" customModuleProvider="target">
-                                        <rect key="frame" x="313.5" y="0.0" width="29.5" height="75"/>
-                                        <color key="backgroundColor" red="0.49792851603379029" green="1" blue="0.31714125979312313" alpha="1" colorSpace="calibratedRGB"/>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" placeholderIntrinsicWidth="50" placeholderIntrinsicHeight="infinite" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o7H-tk-jXa" customClass="ParameterButton" customModule="CardSearch" customModuleProvider="target">
+                                        <rect key="frame" x="258" y="0.0" width="85" height="85"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="85" id="TkZ-le-5uS"/>
+                                            <constraint firstAttribute="height" constant="85" id="yvY-Lu-pGJ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                         <state key="normal" title="+"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRad">
+                                                <real key="value" value="20"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="addParameterWithSender:" destination="jYc-DP-Fbz" eventType="touchUpInside" id="J75-cl-Hsf"/>
                                         </connections>
@@ -156,17 +165,20 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="P7W-20-zEF">
-                                <rect key="frame" x="16" y="120" width="343" height="75"/>
+                                <rect key="frame" x="16" y="130" width="343" height="85"/>
                                 <subviews>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fOs-YM-6o4" userLabel="SetPicker" customClass="OptionsPicker" customModule="CardSearch" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="313.5" height="75"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="258" height="85"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="75" id="awU-b9-c6r"/>
+                                            <constraint firstAttribute="height" constant="85" id="awU-b9-c6r"/>
                                         </constraints>
                                     </pickerView>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idc-V4-nQQ" customClass="ParameterButton" customModule="CardSearch" customModuleProvider="target">
-                                        <rect key="frame" x="313.5" y="0.0" width="29.5" height="75"/>
-                                        <color key="backgroundColor" red="0.49792851603379029" green="1" blue="0.31714125979312313" alpha="1" colorSpace="calibratedRGB"/>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" placeholderIntrinsicWidth="50" placeholderIntrinsicHeight="infinite" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="idc-V4-nQQ" customClass="ParameterButton" customModule="CardSearch" customModuleProvider="target">
+                                        <rect key="frame" x="258" y="0.0" width="85" height="85"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="85" id="Ccz-5Z-hRs"/>
+                                            <constraint firstAttribute="height" constant="85" id="IZ8-x2-W5H"/>
+                                        </constraints>
                                         <state key="normal" title="+"/>
                                         <connections>
                                             <action selector="addParameterWithSender:" destination="jYc-DP-Fbz" eventType="touchUpInside" id="lNn-wy-eya"/>
@@ -175,17 +187,20 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="aL0-cP-REA">
-                                <rect key="frame" x="16" y="200" width="343" height="85"/>
+                                <rect key="frame" x="16" y="220" width="343" height="85"/>
                                 <subviews>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XRF-XU-0ib" userLabel="TypePicker" customClass="OptionsPicker" customModule="CardSearch" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="313.5" height="85"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="258" height="85"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="85" id="5jv-TX-uNj"/>
                                         </constraints>
                                     </pickerView>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cb0-0s-Vcw" customClass="ParameterButton" customModule="CardSearch" customModuleProvider="target">
-                                        <rect key="frame" x="313.5" y="0.0" width="29.5" height="85"/>
-                                        <color key="backgroundColor" red="0.49792851603379029" green="1" blue="0.31714125979312313" alpha="1" colorSpace="calibratedRGB"/>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" placeholderIntrinsicWidth="50" placeholderIntrinsicHeight="infinite" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cb0-0s-Vcw" customClass="ParameterButton" customModule="CardSearch" customModuleProvider="target">
+                                        <rect key="frame" x="258" y="0.0" width="85" height="85"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="85" id="V7K-Ag-z2x"/>
+                                            <constraint firstAttribute="width" constant="85" id="ZAe-bb-dFU"/>
+                                        </constraints>
                                         <state key="normal" title="+"/>
                                         <connections>
                                             <action selector="addParameterWithSender:" destination="jYc-DP-Fbz" eventType="touchUpInside" id="4Fc-ex-hjp"/>
@@ -194,17 +209,20 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="Bja-lP-4cA">
-                                <rect key="frame" x="16" y="290" width="343" height="85"/>
+                                <rect key="frame" x="16" y="310" width="343" height="85"/>
                                 <subviews>
                                     <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A6A-Y2-Hzy" userLabel="CMCPicker" customClass="OptionsPicker" customModule="CardSearch" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="313.5" height="85"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="258" height="85"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="85" id="cJ8-uC-iu3"/>
                                         </constraints>
                                     </pickerView>
-                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i4S-mU-xpQ" customClass="ParameterButton" customModule="CardSearch" customModuleProvider="target">
-                                        <rect key="frame" x="313.5" y="0.0" width="29.5" height="85"/>
-                                        <color key="backgroundColor" red="0.49792851603379029" green="1" blue="0.31714125979312313" alpha="1" colorSpace="calibratedRGB"/>
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" placeholderIntrinsicWidth="50" placeholderIntrinsicHeight="infinite" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i4S-mU-xpQ" customClass="ParameterButton" customModule="CardSearch" customModuleProvider="target">
+                                        <rect key="frame" x="258" y="0.0" width="85" height="85"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="85" id="J3b-1p-gjn"/>
+                                            <constraint firstAttribute="height" constant="85" id="eJG-kw-L4G"/>
+                                        </constraints>
                                         <state key="normal" title="+"/>
                                         <connections>
                                             <action selector="addParameterWithSender:" destination="jYc-DP-Fbz" eventType="touchUpInside" id="AnR-8x-6vP"/>
@@ -213,7 +231,7 @@
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FJs-BY-q6c">
-                                <rect key="frame" x="16" y="380" width="343" height="196"/>
+                                <rect key="frame" x="16" y="400" width="343" height="176"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="parameterCell" id="F6k-pw-c1Y" customClass="ParameterCell" customModule="CardSearch" customModuleProvider="target">
@@ -292,6 +310,17 @@
                                     <outlet property="delegate" destination="jYc-DP-Fbz" id="D6B-Aj-UA1"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kYN-4b-yUl">
+                                <rect key="frame" x="16" y="596" width="50" height="51"/>
+                                <color key="backgroundColor" red="1" green="0.1825936507" blue="0.20157242980000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="fJr-pS-Vg0"/>
+                                </constraints>
+                                <state key="normal" title="CLEAR"/>
+                                <connections>
+                                    <action selector="clearParameters" destination="jYc-DP-Fbz" eventType="touchUpInside" id="rKd-R4-cxy"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -299,15 +328,18 @@
                             <constraint firstItem="pky-g1-OGe" firstAttribute="top" secondItem="8AA-i0-mEI" secondAttribute="bottom" constant="20" id="2WV-z7-gVQ"/>
                             <constraint firstItem="dTP-di-yG0" firstAttribute="top" secondItem="FJs-BY-q6c" secondAttribute="bottom" constant="20" id="54d-gQ-9Qi"/>
                             <constraint firstItem="Bja-lP-4cA" firstAttribute="leading" secondItem="y7x-Y4-6od" secondAttribute="leadingMargin" id="6Rv-kP-wwg"/>
-                            <constraint firstItem="dTP-di-yG0" firstAttribute="leading" secondItem="y7x-Y4-6od" secondAttribute="leadingMargin" id="Byd-4A-v5r"/>
                             <constraint firstItem="aL0-cP-REA" firstAttribute="top" secondItem="P7W-20-zEF" secondAttribute="bottom" constant="5" id="EOs-Ns-Rci"/>
                             <constraint firstItem="3no-e9-HiO" firstAttribute="top" secondItem="dTP-di-yG0" secondAttribute="bottom" constant="20" id="EPo-b7-MHM"/>
+                            <constraint firstItem="3no-e9-HiO" firstAttribute="top" secondItem="kYN-4b-yUl" secondAttribute="bottom" constant="20" id="Ptg-3Y-hAr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Bja-lP-4cA" secondAttribute="trailing" id="Vme-wJ-uxt"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FJs-BY-q6c" secondAttribute="trailing" id="XNS-b4-OrV"/>
+                            <constraint firstItem="kYN-4b-yUl" firstAttribute="leading" secondItem="y7x-Y4-6od" secondAttribute="leadingMargin" id="bz7-bI-DMf"/>
+                            <constraint firstItem="dTP-di-yG0" firstAttribute="leading" secondItem="kYN-4b-yUl" secondAttribute="trailing" constant="10" id="dC4-wO-nQs"/>
                             <constraint firstItem="pky-g1-OGe" firstAttribute="leading" secondItem="y7x-Y4-6od" secondAttribute="leadingMargin" id="gEL-Zg-R7d"/>
                             <constraint firstAttribute="trailingMargin" secondItem="pky-g1-OGe" secondAttribute="trailing" id="iE5-Ra-36K"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aL0-cP-REA" secondAttribute="trailing" id="k2q-dd-aI2"/>
                             <constraint firstItem="Bja-lP-4cA" firstAttribute="top" secondItem="aL0-cP-REA" secondAttribute="bottom" constant="4.5" id="lPG-ae-SfY"/>
+                            <constraint firstItem="kYN-4b-yUl" firstAttribute="top" secondItem="FJs-BY-q6c" secondAttribute="bottom" constant="20" id="mBn-vS-JrS"/>
                             <constraint firstItem="FJs-BY-q6c" firstAttribute="leading" secondItem="y7x-Y4-6od" secondAttribute="leadingMargin" id="qEz-xa-Fvo"/>
                             <constraint firstItem="P7W-20-zEF" firstAttribute="leading" secondItem="y7x-Y4-6od" secondAttribute="leadingMargin" id="uVP-YL-qlS"/>
                             <constraint firstItem="aL0-cP-REA" firstAttribute="leading" secondItem="y7x-Y4-6od" secondAttribute="leadingMargin" id="uuV-nJ-6K3"/>

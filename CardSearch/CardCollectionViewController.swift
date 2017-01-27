@@ -173,6 +173,7 @@ class CardCollectionViewController: UICollectionViewController  {
             let parameters = searchManager.search.parameters
             if !parameters.isEmpty {
                 destinationVC.parameters = parameters
+                destinationVC.groupParameters()
             }
             
         }

@@ -25,14 +25,14 @@ struct Parameter {
 
 class ConfigSearchVC: UIViewController {
     
-    var parameters = [Parameter]() {
-        didSet {
-          parameters = parameters.sorted {param1, param2 in
+    var parameters = [Parameter]()
+    
+    func groupParameters() {
+        let sorted = self.parameters.sorted { param1, param2 in
             print("sorted")
-              return   param1.parameterType.rawValue < param2.parameterType.rawValue
-            
-            }
+            return param1.parameterType.rawValue < param2.parameterType.rawValue
         }
+        parameters = sorted
     }
     
     var collectionView: CardCollectionViewController?
@@ -54,12 +54,15 @@ class ConfigSearchVC: UIViewController {
     @IBOutlet weak var setButton: ParameterButton!
     @IBOutlet weak var cmcButton: ParameterButton!
     
-   
+    @IBAction func clearParameters() {
+        parameters.removeAll()
+        parameterTableView.reloadData()
+    }
     
+   
     @IBAction func addParameter(sender: ParameterButton) {
         
         var parameter = Parameter()
-        
         
         guard let picker = sender.associatedPicker else {
             print("addParamter: bad picker")
@@ -73,6 +76,8 @@ class ConfigSearchVC: UIViewController {
         parameter.value = value
         
         parameters.append(parameter)
+        
+      //  groupParameters()
         
         parameterTableView.reloadData()
 
@@ -99,7 +104,7 @@ class ConfigSearchVC: UIViewController {
         
         collectionView?.searchManager.search.parameters = parameters
         
-        print(parameters)
+        print(parameters.description)
         
         self.dismiss(animated: true, completion: nil)
         
@@ -125,8 +130,14 @@ class ConfigSearchVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = UIColor(red:0.95, green:0.95, blue:0.95, alpha:1.00)
+        
+        parameterTableView.backgroundColor = UIColor.darkGray
+        
         configButtons()
         configPickers()
+        
+        parameterTableView.allowsSelection = false
         
         
     }
