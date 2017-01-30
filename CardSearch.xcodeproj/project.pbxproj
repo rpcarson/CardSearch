@@ -70,12 +70,10 @@
 		5BA8AAAE1E2D7E5800B895B5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5BE7C9B91E3FF68800775DBD /* SearchCollectionView */,
 				5BA8AAAC1E2D7E4C00B895B5 /* CardDetailViewController.swift */,
-				5BFE72061E284B2A003666B5 /* CardCollectionViewController.swift */,
 				5BD32DE71E314E4000A1E070 /* ConfigSearchVC.swift */,
 				5BFC78971E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift */,
-				5BE7C9B51E3FEC0A00775DBD /* SearchCollectionViewDatasource.swift */,
-				5BE7C9B71E3FF05900775DBD /* SearchCollectionFlowDelegate.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -102,6 +100,16 @@
 				5BFE720A1E284BA2003666B5 /* CardCell.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		5BE7C9B91E3FF68800775DBD /* SearchCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				5BFE72061E284B2A003666B5 /* CardCollectionViewController.swift */,
+				5BE7C9B51E3FEC0A00775DBD /* SearchCollectionViewDatasource.swift */,
+				5BE7C9B71E3FF05900775DBD /* SearchCollectionFlowDelegate.swift */,
+			);
+			name = SearchCollectionView;
 			sourceTree = "<group>";
 		};
 		5BFE71E81E284AF3003666B5 = {

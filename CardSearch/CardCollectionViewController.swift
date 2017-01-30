@@ -37,36 +37,26 @@ class CardCollectionViewController: UICollectionViewController  {
     
     var mtgAPISerivce = MTGAPIService()
     
-   // var currentSearch: Search?
-    
-    
     var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
-
     var configVC: ConfigSearchVC?
     
     var searchManager = SearchManager()
-  //  var dataSource.cardManager = CardManager()
     
     var dataSource = SearchCollectionViewDatasource()
 
-    
     @IBOutlet weak var searchField: UITextField!
-    
     
     var searchTerm: String? {
         return searchField.text != nil ? searchField.text : ""
     }
     
     
-    let cardsPerRow: CGFloat = 3
-    let sectionInsets = UIEdgeInsets(top: 40.0, left: 15.0, bottom: 40.0, right: 15.0)
-    let cardSize = CGSize(width: 63, height: 88)
-    var cardSizeRatio: CGFloat {
-        return cardSize.height/cardSize.width
+    @IBAction func configSearch() {
+        print("config pressed")
+        performSegue(withIdentifier: configSearchSegueID, sender: nil)
     }
-    
-    
+        
     func performSearch(completion: @escaping () -> Void) {
         searchManager.updateSearchTerm(term: searchTerm)
         guard let url = searchManager.constructURLWithComponents() else {
@@ -95,6 +85,13 @@ class CardCollectionViewController: UICollectionViewController  {
         activityIndicator.frame = searchField.bounds
         activityIndicator.startAnimating()
         
+        if useDummyData {
+            dataSource.cardManager.cards = dummyData
+            activityIndicator.stopAnimating()
+            self.collectionView?.reloadData()
+            return
+        }
+        
         
         if testRefactoredSearch {
             
@@ -111,78 +108,6 @@ class CardCollectionViewController: UICollectionViewController  {
             print("ending loadData")
             return
         }
-        
-        
-        if useDummyData {
-            dataSource.cardManager.cards = dummyData
-            activityIndicator.stopAnimating()
-            self.collectionView?.reloadData()
-        
-        } else {
-
-            guard let term = searchField.text else {
-                print("searchFiled text invalid")
-                return
-            }
-            
-          
-            
-            searchManager.updateSearchTerm(term: term)
-          
-            
-            
-            
-            guard let url = searchManager.constructURLWithComponents() else {
-                print("CardCollecitonViewController:loadData construct URL fail")
-                return
-            }
-            
-           
-            
-            print(url)
-            
-            mtgAPISerivce.performSearch(url: url) {
-                results in
-                
-              //  print(results)
-                
-                if testManager {
-                    self.dataSource.cardManager = CardManager(json: results)
-                    if let cards = self.dataSource.cardManager.returnUniqueCards(amount: 12) {
-                        self.dataSource.cardManager.cards = cards
-                        print("cardManager cards set")
-                    }
-                } else {
-                   
-                    if let cards = JSONParser.parser.createCardsRemovingDuplicatesByName(data: results) {
-                        self.dataSource.cardManager.cards = cards
-                        print("carddata set")
-                    }
-                    
-                }
-               
-                if useImages {
-                    for (index, _) in self.dataSource.cardManager.cards.enumerated() {
-                        let card = self.dataSource.cardManager.cards[index]
-                        self.dataSource.cardManager.cards[index].image = JSONParser.parser.getImageNoQueue(imageURL: card.imageURL)
-                    }
-                }
-                
-              
-                
-                DispatchQueue.main.async {
-                    print("Closure called in func loadData")
-                    self.activityIndicator.stopAnimating()
-                    self.collectionView?.reloadData()
-                }
-            }
-            
-            
-            
-            print("right before end of load data")
-            
-        }
-        
     }
     
     
@@ -233,126 +158,11 @@ class CardCollectionViewController: UICollectionViewController  {
         }
         
      }
-    
-    
-//    // MARK: UICollectionViewDataSource
-//    
-//
-//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return dataSource.cardManager.cards.count
-//    }
-//    
-//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CardCell
-//        
-//        let card = dataSource.cardManager.cards[indexPath.row]
-//        
-//        cell.cardData = card
-//        
-//        if useDummyData {
-//            cell.cardNameLabel.text = String(describing: indexPath.row)
-//            cell.backgroundColor = UIColor.gray
-//            return cell
-//        }
-//        
-//        if !useImages {
-//            cell.cardNameLabel.text = "# \(indexPath.row), \(card.name)"
-//            cell.backgroundColor = UIColor.gray
-//            //cell.cardImageView.image = cell.cardData.image
-//            return cell
-//        }
-//        
-//        cell.cardNameLabel.isHidden = true
-//
-//        return cell
-//    }
-//    
-//    
-//    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        
-//        let card = dataSource.cardManager.cards[indexPath.row]
-//        guard let image = JSONParser.parser.getImageNoQueue(imageURL: card.imageURL) else {
-//            print("CCVC:willDisplayCell  - no card image retrieved")
-//            // TODO - display question mark
-//            return
-//        }
-//        
-//        (cell as! CardCell).setImage(image: image, andDisplay: true)
-//        
-//        print("CCVC willDisplayCell  card.image set")
-//        
-//        
-//    }
-//    
-//    
-    // MARK: UICollectionViewDelegate
-    
-    /*
-     // Uncomment this method to specify if the specified item should be highlighted during tracking
-     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment this method to specify if the specified item should be selected
-     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-     return true
-     }
-     */
-    
-    /*
-     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-     override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-     return false
-     }
-     
-     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-     
-     }
-     */
-    
+
 }
-
-//MARK: - FlowLayout delegate extension
-
-extension CardCollectionViewController: UICollectionViewDelegateFlowLayout {
-    
-   
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let paddingSpace = sectionInsets.left * (cardsPerRow + 1)
-        let availableWidth = view.frame.width - paddingSpace
-        let widthPerItem = availableWidth / cardsPerRow
-        let height = widthPerItem * cardSizeRatio
-        
-        return CGSize(width: widthPerItem, height: height)
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        return sectionInsets
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.left
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
-    }
-}
-
 
 //MARK: - Textfielddelegate extension
+
 extension CardCollectionViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -363,22 +173,13 @@ extension CardCollectionViewController: UITextFieldDelegate {
         return true
     }
 
-    
-    
-    
 }
 
-
-
-
-
+//MARK: - PeekNPop Delegate
 
 extension CardCollectionViewController: UIViewControllerPreviewingDelegate {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         
-        
-      
-
         guard let indexPath = collectionView?.indexPathForItem(at: location) else {
             print("previewingContext  indexpath fail, got path: \(location)")
             return nil
@@ -401,11 +202,10 @@ extension CardCollectionViewController: UIViewControllerPreviewingDelegate {
         
         let width = view.frame.width/3
         
+        let cardSizeRatio = dataSource.cardSizeRatio
         
         detailVC.preferredContentSize = CGSize(width: width, height: width*cardSizeRatio)
-//
   
-       
         previewingContext.sourceRect = CGRect(x: view.frame.width/2, y: view.frame.height/2, width: width, height: width*cardSizeRatio)
         
         return detailVC
@@ -418,16 +218,6 @@ extension CardCollectionViewController: UIViewControllerPreviewingDelegate {
     }
 }
 
-
-
-
-extension CardCollectionViewController {
-    
-    @IBAction func configSearch() {
-     print("config pressed")
-        performSegue(withIdentifier: configSearchSegueID, sender: nil)
-    }
-}
 
 
 

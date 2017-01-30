@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-//class SearchCollectionFlowDelegate: NSObject, UICollectionViewDelegateFlowLayout {
 extension SearchCollectionViewDatasource: UICollectionViewDelegateFlowLayout {
     
     
