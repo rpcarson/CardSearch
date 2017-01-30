@@ -26,7 +26,7 @@ class CardManager {
     }
     
     
-    func returnUniqueCards(amount: Int) -> [Card] {
+    func returnUniqueCards(amount: Int) -> [Card]? {
         
         getUniqueJSON()
         
@@ -50,6 +50,39 @@ class CardManager {
         
     }
     
+    func createUniqueCardsWithMaxFromJSON(json: JSONResults, amount: Int) {
+        
+        allJSONResults = json
+        
+        getUniqueJSON()
+        
+        var limitedJson = JSONCardData()
+        
+        if let cards = uniqueJSONResults["cards"] as? [[String:Any]] {
+            
+            let maxIndex = cards.count - 1
+            
+            for i in 0..<amount {
+                if i <= maxIndex {
+                    limitedJson.append(cards[i])
+                    
+                }
+            }
+            
+        }
+        
+        let cardData = JSONParser.parser.createCardsFromCardsData(data: limitedJson)
+        cards = cardData
+        
+        print("CardManager createUniquecards ended")
+        
+    }
+    
+    func configureWithJSON(json: JSONResults) {
+        allJSONResults = json
+        
+    }
+    
     
     func generateCardImages() {
         for (index, _) in cards.enumerated() {
@@ -65,6 +98,10 @@ class CardManager {
     
     init(json: JSONResults) {
         allJSONResults = json
+    }
+    
+    init() {
+        
     }
     
     

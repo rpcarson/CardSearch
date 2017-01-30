@@ -19,8 +19,20 @@ enum SetCode: String {
     case SOI
     case EMN
     case KLD
+    case AER
     
 }
+
+enum StandardSets: String {
+    case BFZ
+    case OGW
+    case SOI
+    case EMN
+    case KLD
+    case AER
+}
+
+let currentStandard = "BFZ|OGW|SOI|EMN|KLD|AER"
 
 
 
@@ -32,17 +44,9 @@ enum SearchParameter: String {
     case type
 }
 
-
-
-
-protocol SearchType {
-    var searchTerm: String { get set }
-    var parameters: [String:String] { get set }
-}
-
 struct Search {
     
-    var searchTerm: String
+    var searchTerm: String = ""
    
     //var searchParamter: SearchParameter
     
@@ -56,7 +60,7 @@ struct Search {
     }
     
     init() {
-        searchTerm = "zombie"
+      // searchTerm = "zombie"
        // searchParamter = .name
         
     }
@@ -189,8 +193,10 @@ struct Search {
         func updateParameters(parameters: [Parameter]) {
             search.parameters = parameters
         }
-        func updateSearchTerm(term: String) {
-            search.searchTerm = term
+       
+        func updateSearchTerm(term: String?) {
+    
+            search.searchTerm = (term != nil ? term! : "")
         }
         
         
@@ -216,19 +222,23 @@ struct Search {
             }
             
             urlComponents.queryItems = queryItems
-
-
             
+            let stringWithoutBullshit = urlComponents.string!.replacingOccurrences(of: "%7C", with: "|")
+            //ignore the force unwrap
+            guard let encodedURL = stringWithoutBullshit.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else {
+                print("unhelpful message")
+                return nil
+            }
             
-//            var queryItems = [URLQueryItem]()
-//            let item = URLQueryItem(name: "colors", value: "black")
-//            let item2 = URLQueryItem(name: "pageSize", value: "20")
-//            queryItems.append(item2)
-//            queryItems.append(item)
+            //let correctURL = URL(string: encodedURL)
             
-            print(urlComponents.url)
-            
-            return urlComponents.url
+//            print"URLComponents.url:\(urlComponents.url)"
+//            print"URL String: \(stringWithoutBullshit)"
+//            
+           
+            let uRaEl = URL(string: encodedURL)
+            print("URAEL: \(uRaEl)")
+            return uRaEl
         }
         
         
@@ -237,7 +247,7 @@ struct Search {
             var colors = String()
             var cmc = [String]()
             var types = String()
-            var sets = [String]()
+            var sets = String()
             
             for parameter in search.parameters {
                 
@@ -262,12 +272,39 @@ struct Search {
                     cmc.append(parameter.value)
                 case .type:
                     if parameter.logicState == ._is {
-                        types += ",\(parameter.value)"
+                        if types.isEmpty {
+                            types += parameter.value
+                        } else {
+                            types += ",\(parameter.value)"
+                        }
+                        
                     } else if parameter.logicState == ._or {
-                        types += "|\(parameter.value)"
+                        if types.isEmpty {
+                            types += parameter.value
+                        } else {
+                            types += ",\(parameter.value)"
+                        }
                     }
                 case .set:
-                    sets.append(parameter.value)
+                    if parameter.logicState == ._is {
+                        if sets.isEmpty {
+                            sets += parameter.value
+                        } else {
+                            sets += ",\(parameter.value)"
+                        }
+                        
+                    } else if parameter.logicState == ._or {
+                        if sets.isEmpty {
+                            sets += parameter.value
+                        } else {
+                            sets += ",\(parameter.value)"
+                        }
+                    }
+                    
+                    if sets == "Standard" {
+                        sets = currentStandard
+                    }
+                    
                 default: print("getQueryItems FAIL")
                     
                     
@@ -282,14 +319,22 @@ struct Search {
         
             let typesQuery = URLQueryItem(name: "types", value: types)
             let colorsQuery = URLQueryItem(name: "colors", value: colors)
+        let setsQuery = URLQueryItem(name: "set", value: sets)
             // let name = URLQueryItem(name: "name", value: searchTerm)
         let sizeLimit = URLQueryItem(name: "pageSize", value: "12")
+        
+      
+        
+        
         
         if !types.isEmpty {
             items.append(typesQuery)
         }
         if !colors.isEmpty {
             items.append(colorsQuery)
+        }
+        if !sets.isEmpty {
+            items.append(setsQuery)
         }
             
             return items
@@ -298,10 +343,32 @@ struct Search {
         }
 }
 
+extension CharacterSet {
+    static let urlQueryAllowedChar: CharacterSet = {
+        var allowed = CharacterSet.urlQueryAllowed
+        allowed.remove("|")
+        return allowed
+    }()
+    
+    
+    static func urlQueryValueAllowed() -> CharacterSet {
+        return CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~/?|=")
+    }
+}
+
+extension String {
+  
+    func addingPercentEncodingForURLQueryValue() -> String? {
+        let allowedCharacters = CharacterSet.urlQueryValueAllowed()
+        return addingPercentEncoding(withAllowedCharacters: allowedCharacters)
+}
 
 
 
 
+
+
+}
 
 
 

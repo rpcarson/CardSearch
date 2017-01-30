@@ -401,6 +401,7 @@ class JSONParser {
                         print("sortJSONByRemovingDuplicateNames unique card appended: \(name)")
                         
                     }
+                
                 }
                 
             }
