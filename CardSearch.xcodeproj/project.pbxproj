@@ -16,6 +16,7 @@
 		5BD1DDF31E29B81B00D52C8B /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BD1DDF21E29B81B00D52C8B /* 8.png */; };
 		5BD32DE81E314E4000A1E070 /* ConfigSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD32DE71E314E4000A1E070 /* ConfigSearchVC.swift */; };
 		5BE7C9B61E3FEC0A00775DBD /* SearchCollectionViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE7C9B51E3FEC0A00775DBD /* SearchCollectionViewDatasource.swift */; };
+		5BE7C9B81E3FF05900775DBD /* SearchCollectionFlowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE7C9B71E3FF05900775DBD /* SearchCollectionFlowDelegate.swift */; };
 		5BEB60FC1E341991009A81EB /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB60FB1E341991009A81EB /* NetworkServices.swift */; };
 		5BFC78921E359085009960B5 /* OptionsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFC78911E359085009960B5 /* OptionsPicker.swift */; };
 		5BFC78941E35A0B3009960B5 /* ParameterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFC78931E35A0B3009960B5 /* ParameterButton.swift */; };
@@ -39,6 +40,7 @@
 		5BD1DDF21E29B81B00D52C8B /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
 		5BD32DE71E314E4000A1E070 /* ConfigSearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigSearchVC.swift; sourceTree = "<group>"; };
 		5BE7C9B51E3FEC0A00775DBD /* SearchCollectionViewDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewDatasource.swift; sourceTree = "<group>"; };
+		5BE7C9B71E3FF05900775DBD /* SearchCollectionFlowDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionFlowDelegate.swift; sourceTree = "<group>"; };
 		5BEB60FB1E341991009A81EB /* NetworkServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkServices.swift; sourceTree = "<group>"; };
 		5BFC78911E359085009960B5 /* OptionsPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsPicker.swift; sourceTree = "<group>"; };
 		5BFC78931E35A0B3009960B5 /* ParameterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterButton.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				5BD32DE71E314E4000A1E070 /* ConfigSearchVC.swift */,
 				5BFC78971E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift */,
 				5BE7C9B51E3FEC0A00775DBD /* SearchCollectionViewDatasource.swift */,
+				5BE7C9B71E3FF05900775DBD /* SearchCollectionFlowDelegate.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 			files = (
 				5BFE72071E284B2A003666B5 /* CardCollectionViewController.swift in Sources */,
 				5B37F2831E2C6EB4007442B2 /* SearchManager.swift in Sources */,
+				5BE7C9B81E3FF05900775DBD /* SearchCollectionFlowDelegate.swift in Sources */,
 				5BFE72091E284B4D003666B5 /* MTGCardSearch.swift in Sources */,
 				5BFC78941E35A0B3009960B5 /* ParameterButton.swift in Sources */,
 				5B04C0281E304AAA00CFD58A /* CardManager.swift in Sources */,

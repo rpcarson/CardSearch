@@ -46,7 +46,7 @@ class CardCollectionViewController: UICollectionViewController  {
     var configVC: ConfigSearchVC?
     
     var searchManager = SearchManager()
-    var cardManager = CardManager()
+  //  var dataSource.cardManager = CardManager()
     
     var dataSource = SearchCollectionViewDatasource()
 
@@ -77,7 +77,7 @@ class CardCollectionViewController: UICollectionViewController  {
         mtgAPISerivce.performSearch(url: url) {
             results in
 
-            self.cardManager.createUniqueCardsWithMaxFromJSON(json: results, amount: 6)
+            self.dataSource.cardManager.createUniqueCardsWithMaxFromJSON(json: results, amount: 6)
             print("CCVC cardManager.createUniqueCardsWithMaxFromJSON called in performSearch closure")
             
             
@@ -114,7 +114,7 @@ class CardCollectionViewController: UICollectionViewController  {
         
         
         if useDummyData {
-            cardManager.cards = dummyData
+            dataSource.cardManager.cards = dummyData
             activityIndicator.stopAnimating()
             self.collectionView?.reloadData()
         
@@ -147,24 +147,24 @@ class CardCollectionViewController: UICollectionViewController  {
               //  print(results)
                 
                 if testManager {
-                    self.cardManager = CardManager(json: results)
-                    if let cards = self.cardManager.returnUniqueCards(amount: 12) {
-                        self.cardManager.cards = cards
+                    self.dataSource.cardManager = CardManager(json: results)
+                    if let cards = self.dataSource.cardManager.returnUniqueCards(amount: 12) {
+                        self.dataSource.cardManager.cards = cards
                         print("cardManager cards set")
                     }
                 } else {
                    
                     if let cards = JSONParser.parser.createCardsRemovingDuplicatesByName(data: results) {
-                        self.cardManager.cards = cards
+                        self.dataSource.cardManager.cards = cards
                         print("carddata set")
                     }
                     
                 }
                
                 if useImages {
-                    for (index, _) in self.cardManager.cards.enumerated() {
-                        let card = self.cardManager.cards[index]
-                        self.cardManager.cards[index].image = JSONParser.parser.getImageNoQueue(imageURL: card.imageURL)
+                    for (index, _) in self.dataSource.cardManager.cards.enumerated() {
+                        let card = self.dataSource.cardManager.cards[index]
+                        self.dataSource.cardManager.cards[index].image = JSONParser.parser.getImageNoQueue(imageURL: card.imageURL)
                     }
                 }
                 
@@ -197,6 +197,7 @@ class CardCollectionViewController: UICollectionViewController  {
         searchField.delegate = self
         
         collectionView?.dataSource = dataSource
+        collectionView?.delegate = dataSource
         
 
     }
@@ -234,57 +235,57 @@ class CardCollectionViewController: UICollectionViewController  {
      }
     
     
-    // MARK: UICollectionViewDataSource
-    
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cardManager.cards.count
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CardCell
-        
-        let card = cardManager.cards[indexPath.row]
-        
-        cell.cardData = card
-        
-        if useDummyData {
-            cell.cardNameLabel.text = String(describing: indexPath.row)
-            cell.backgroundColor = UIColor.gray
-            return cell
-        }
-        
-        if !useImages {
-            cell.cardNameLabel.text = "# \(indexPath.row), \(card.name)"
-            cell.backgroundColor = UIColor.gray
-            //cell.cardImageView.image = cell.cardData.image
-            return cell
-        }
-        
-        cell.cardNameLabel.isHidden = true
-
-        return cell
-    }
-    
-    
-    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
-        let card = cardManager.cards[indexPath.row]
-        guard let image = JSONParser.parser.getImageNoQueue(imageURL: card.imageURL) else {
-            print("CCVC:willDisplayCell  - no card image retrieved")
-            // TODO - display question mark
-            return
-        }
-        
-        (cell as! CardCell).setImage(image: image, andDisplay: true)
-        
-        print("CCVC willDisplayCell  card.image set")
-        
-        
-    }
-    
-    
+//    // MARK: UICollectionViewDataSource
+//    
+//
+//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return dataSource.cardManager.cards.count
+//    }
+//    
+//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CardCell
+//        
+//        let card = dataSource.cardManager.cards[indexPath.row]
+//        
+//        cell.cardData = card
+//        
+//        if useDummyData {
+//            cell.cardNameLabel.text = String(describing: indexPath.row)
+//            cell.backgroundColor = UIColor.gray
+//            return cell
+//        }
+//        
+//        if !useImages {
+//            cell.cardNameLabel.text = "# \(indexPath.row), \(card.name)"
+//            cell.backgroundColor = UIColor.gray
+//            //cell.cardImageView.image = cell.cardData.image
+//            return cell
+//        }
+//        
+//        cell.cardNameLabel.isHidden = true
+//
+//        return cell
+//    }
+//    
+//    
+//    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        
+//        let card = dataSource.cardManager.cards[indexPath.row]
+//        guard let image = JSONParser.parser.getImageNoQueue(imageURL: card.imageURL) else {
+//            print("CCVC:willDisplayCell  - no card image retrieved")
+//            // TODO - display question mark
+//            return
+//        }
+//        
+//        (cell as! CardCell).setImage(image: image, andDisplay: true)
+//        
+//        print("CCVC willDisplayCell  card.image set")
+//        
+//        
+//    }
+//    
+//    
     // MARK: UICollectionViewDelegate
     
     /*

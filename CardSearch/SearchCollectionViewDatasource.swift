@@ -9,7 +9,18 @@
 import UIKit
 
 
-class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource {
+class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    
+    
+    let cardsPerRow: CGFloat = 3
+    let sectionInsets = UIEdgeInsets(top: 40.0, left: 15.0, bottom: 40.0, right: 15.0)
+    let cardSize = CGSize(width: 63, height: 88)
+    var cardSizeRatio: CGFloat {
+        return cardSize.height/cardSize.width
+    }
+    
+    
     
     var cardManager: CardManager = CardManager()
     
@@ -42,11 +53,15 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource {
         
         cell.cardNameLabel.isHidden = true
         
+        print("cell for path")
+        
         return cell
     }
     
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        print("will display")
         
         let card = cardManager.cards[indexPath.row]
         
@@ -62,7 +77,12 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource {
         
         
     }
-    
-    
-    
 }
+
+
+
+
+
+
+
+//
