@@ -72,10 +72,9 @@ class CardManager {
         }
         
         let cardData = JSONParser.parser.createCardsFromCardsData(data: limitedJson)
+        
         cards = cardData
-        
-        print("CardManager createUniquecards ended")
-        
+            
     }
     
     func configureWithJSON(json: JSONResults) {
@@ -84,25 +83,22 @@ class CardManager {
     }
     
     
-    func generateCardImages() {
-        for (index, _) in cards.enumerated() {
-            let card = cards[index]
-            if card.image == nil {
-                JSONParser.parser.imageFromURL(imageURL: card.imageURL) {
-                    result in
-                    self.cards[index].image = result
-                }
-            }
-        }
-    }
+//    func generateCardImages() {
+//        for (index, _) in cards.enumerated() {
+//            let card = cards[index]
+//            if card.image == nil {
+//                JSONParser.parser.imageFromURL(imageURL: card.imageURL) {
+//                    result in
+//                    self.cards[index].image = result
+//                }
+//            }
+//        }
+//    }
     
     init(json: JSONResults) {
         allJSONResults = json
     }
-    
-    init() {
-        
-    }
-    
+    init() {}
+
     
 }

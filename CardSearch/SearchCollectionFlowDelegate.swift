@@ -8,6 +8,9 @@
 
 import UIKit
 
+
+
+
 extension SearchCollectionViewDatasource: UICollectionViewDelegateFlowLayout {
     
     
@@ -28,8 +31,13 @@ extension SearchCollectionViewDatasource: UICollectionViewDelegateFlowLayout {
         
     }
     
+    
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return sectionInsets.left
+        
+        let widthBetweenCards: CGFloat = 5
+        
+        return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

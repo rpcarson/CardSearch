@@ -38,7 +38,6 @@ class JSONParser {
         
         print("beginning getImage")
         
-        
         if let url = URL(string: imageURL) {
                 do {
                     

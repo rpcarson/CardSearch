@@ -265,7 +265,7 @@ struct Search {
                         if colors.isEmpty {
                             colors += parameter.value
                         } else {
-                            colors += ",\(parameter.value)"
+                            colors += "|\(parameter.value)"
                         }
                     }
                 case .cmc:
@@ -282,7 +282,7 @@ struct Search {
                         if types.isEmpty {
                             types += parameter.value
                         } else {
-                            types += ",\(parameter.value)"
+                            types += "|\(parameter.value)"
                         }
                     }
                 case .set:
@@ -297,7 +297,7 @@ struct Search {
                         if sets.isEmpty {
                             sets += parameter.value
                         } else {
-                            sets += ",\(parameter.value)"
+                            sets += "|\(parameter.value)"
                         }
                     }
                     
@@ -324,9 +324,6 @@ struct Search {
         let sizeLimit = URLQueryItem(name: "pageSize", value: "12")
         
       
-        
-        
-        
         if !types.isEmpty {
             items.append(typesQuery)
         }
@@ -336,6 +333,8 @@ struct Search {
         if !sets.isEmpty {
             items.append(setsQuery)
         }
+        
+        items.append(sizeLimit)
             
             return items
             

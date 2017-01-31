@@ -26,7 +26,6 @@
 		5BFE71FC1E284AF3003666B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BFE71FB1E284AF3003666B5 /* Assets.xcassets */; };
 		5BFE71FF1E284AF3003666B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BFE71FD1E284AF3003666B5 /* LaunchScreen.storyboard */; };
 		5BFE72071E284B2A003666B5 /* CardCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFE72061E284B2A003666B5 /* CardCollectionViewController.swift */; };
-		5BFE72091E284B4D003666B5 /* MTGCardSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFE72081E284B4D003666B5 /* MTGCardSearch.swift */; };
 		5BFE720B1E284BA2003666B5 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFE720A1E284BA2003666B5 /* CardCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,7 +51,6 @@
 		5BFE71FE1E284AF3003666B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5BFE72001E284AF3003666B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BFE72061E284B2A003666B5 /* CardCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCollectionViewController.swift; sourceTree = "<group>"; };
-		5BFE72081E284B4D003666B5 /* MTGCardSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTGCardSearch.swift; sourceTree = "<group>"; };
 		5BFE720A1E284BA2003666B5 /* CardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,7 +80,6 @@
 			isa = PBXGroup;
 			children = (
 				5BA8AAAA1E2D756700B895B5 /* CardSorter.swift */,
-				5BFE72081E284B4D003666B5 /* MTGCardSearch.swift */,
 				5BEB60FB1E341991009A81EB /* NetworkServices.swift */,
 				5B37F2821E2C6EB4007442B2 /* SearchManager.swift */,
 				5B8811831E292A1B00647253 /* CardModel.swift */,
@@ -221,7 +218,6 @@
 				5BFE72071E284B2A003666B5 /* CardCollectionViewController.swift in Sources */,
 				5B37F2831E2C6EB4007442B2 /* SearchManager.swift in Sources */,
 				5BE7C9B81E3FF05900775DBD /* SearchCollectionFlowDelegate.swift in Sources */,
-				5BFE72091E284B4D003666B5 /* MTGCardSearch.swift in Sources */,
 				5BFC78941E35A0B3009960B5 /* ParameterButton.swift in Sources */,
 				5B04C0281E304AAA00CFD58A /* CardManager.swift in Sources */,
 				5B8811861E292E4B00647253 /* Parser.swift in Sources */,

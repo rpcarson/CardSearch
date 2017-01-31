@@ -11,10 +11,14 @@ import UIKit
 
 class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
     
+    var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
     
-    let cardsPerRow: CGFloat = 3
-    let sectionInsets = UIEdgeInsets(top: 40.0, left: 15.0, bottom: 40.0, right: 15.0)
+    var cells = [CardCell]()
+    
+    
+    let cardsPerRow: CGFloat = 2
+    let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
     let cardSize = CGSize(width: 63, height: 88)
     var cardSizeRatio: CGFloat {
         return cardSize.height/cardSize.width
@@ -26,17 +30,22 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICo
     
     
     
-     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cardManager.cards.count
     }
     
-     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CardCell
         
-        let card = cardManager.cards[indexPath.row]
+        let index = indexPath.row
         
-        cell.cardData = card
+        let card = cardManager.cards[index]
+        
+        if cell.isNew {
+            cell.cardData = card   // <---- keeps cards from  losing/getting data mixed up
+        }
+        
         
         if useDummyData {
             cell.cardNameLabel.text = String(describing: indexPath.row)
@@ -47,13 +56,15 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICo
         if !useImages {
             cell.cardNameLabel.text = "# \(indexPath.row), \(card.name)"
             cell.backgroundColor = UIColor.gray
-            //cell.cardImageView.image = cell.cardData.image
             return cell
         }
         
         cell.cardNameLabel.isHidden = true
         
-        print("cell for path")
+        //cells.append(cell)
+        cell.backgroundColor = UIColor.lightGray
+        
+        
         
         return cell
     }
@@ -63,18 +74,43 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICo
         
         print("will display")
         
-        let card = cardManager.cards[indexPath.row]
+        guard useImages else { return }
         
-        guard let image = JSONParser.parser.getImageNoQueue(imageURL: card.imageURL) else {
-            print("CCVC:willDisplayCell  - no card image retrieved")
-            // TODO - display question mark
+        if (cell as! CardCell).cardImageView.image != nil { print("image was already set")
             return
         }
         
-        (cell as! CardCell).setImage(image: image, andDisplay: true)
+        
+        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        cell.addSubview(indicator)
+        indicator.frame = cell.bounds
+        indicator.startAnimating()
+        
+        let card = cardManager.cards[indexPath.row]
+        
+        DispatchQueue.global(qos: .background).async {
+            print("willDisplayCell background queue")
+            
+            guard let image = JSONParser.parser.getImageNoQueue(imageURL: card.imageURL) else {
+                print("CCVC:willDisplayCell  - no card image retrieved")
+                // TODO - display question mark
+                return
+            }
+            
+            DispatchQueue.main.async {
+                
+                (cell as! CardCell).setImage(image: image, andDisplay: true) {
+                    
+                    print("willDisplayCell main queue")
+                    
+                    indicator.stopAnimating()
+                    
+                    cell.setNeedsLayout()
+                }
+            }
+        }
         
         print("CCVC willDisplayCell  card.image set")
-        
         
     }
 }
