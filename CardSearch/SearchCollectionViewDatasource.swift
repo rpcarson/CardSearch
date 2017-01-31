@@ -34,16 +34,26 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICo
         return cardManager.cards.count
     }
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        
+        return 1
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CardCell
         
+        cell.cardData.image = nil
+        cell.cardImageView.image = nil
+
         let index = indexPath.row
         
         let card = cardManager.cards[index]
         
+        
         if cell.isNew {
-            cell.cardData = card   // <---- keeps cards from  losing/getting data mixed up
+            cell.cardData = card
+                                        // <---- keeps cards from  losing/getting data mixed up
         }
         
         

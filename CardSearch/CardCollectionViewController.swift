@@ -8,6 +8,11 @@
 
 import UIKit
 
+
+let testingPageSize = "50"
+let testingResultsToDisplay = 40
+
+
 let autoLoad = true
 
 let useDummyData = false
@@ -68,7 +73,7 @@ class CardCollectionViewController: UICollectionViewController  {
         mtgAPISerivce.performSearch(url: url) {
             results in
             
-            self.dataSource.cardManager.createUniqueCardsWithMaxFromJSON(json: results, amount: 12)
+            self.dataSource.cardManager.createUniqueCardsWithMaxFromJSON(json: results, amount: testingResultsToDisplay)
             print("CCVC cardManager.createUniqueCardsWithMaxFromJSON called in performSearch closure")
             
             completion()
@@ -97,6 +102,11 @@ class CardCollectionViewController: UICollectionViewController  {
                 print("CCVC DispatchMain in peformSearch closure")
                 self.activityIndicator.stopAnimating()
                 self.collectionView?.reloadData()
+                
+                for card in self.dataSource.cardManager.cards {
+                    print("CARDS IN CARDMAN \(card.name)")
+                }
+                
             }
             
         }

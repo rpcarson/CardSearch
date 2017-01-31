@@ -321,7 +321,7 @@ struct Search {
             let colorsQuery = URLQueryItem(name: "colors", value: colors)
         let setsQuery = URLQueryItem(name: "set", value: sets)
             // let name = URLQueryItem(name: "name", value: searchTerm)
-        let sizeLimit = URLQueryItem(name: "pageSize", value: "12")
+        let sizeLimit = URLQueryItem(name: "pageSize", value: testingPageSize)
         
       
         if !types.isEmpty {

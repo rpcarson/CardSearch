@@ -39,6 +39,7 @@ class CardManager {
             for i in 0..<amount {
                 if i <= maxIndex {
                     limitedJson.append(cards[i])
+                  
                     
                 }
             }
@@ -58,13 +59,25 @@ class CardManager {
         
         var limitedJson = JSONCardData()
         
+        var appended = 0
+
+        
         if let cards = uniqueJSONResults["cards"] as? [[String:Any]] {
             
             let maxIndex = cards.count - 1
             
-            for i in 0..<amount {
-                if i <= maxIndex {
+            
+            print(amount)
+            print(maxIndex)
+            
+            
+            for i in 0...maxIndex {
+                if i <= amount {
                     limitedJson.append(cards[i])
+                    appended += 1
+                    let card = cards[i]
+                    let name = card["name"]
+                    print("appending \(name)")
                     
                 }
             }
@@ -72,6 +85,8 @@ class CardManager {
         }
         
         let cardData = JSONParser.parser.createCardsFromCardsData(data: limitedJson)
+        
+        print("cards appened: \(appended)")
         
         cards = cardData
             
