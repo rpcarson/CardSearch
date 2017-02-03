@@ -13,8 +13,8 @@ import UIKit
 
 let testingSets = false
 
-let testingPageSize = "6"
-let testingResultsToDisplay = 12
+let testingPageSize = "36"
+let testingResultsToDisplay = 36
 
 
 let autoLoad = true
