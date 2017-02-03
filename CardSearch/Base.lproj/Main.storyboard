@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -71,38 +72,28 @@
                     </collectionView>
                     <navigationItem key="navigationItem" id="Y6A-CF-zMG">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="F9n-s9-Hal">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Lqt-xq-TQC">
-                                <rect key="frame" x="16" y="7" width="150" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="LOAD"/>
-                                <connections>
-                                    <action selector="loadData" destination="Mgm-ks-V31" eventType="touchUpInside" id="hiP-y7-XKS"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
-                        <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" id="0k1-jp-tUi">
-                            <rect key="frame" x="172" y="7" width="98" height="30"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="bookmarks" id="cOE-KS-mZ4"/>
+                        <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" id="0k1-jp-tUi">
+                            <rect key="frame" x="139" y="7" width="98" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Npt-2n-7Xp">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JWp-xd-hND">
-                                <rect key="frame" x="276" y="7" width="83" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Config"/>
+                        <rightBarButtonItems>
+                            <barButtonItem style="plain" systemItem="edit" id="Npt-2n-7Xp">
                                 <connections>
-                                    <action selector="configSearch" destination="Mgm-ks-V31" eventType="touchUpInside" id="uLs-Nf-7Lg"/>
+                                    <segue destination="jYc-DP-Fbz" kind="popoverPresentation" identifier="ConfigSearchSegue" popoverAnchorBarButtonItem="Npt-2n-7Xp" id="v0S-Qf-IH2">
+                                        <popoverArrowDirection key="popoverArrowDirection" left="YES"/>
+                                    </segue>
                                 </connections>
-                            </button>
-                            <connections>
-                                <segue destination="jYc-DP-Fbz" kind="popoverPresentation" identifier="ConfigSearchSegue" popoverAnchorBarButtonItem="Npt-2n-7Xp" id="v0S-Qf-IH2">
-                                    <popoverArrowDirection key="popoverArrowDirection" left="YES"/>
-                                </segue>
-                            </connections>
-                        </barButtonItem>
+                            </barButtonItem>
+                            <barButtonItem style="plain" systemItem="search" id="F9n-s9-Hal">
+                                <connections>
+                                    <action selector="loadData" destination="Mgm-ks-V31" id="80T-32-ji5"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="searchField" destination="0k1-jp-tUi" id="qYU-Tl-lJy"/>
@@ -128,7 +119,7 @@
                                 <rect key="frame" x="76" y="596" width="283" height="51"/>
                                 <color key="backgroundColor" red="0.45891815808972014" green="1" blue="0.43377447690638038" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <state key="normal" title="S E A R C H">
+                                <state key="normal" title="Save Parameters">
                                     <color key="titleShadowColor" red="0.58841594060000002" green="1" blue="0.47044536819999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
@@ -403,6 +394,7 @@
         <!--Navigation Controller-->
         <scene sceneID="6Bg-xY-u12">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jXy-96-rWl" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1GJ-rd-lOH" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="NSP-LB-uAl">
@@ -414,7 +406,6 @@
                         <segue destination="Mgm-ks-V31" kind="relationship" relationship="rootViewController" id="P0i-jc-ZSt"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jXy-96-rWl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="289" y="0.0"/>
         </scene>

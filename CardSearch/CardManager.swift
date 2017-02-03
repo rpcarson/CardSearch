@@ -51,6 +51,8 @@ class CardManager {
         
     }
     
+    // TODO: - this function in general needs to be rerworked
+    
     func createUniqueCardsWithMaxFromJSON(json: JSONResults, amount: Int) {
         
         allJSONResults = json
@@ -70,7 +72,7 @@ class CardManager {
             print(amount)
             print(maxIndex)
             
-            
+            guard maxIndex >= 0 else { print("card results less than 1") ; return }
             for i in 0...maxIndex {
                 if i <= amount {
                     limitedJson.append(cards[i])

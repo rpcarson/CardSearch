@@ -81,9 +81,7 @@ class ParameterCell: UITableViewCell {
 extension ConfigSearchVC: UITableViewDelegate, UITableViewDataSource, LogicDelegate {
     
     func didChangeLogicState() {
-        
-        getLogicStateForParameters()
-        
+        updateLogicStateForParameters()
     }
     
     

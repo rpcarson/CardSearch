@@ -9,7 +9,28 @@
 import Foundation
 
 
+
+
 struct MTGAPIService {
+    
+    
+    func downloadSetsData(completion: @escaping (JSONResults) -> Void) {
+        
+        guard let url = URL(string: "https://api.magicthegathering.io/v1/sets?pageSize=20") else {
+            print("MTGAPIService:downloadSetsData - url failed")
+            return
+        }
+        
+        let networkOperation = NetworkOperation(url: url)
+        
+        networkOperation.retrieveJSON { (results) in
+            if let sets = results {
+                print("MTGAPIService:downloadSetsData - operation success")
+                completion(sets)
+            }
+        }
+        
+    }
     
     func performSearch(url: URL, completion: @escaping ([String:Any]) -> Void) {
 

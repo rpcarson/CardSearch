@@ -9,8 +9,12 @@
 import UIKit
 
 
-let testingPageSize = "50"
-let testingResultsToDisplay = 40
+
+
+let testingSets = false
+
+let testingPageSize = "6"
+let testingResultsToDisplay = 12
 
 
 let autoLoad = true
@@ -83,6 +87,9 @@ class CardCollectionViewController: UICollectionViewController  {
     
     @IBAction func loadData() {
         
+    
+        
+        
         searchField.addSubview(activityIndicator)
         activityIndicator.frame = searchField.bounds
         activityIndicator.startAnimating()
@@ -91,6 +98,21 @@ class CardCollectionViewController: UICollectionViewController  {
             dataSource.cardManager.cards = dummyData
             activityIndicator.stopAnimating()
             self.collectionView?.reloadData()
+            return
+        }
+        
+        if testingSets {
+            
+            mtgAPISerivce.downloadSetsData {
+                data in
+                
+                if let sets = JSONParser.parser.parseSetsJSONData(json: data) {
+                    print("SETS: \(sets)")
+                }
+                
+            }
+            
+            
             return
         }
         
@@ -133,6 +155,9 @@ class CardCollectionViewController: UICollectionViewController  {
         
         collectionView?.dataSource = dataSource
         collectionView?.delegate = dataSource
+        
+        
+        
         
         
     }
@@ -219,7 +244,9 @@ extension CardCollectionViewController: UIViewControllerPreviewingDelegate {
         
         detailVC.preferredContentSize = CGSize(width: width, height: width*cardSizeRatio)
         
-        previewingContext.sourceRect = CGRect(x: view.frame.width/2, y: view.frame.height/2, width: width, height: width*cardSizeRatio)
+        previewingContext.sourceRect = cell.frame
+            
+            //CGRect(x: view.frame.width/2, y: view.frame.height/2, width: width, height: width*cardSizeRatio)
         
         return detailVC
         
