@@ -13,13 +13,13 @@ import UIKit
 
 let testingSets = false
 
-let testingPageSize = "36"
+let testingPageSize = "2"
 let testingResultsToDisplay = 36
 
 
-let autoLoad = true
+let autoLoad = false
 
-let useDummyData = false
+let useDummyData = true
 
 let useDebuggerCells = true
 
@@ -41,9 +41,6 @@ class CardCollectionViewController: UICollectionViewController  {
         }
         return data
     }()
-    
-    
-   
     
     var mtgAPISerivce = MTGAPIService()
     
@@ -89,10 +86,12 @@ class CardCollectionViewController: UICollectionViewController  {
         
     
         
-        
-        searchField.addSubview(activityIndicator)
-        activityIndicator.frame = searchField.bounds
-        activityIndicator.startAnimating()
+        if !useDummyData {
+            searchField.addSubview(activityIndicator)
+            activityIndicator.frame = searchField.bounds
+            activityIndicator.startAnimating()
+        }
+   
         
         if useDummyData {
             dataSource.cardManager.cards = dummyData
@@ -142,6 +141,10 @@ class CardCollectionViewController: UICollectionViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+      //  navigationController?.prefersStatusBarHidden = false
+
+        
         if autoLoad && useDummyData {
             loadData()
         }
@@ -167,14 +170,15 @@ class CardCollectionViewController: UICollectionViewController  {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "cardDetailSegue" {
-            if let card = sender as? CardCell {
+            if let cardCell = sender as? CardCell {
                 let destinationController = segue.destination as! CardDetailViewController
                 
-            print(card.cardData)
+            print(cardCell.cardData)
                 
-                print("Card image \(card.cardData.image)")
-                print("Card name \(card.cardData.name)")
-                destinationController.image = card.cardData.image
+                print("Card image \(cardCell.cardData.image)")
+                print("Card name \(cardCell.cardData.name)")
+                destinationController.image = cardCell.cardData.image
+                destinationController.card = cardCell.cardData
                 if activityIndicator.isAnimating {
                     activityIndicator.stopAnimating()
                 }
@@ -254,7 +258,7 @@ extension CardCollectionViewController: UIViewControllerPreviewingDelegate {
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         
-        showDetailViewController(viewControllerToCommit, sender: self)
+        navigationController?.pushViewController(viewControllerToCommit, animated: true)
     }
 }
 

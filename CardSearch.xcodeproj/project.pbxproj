@@ -23,6 +23,7 @@
 		5BF07CE81E44245A00C11C6D /* SavedCollectionsCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF07CE71E44245A00C11C6D /* SavedCollectionsCVC.swift */; };
 		5BF07CEB1E44251900C11C6D /* CollectionsTBVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF07CEA1E44251900C11C6D /* CollectionsTBVCell.swift */; };
 		5BF07CED1E44253700C11C6D /* SavedCollectionsCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF07CEC1E44253700C11C6D /* SavedCollectionsCVCell.swift */; };
+		5BF0B1A51E4564E10015C6FD /* CollectionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF0B1A41E4564E10015C6FD /* CollectionsManager.swift */; };
 		5BFC78921E359085009960B5 /* OptionsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFC78911E359085009960B5 /* OptionsPicker.swift */; };
 		5BFC78941E35A0B3009960B5 /* ParameterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFC78931E35A0B3009960B5 /* ParameterButton.swift */; };
 		5BFC78981E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFC78971E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift */; };
@@ -51,6 +52,7 @@
 		5BF07CE71E44245A00C11C6D /* SavedCollectionsCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedCollectionsCVC.swift; sourceTree = "<group>"; };
 		5BF07CEA1E44251900C11C6D /* CollectionsTBVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsTBVCell.swift; sourceTree = "<group>"; };
 		5BF07CEC1E44253700C11C6D /* SavedCollectionsCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedCollectionsCVCell.swift; sourceTree = "<group>"; };
+		5BF0B1A41E4564E10015C6FD /* CollectionsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsManager.swift; sourceTree = "<group>"; };
 		5BFC78911E359085009960B5 /* OptionsPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsPicker.swift; sourceTree = "<group>"; };
 		5BFC78931E35A0B3009960B5 /* ParameterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterButton.swift; sourceTree = "<group>"; };
 		5BFC78971E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameteTableViewExtensionCSVC.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				5BA8AAB01E2D7E9000B895B5 /* Views */,
 				5BA8AAAF1E2D7E6C00B895B5 /* Models */,
 				5BA8AAAE1E2D7E5800B895B5 /* ViewControllers */,
+				5BF0B1A41E4564E10015C6FD /* CollectionsManager.swift */,
 			);
 			path = CardSearch;
 			sourceTree = "<group>";
@@ -255,6 +258,7 @@
 				5BFE71F51E284AF3003666B5 /* AppDelegate.swift in Sources */,
 				5BF07CED1E44253700C11C6D /* SavedCollectionsCVCell.swift in Sources */,
 				5BFE720B1E284BA2003666B5 /* CardCell.swift in Sources */,
+				5BF0B1A51E4564E10015C6FD /* CollectionsManager.swift in Sources */,
 				5BFC78981E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift in Sources */,
 				5B8811841E292A1B00647253 /* CardModel.swift in Sources */,
 				5BF07CE61E44243300C11C6D /* CollectionsTBVC.swift in Sources */,

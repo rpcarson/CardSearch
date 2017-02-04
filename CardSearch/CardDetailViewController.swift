@@ -8,6 +8,14 @@
 
 import UIKit
 
+
+let cardSize = CGSize(width: 63, height: 88)
+var cardSizeRatio: CGFloat {
+    return cardSize.height/cardSize.width
+}
+
+
+
 class CardDetailViewController: UIViewController {
     
     let storyboardID = "cardDetailControllerID"
@@ -24,30 +32,44 @@ class CardDetailViewController: UIViewController {
         }
     }
     
+    var card: Card?
+    
     func swipeToDismiss() {
         print("swipe detected")
+      //  cardView.removeGestureRecognizer(swipeRecognizer)
+        navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
     
     func setupGestureRecognizer() {
         swipeRecognizer.addTarget(self, action: #selector(CardDetailViewController.swipeToDismiss))
+        swipeRecognizer.direction = [.left,.right]
         cardView.addGestureRecognizer(swipeRecognizer)
         cardView.isUserInteractionEnabled = true
+    }
+    
+    func addToCollection() {
+        guard let card = self.card else {
+            print("CDVC: addToCollection - no card")
+            return
+        }
+        CollectionsManager.sharedManager.addCardToFavorites(card: card)
     }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let barButtonAdd = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(CardDetailViewController.addToCollection))
+        
+        navigationItem.rightBarButtonItem = barButtonAdd
+        
+      //  cardView.frame.width = cardView.frame.width/cardSizeRatio
+        
         cardView.image = image
         
         setupGestureRecognizer()
 
-//        if image == nil {
-//            cardView.addSubview(activityIndicator)
-//            activityIndicator.frame = cardView.bounds
-//            activityIndicator.startAnimating()
-//        }
         
         print("card detail viewloaded")
         
