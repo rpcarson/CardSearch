@@ -80,7 +80,8 @@
 		5BA8AAAE1E2D7E5800B895B5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				5BF07CE91E44245D00C11C6D /* SavedCOllectionsVCs */,
+				5BD5F2811E4A86880098EB67 /* CollexTable */,
+				5BF07CE91E44245D00C11C6D /* SavedCardsCV */,
 				5BE7C9B91E3FF68800775DBD /* SearchCollectionView */,
 				5BA8AAAC1E2D7E4C00B895B5 /* CardDetailViewController.swift */,
 				5BD32DE71E314E4000A1E070 /* ConfigSearchVC.swift */,
@@ -113,6 +114,15 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		5BD5F2811E4A86880098EB67 /* CollexTable */ = {
+			isa = PBXGroup;
+			children = (
+				5BF07CEA1E44251900C11C6D /* CollectionsTBVCell.swift */,
+				5BF07CE51E44243300C11C6D /* CollectionsTBVC.swift */,
+			);
+			name = CollexTable;
+			sourceTree = "<group>";
+		};
 		5BE7C9B91E3FF68800775DBD /* SearchCollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,15 +133,13 @@
 			name = SearchCollectionView;
 			sourceTree = "<group>";
 		};
-		5BF07CE91E44245D00C11C6D /* SavedCOllectionsVCs */ = {
+		5BF07CE91E44245D00C11C6D /* SavedCardsCV */ = {
 			isa = PBXGroup;
 			children = (
-				5BF07CEA1E44251900C11C6D /* CollectionsTBVCell.swift */,
-				5BF07CE51E44243300C11C6D /* CollectionsTBVC.swift */,
 				5BF07CE71E44245A00C11C6D /* SavedCollectionsCVC.swift */,
 				5BF07CEC1E44253700C11C6D /* SavedCollectionsCVCell.swift */,
 			);
-			name = SavedCOllectionsVCs;
+			name = SavedCardsCV;
 			sourceTree = "<group>";
 		};
 		5BFE71E81E284AF3003666B5 = {

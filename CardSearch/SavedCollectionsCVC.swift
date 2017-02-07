@@ -10,11 +10,74 @@ import UIKit
 
 private let savedCollectionsCVCellReuse = "savedCollectionsCVCellID"
 
-class SavedCollectionsCVC: UICollectionViewController {
+
+
+class SavedCVDataSource: NSObject, UICollectionViewDataSource {
+    
+    var collection: CardCollection?
+    
+    var displayDelegate: DisplayDelegate?
+    
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        guard let cards = collection?.getCards() else {
+            return 0
+        }
+        
+        guard cards.count >= 1 else {
+            print("SavedVCDataSource:numberofitems - no cards")
+            return 0
+        }
+        
+        return cards.count
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: savedCollectionsCVCellReuse, for: indexPath) as! SavedCollectionsCVCell
+        
+        cell.backgroundColor = UIColor.lightGray
+        
+        guard let cards = collection?.getCards() else {
+            print("cellforItem - no cards")
+            return cell
+        }
+        
+        
+        cell.nameLabel.text = String(indexPath.row)
+        
+        return cell
+    }
+    
+}
+
+class SavedCollectionsCVC: UICollectionViewController, DisplayDelegate {
+    
+    let dataSource = SavedCVDataSource()
+    
+    func didUpdateData() {
+        
+        dataSource.collection = CollectionsManager.sharedManager.collections[0]
+        
+        collectionView?.reloadData()
+        
+        print(dataSource.collection?.getCards().count)
+        
+        print("didUpdateData called")
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView?.dataSource = dataSource
+        CollectionsManager.sharedManager.displayDelegate = self
+        
+        dataSource.collection = CollectionsManager.sharedManager.collections[0]
         
         print("loaded collectors view")
 
@@ -22,7 +85,7 @@ class SavedCollectionsCVC: UICollectionViewController {
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+//        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
     }
@@ -44,24 +107,7 @@ class SavedCollectionsCVC: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-    
-        return cell
-    }
+ 
 
     // MARK: UICollectionViewDelegate
 

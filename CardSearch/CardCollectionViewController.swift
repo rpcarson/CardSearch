@@ -158,11 +158,7 @@ class CardCollectionViewController: UICollectionViewController  {
         
         collectionView?.dataSource = dataSource
         collectionView?.delegate = dataSource
-        
-        
-        
-        
-        
+    
     }
     
     
@@ -172,9 +168,6 @@ class CardCollectionViewController: UICollectionViewController  {
         if segue.identifier == "cardDetailSegue" {
             if let cardCell = sender as? CardCell {
                 let destinationController = segue.destination as! CardDetailViewController
-                
-            print(cardCell.cardData)
-                
                 print("Card image \(cardCell.cardData.image)")
                 print("Card name \(cardCell.cardData.name)")
                 destinationController.image = cardCell.cardData.image

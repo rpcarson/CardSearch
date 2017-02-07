@@ -10,4 +10,7 @@ import UIKit
 
 class SavedCollectionsCVCell: UICollectionViewCell {
     
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    
 }

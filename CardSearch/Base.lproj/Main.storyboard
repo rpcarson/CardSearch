@@ -432,14 +432,27 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gyp-Au-KnR" id="ZWN-CD-S52">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5lY-Ei-pgM">
+                                            <rect key="frame" x="18" y="8" width="42" height="27.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="5lY-Ei-pgM" firstAttribute="leading" secondItem="ZWN-CD-S52" secondAttribute="leadingMargin" constant="10" id="No5-de-Gt1"/>
+                                        <constraint firstItem="5lY-Ei-pgM" firstAttribute="top" secondItem="ZWN-CD-S52" secondAttribute="topMargin" id="SSx-r8-Bxs"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="5lY-Ei-pgM" secondAttribute="bottom" id="eQd-dU-Kub"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="nameLabel" destination="5lY-Ei-pgM" id="4c2-lc-S9g"/>
                                     <segue destination="IXn-V9-nmd" kind="show" id="n75-3g-vAJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="Yfo-BO-grA" id="ESQ-9h-9rZ"/>
                             <outlet property="delegate" destination="Yfo-BO-grA" id="Fj6-sM-4LS"/>
                         </connections>
                     </tableView>
@@ -470,11 +483,27 @@
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tdp-5v-TN8">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
                                 </view>
+                                <constraints>
+                                    <constraint firstItem="Tdp-5v-TN8" firstAttribute="leading" secondItem="0qU-12-eAQ" secondAttribute="leading" id="1R7-ec-Tbt"/>
+                                    <constraint firstAttribute="bottom" secondItem="Tdp-5v-TN8" secondAttribute="bottom" id="3LB-ht-g6y"/>
+                                    <constraint firstItem="Tdp-5v-TN8" firstAttribute="top" secondItem="0qU-12-eAQ" secondAttribute="top" id="F7J-yG-RY7"/>
+                                    <constraint firstAttribute="trailing" secondItem="Tdp-5v-TN8" secondAttribute="trailing" id="Sxq-eP-fe9"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="nameLabel" destination="Tdp-5v-TN8" id="Qvj-yq-xgE"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
-                            <outlet property="dataSource" destination="IXn-V9-nmd" id="NM3-dL-3Kk"/>
                             <outlet property="delegate" destination="IXn-V9-nmd" id="UKn-PQ-EzK"/>
                         </connections>
                     </collectionView>

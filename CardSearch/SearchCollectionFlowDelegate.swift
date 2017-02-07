@@ -35,7 +35,6 @@ extension SearchCollectionViewDatasource: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        let widthBetweenCards: CGFloat = 5
         
         return 5
     }

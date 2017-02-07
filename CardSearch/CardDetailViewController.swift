@@ -37,8 +37,8 @@ class CardDetailViewController: UIViewController {
     func swipeToDismiss() {
         print("swipe detected")
       //  cardView.removeGestureRecognizer(swipeRecognizer)
-        navigationController?.popViewController(animated: true)
-        dismiss(animated: true, completion: nil)
+       _ = navigationController?.popViewController(animated: true)
+       // dismiss(animated: true, completion: nil)
     }
     
     func setupGestureRecognizer() {
@@ -48,19 +48,21 @@ class CardDetailViewController: UIViewController {
         cardView.isUserInteractionEnabled = true
     }
     
-    func addToCollection() {
+    func addToDefaultCollection() {
+        
         guard let card = self.card else {
             print("CDVC: addToCollection - no card")
             return
         }
-        CollectionsManager.sharedManager.addCardToFavorites(card: card)
+        
+        CollectionsManager.sharedManager.addCardToCollection(card: card, collection: "Favorites")
     }
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let barButtonAdd = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(CardDetailViewController.addToCollection))
+        let barButtonAdd = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(CardDetailViewController.addToDefaultCollection))
         
         navigationItem.rightBarButtonItem = barButtonAdd
         
