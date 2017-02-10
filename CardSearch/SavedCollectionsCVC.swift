@@ -16,12 +16,10 @@ class SavedCVDataSource: NSObject, UICollectionViewDataSource {
     
     var collection: CardCollection?
     
-    var displayDelegate: DisplayDelegate?
-    
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         guard let cards = collection?.getCards() else {
@@ -35,18 +33,13 @@ class SavedCVDataSource: NSObject, UICollectionViewDataSource {
         
         return cards.count
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: savedCollectionsCVCellReuse, for: indexPath) as! SavedCollectionsCVCell
         
         cell.backgroundColor = UIColor.lightGray
-        
-        guard let cards = collection?.getCards() else {
-            print("cellforItem - no cards")
-            return cell
-        }
-        
         
         cell.nameLabel.text = String(indexPath.row)
         
@@ -55,28 +48,26 @@ class SavedCVDataSource: NSObject, UICollectionViewDataSource {
     
 }
 
-class SavedCollectionsCVC: UICollectionViewController, DisplayDelegate {
+class SavedCollectionsCVC: UICollectionViewController {
     
     let dataSource = SavedCVDataSource()
     
-    func didUpdateData() {
-        
+    override func viewWillAppear(_ animated: Bool) {
         dataSource.collection = CollectionsManager.sharedManager.collections[0]
         
         collectionView?.reloadData()
         
-        print(dataSource.collection?.getCards().count)
-        
-        print("didUpdateData called")
+        print("view will apeepee called")
         
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView?.dataSource = dataSource
-        CollectionsManager.sharedManager.displayDelegate = self
+   
         
+        collectionView?.dataSource = dataSource
+               
         dataSource.collection = CollectionsManager.sharedManager.collections[0]
         
         print("loaded collectors view")

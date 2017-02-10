@@ -8,6 +8,8 @@
 
 import UIKit
 
+let cardDetailVCID = "cardDetailControllerID"
+
 
 let cardSize = CGSize(width: 63, height: 88)
 var cardSizeRatio: CGFloat {
@@ -17,6 +19,13 @@ var cardSizeRatio: CGFloat {
 
 
 class CardDetailViewController: UIViewController {
+    
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var typeLabel: UILabel!
+    
+    @IBOutlet weak var setLabel: UILabel!
     
     let storyboardID = "cardDetailControllerID"
     
@@ -54,8 +63,20 @@ class CardDetailViewController: UIViewController {
             print("CDVC: addToCollection - no card")
             return
         }
-        
+    
+        RealmManager.sharedManager.saveCardAsModel(card: card, inCollection: "Favorites")
+        RealmManager.sharedManager.saveCardModels()
+    
         CollectionsManager.sharedManager.addCardToCollection(card: card, collection: "Favorites")
+    }
+    
+    func setupLabels() {
+        nameLabel.text = card?.name
+        typeLabel.text = card?.type
+        setLabel.text = card?.set
+        
+        cardView.image = image
+
     }
     
 
@@ -68,7 +89,8 @@ class CardDetailViewController: UIViewController {
         
       //  cardView.frame.width = cardView.frame.width/cardSizeRatio
         
-        cardView.image = image
+        
+        setupLabels()
         
         setupGestureRecognizer()
 

@@ -9,6 +9,8 @@
 import UIKit
 
 
+
+
 struct Card {
     
     var name: String
@@ -31,8 +33,8 @@ struct Card {
     var manaCost: String
     var cmc: Int
     
-    var power: Int
-    var toughness: Int
+    var power: String
+    var toughness: String
     
     var type: String
     var types: [String]
@@ -46,6 +48,8 @@ struct Card {
     
     var id: Int
     
+    var set: String
+    
     var otherVersionIDs: [Int]
     
     var image: UIImage?
@@ -57,8 +61,8 @@ struct Card {
         colors = ["blank"]
         manaCost = "blank"
         cmc = 0
-        power = 0
-        toughness = 0
+        power = "0"
+        toughness = "0"
         type = "blank"
         types = ["blank"]
         subtypes = ["blank"]
@@ -67,6 +71,7 @@ struct Card {
         rarity = "blank"
         id = 0
         otherVersionIDs = [0]
+        set = "blank"
     }
     
 }

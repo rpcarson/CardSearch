@@ -50,10 +50,12 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICo
         
         let card = cardManager.cards[index]
         
-        
+        cell.cardData = card
         if cell.isNew {
-            cell.cardData = card
-                                        // <---- keeps cards from  losing/getting data mixed up
+            
+            print("SETTING CARD DATA CELLFORITEM: \(card)")
+           // cell.cardData = card
+                                        // <---- keeps cards from  losing/getting data mixed up - but turns out it just never sets the card data
         }
         
         

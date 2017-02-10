@@ -13,7 +13,7 @@ import UIKit
 
 let testingSets = false
 
-let testingPageSize = "2"
+let testingPageSize = "1"
 let testingResultsToDisplay = 36
 
 
@@ -219,13 +219,12 @@ extension CardCollectionViewController: UIViewControllerPreviewingDelegate {
             print("previewingContext  indexpath fail, got path: \(location)")
             return nil
         }
-        print(indexPath)
         guard let cell = collectionView?.cellForItem(at: indexPath) as? CardCell else {
             print("previewingContext get cell for indexpath fail")
             return nil
         }
         
-        guard let detailVC = storyboard?.instantiateViewController(withIdentifier: "cardDetailControllerID") as? CardDetailViewController else {
+        guard let detailVC = storyboard?.instantiateViewController(withIdentifier: previewVCStoryboardID) as? PreviewVC else {
             print("previewingContext detailVC creation fail")
             return nil
         }
@@ -235,11 +234,17 @@ extension CardCollectionViewController: UIViewControllerPreviewingDelegate {
         
         detailVC.image = image
         
-        let width = view.frame.width/3
+        detailVC.labelText = cell.cardData.name
         
-        let cardSizeRatio = dataSource.cardSizeRatio
+        print("CELL CARD DATA : \(cell.cardData)")
         
-        detailVC.preferredContentSize = CGSize(width: width, height: width*cardSizeRatio)
+        detailVC.cardData = cell.cardData
+        
+       // let width = view.frame.width/3
+        
+       // let cardSizeRatio = dataSource.cardSizeRatio
+        
+        //detailVC.preferredContentSize = CGSize(width: width, height: width*cardSizeRatio)
         
         previewingContext.sourceRect = cell.frame
             
@@ -251,7 +256,21 @@ extension CardCollectionViewController: UIViewControllerPreviewingDelegate {
     
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
         
-        navigationController?.pushViewController(viewControllerToCommit, animated: true)
+        
+        guard let detailVC = storyboard?.instantiateViewController(withIdentifier: cardDetailVCID) as? CardDetailViewController else {
+            print("problem loading detailVC")
+            return
+        }
+        if let image = (viewControllerToCommit as? PreviewVC)?.image {
+              detailVC.image = image
+        }
+        
+        if let card = (viewControllerToCommit as? PreviewVC)?.cardData {
+            detailVC.card = card
+            print("detailVC card set")
+        }
+      
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		5B04C0281E304AAA00CFD58A /* CardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B04C0271E304AAA00CFD58A /* CardManager.swift */; };
 		5B37F2831E2C6EB4007442B2 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B37F2821E2C6EB4007442B2 /* SearchManager.swift */; };
+		5B67281E1E4CE4AB00F35639 /* PreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B67281D1E4CE4AB00F35639 /* PreviewVC.swift */; };
+		5B6728201E4CF37F00F35639 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B67281F1E4CF37F00F35639 /* RealmSwift.framework */; };
+		5B6728221E4CF3AC00F35639 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6728211E4CF3AC00F35639 /* Realm.framework */; };
 		5B8811841E292A1B00647253 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8811831E292A1B00647253 /* CardModel.swift */; };
 		5B8811861E292E4B00647253 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8811851E292E4B00647253 /* Parser.swift */; };
 		5BA8AAAB1E2D756700B895B5 /* CardSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA8AAAA1E2D756700B895B5 /* CardSorter.swift */; };
@@ -24,6 +27,11 @@
 		5BF07CEB1E44251900C11C6D /* CollectionsTBVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF07CEA1E44251900C11C6D /* CollectionsTBVCell.swift */; };
 		5BF07CED1E44253700C11C6D /* SavedCollectionsCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF07CEC1E44253700C11C6D /* SavedCollectionsCVCell.swift */; };
 		5BF0B1A51E4564E10015C6FD /* CollectionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF0B1A41E4564E10015C6FD /* CollectionsManager.swift */; };
+		5BF2665D1E4DC6A50052D474 /* RealmDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF2665C1E4DC6A50052D474 /* RealmDB.swift */; };
+		5BF2665F1E4DDE140052D474 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6728211E4CF3AC00F35639 /* Realm.framework */; };
+		5BF266601E4DDE140052D474 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6728211E4CF3AC00F35639 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5BF266621E4DDE180052D474 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B67281F1E4CF37F00F35639 /* RealmSwift.framework */; };
+		5BF266631E4DDE180052D474 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5B67281F1E4CF37F00F35639 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5BFC78921E359085009960B5 /* OptionsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFC78911E359085009960B5 /* OptionsPicker.swift */; };
 		5BFC78941E35A0B3009960B5 /* ParameterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFC78931E35A0B3009960B5 /* ParameterButton.swift */; };
 		5BFC78981E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFC78971E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift */; };
@@ -35,9 +43,27 @@
 		5BFE720B1E284BA2003666B5 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFE720A1E284BA2003666B5 /* CardCell.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		5BF266611E4DDE140052D474 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5BF266631E4DDE180052D474 /* RealmSwift.framework in Embed Frameworks */,
+				5BF266601E4DDE140052D474 /* Realm.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		5B04C0271E304AAA00CFD58A /* CardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardManager.swift; sourceTree = "<group>"; };
 		5B37F2821E2C6EB4007442B2 /* SearchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
+		5B67281D1E4CE4AB00F35639 /* PreviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewVC.swift; sourceTree = "<group>"; };
+		5B67281F1E4CF37F00F35639 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
+		5B6728211E4CF3AC00F35639 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Realm.framework; sourceTree = "<group>"; };
 		5B8811831E292A1B00647253 /* CardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		5B8811851E292E4B00647253 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		5BA8AAAA1E2D756700B895B5 /* CardSorter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSorter.swift; sourceTree = "<group>"; };
@@ -53,6 +79,7 @@
 		5BF07CEA1E44251900C11C6D /* CollectionsTBVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsTBVCell.swift; sourceTree = "<group>"; };
 		5BF07CEC1E44253700C11C6D /* SavedCollectionsCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedCollectionsCVCell.swift; sourceTree = "<group>"; };
 		5BF0B1A41E4564E10015C6FD /* CollectionsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsManager.swift; sourceTree = "<group>"; };
+		5BF2665C1E4DC6A50052D474 /* RealmDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmDB.swift; sourceTree = "<group>"; };
 		5BFC78911E359085009960B5 /* OptionsPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsPicker.swift; sourceTree = "<group>"; };
 		5BFC78931E35A0B3009960B5 /* ParameterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterButton.swift; sourceTree = "<group>"; };
 		5BFC78971E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameteTableViewExtensionCSVC.swift; sourceTree = "<group>"; };
@@ -71,6 +98,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BF2665F1E4DDE140052D474 /* Realm.framework in Frameworks */,
+				5B6728221E4CF3AC00F35639 /* Realm.framework in Frameworks */,
+				5BF266621E4DDE180052D474 /* RealmSwift.framework in Frameworks */,
+				5B6728201E4CF37F00F35639 /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +111,7 @@
 		5BA8AAAE1E2D7E5800B895B5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5B67281D1E4CE4AB00F35639 /* PreviewVC.swift */,
 				5BD5F2811E4A86880098EB67 /* CollexTable */,
 				5BF07CE91E44245D00C11C6D /* SavedCardsCV */,
 				5BE7C9B91E3FF68800775DBD /* SearchCollectionView */,
@@ -145,6 +177,8 @@
 		5BFE71E81E284AF3003666B5 = {
 			isa = PBXGroup;
 			children = (
+				5B6728211E4CF3AC00F35639 /* Realm.framework */,
+				5B67281F1E4CF37F00F35639 /* RealmSwift.framework */,
 				5BFE71F31E284AF3003666B5 /* CardSearch */,
 				5BFE71F21E284AF3003666B5 /* Products */,
 			);
@@ -171,6 +205,7 @@
 				5BA8AAAF1E2D7E6C00B895B5 /* Models */,
 				5BA8AAAE1E2D7E5800B895B5 /* ViewControllers */,
 				5BF0B1A41E4564E10015C6FD /* CollectionsManager.swift */,
+				5BF2665C1E4DC6A50052D474 /* RealmDB.swift */,
 			);
 			path = CardSearch;
 			sourceTree = "<group>";
@@ -185,6 +220,8 @@
 				5BFE71ED1E284AF3003666B5 /* Sources */,
 				5BFE71EE1E284AF3003666B5 /* Frameworks */,
 				5BFE71EF1E284AF3003666B5 /* Resources */,
+				5BF2665E1E4DDD130052D474 /* Run Script */,
+				5BF266611E4DDE140052D474 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -244,6 +281,24 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5BF2665E1E4DDD130052D474 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "
+";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		5BFE71ED1E284AF3003666B5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -256,6 +311,7 @@
 				5BE7C9B81E3FF05900775DBD /* SearchCollectionFlowDelegate.swift in Sources */,
 				5BFC78941E35A0B3009960B5 /* ParameterButton.swift in Sources */,
 				5BF07CE81E44245A00C11C6D /* SavedCollectionsCVC.swift in Sources */,
+				5BF2665D1E4DC6A50052D474 /* RealmDB.swift in Sources */,
 				5B04C0281E304AAA00CFD58A /* CardManager.swift in Sources */,
 				5B8811861E292E4B00647253 /* Parser.swift in Sources */,
 				5BA8AAAD1E2D7E4C00B895B5 /* CardDetailViewController.swift in Sources */,
@@ -271,6 +327,7 @@
 				5B8811841E292A1B00647253 /* CardModel.swift in Sources */,
 				5BF07CE61E44243300C11C6D /* CollectionsTBVC.swift in Sources */,
 				5BD32DE81E314E4000A1E070 /* ConfigSearchVC.swift in Sources */,
+				5B67281E1E4CE4AB00F35639 /* PreviewVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +449,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = X68KF89T7U;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = CardSearch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rpcarson.CardSearch;
@@ -405,6 +466,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = X68KF89T7U;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = CardSearch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.rpcarson.CardSearch;

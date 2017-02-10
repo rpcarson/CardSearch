@@ -17,7 +17,9 @@ protocol DisplayDelegate {
 struct CollectionsManager {
     static var sharedManager = CollectionsManager()
     
-    var displayDelegate: DisplayDelegate?
+  //  var displayDelegate: DisplayDelegate?
+    
+    private var savedCardData = [Card]()
     
     private var defaultCollection = CardCollection(name: "Favorites")
     private var customCollections = [CardCollection(name: "Test")]
@@ -42,6 +44,12 @@ struct CollectionsManager {
         
     }
     
+    mutating func loadFavorites() {
+        let manager = RealmManager.sharedManager
+       
+        defaultCollection.cards = manager.getCards()
+    }
+    
     mutating func addCardToCollection(card: Card, collection: String) {
         
         if collection == "Favorites" {
@@ -54,7 +62,7 @@ struct CollectionsManager {
             }
         }
         
-        displayDelegate?.didUpdateData()
+      //  displayDelegate?.didUpdateData()
         
         print("Card: \(card) added to \(collection)")
     }
@@ -74,7 +82,7 @@ struct CardCollection {
     
     let name: String
     
-    private var cards: [Card]
+    var cards: [Card]
     
     func getCard(index: Int) -> Card? {
         guard index >= cards.count else { print(" getCard: index out of bounds") ; return nil }
