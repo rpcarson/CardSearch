@@ -9,13 +9,7 @@
 import UIKit
 
 
-
-
-
-
 class SavedCollectionsCVC: UICollectionViewController {
-    
-    
     
     let dataSource = SavedCVDataSource()
     

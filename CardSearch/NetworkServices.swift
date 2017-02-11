@@ -65,6 +65,7 @@ class NetworkOperation {
         self.queryURL = url
     }
     
+    
     func retrieveJSON(completion: @escaping ([String:Any]?) -> Void) {
         
         print("NetworkOperation: running retrieveJSON")

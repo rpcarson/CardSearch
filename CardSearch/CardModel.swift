@@ -9,9 +9,16 @@
 import UIKit
 
 
+extension Card: Equatable {
+    public static func ==(lhs: Card, rhs: Card) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
 
 
 struct Card {
+    
+    
     
     var name: String
     

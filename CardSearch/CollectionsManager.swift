@@ -16,9 +16,7 @@ protocol DisplayDelegate {
 
 struct CollectionsManager {
     static var sharedManager = CollectionsManager()
-    
-  //  var displayDelegate: DisplayDelegate?
-    
+        
     private var savedCardData = [Card]()
     
     private var defaultCollection = CardCollection(name: "Favorites")
@@ -44,11 +42,28 @@ struct CollectionsManager {
         defaultCollection.cards = RealmManager.sharedManager.getCardsFromResults()
     }
     
+    func updateRealmData() {
+       // RealmManager.sharedManager.saveCollection(collection: defaultCollection)
+    }
+    
+    mutating func removeFromCollection(card: Card) {
+        for (i, c) in defaultCollection.cards.enumerated() {
+            if c == card {
+                defaultCollection.cards.remove(at: i)
+                RealmManager.sharedManager.removeCardModel(card: card)
+                // updateRealmData()
+                print("Card removed from default collecitn: \(c.name)")
+            }
+        }
+    }
+    
     mutating func addCardToCollection(card: Card, collection: String) {
         if collection == "Favorites" {
             defaultCollection.addCard(card)
-            
             RealmManager.sharedManager.saveCardAsModel(card: card, inCollection: "Favorites")
+            //updateRealmData()
+            print("card added to default collection \(card.name)")
+          //  RealmManager.sharedManager.saveCardAsModel(card: card, inCollection: "Favorites")
             
         } else {
             for (i, c) in customCollections.enumerated() {

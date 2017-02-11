@@ -41,6 +41,7 @@ final class RealmManager {
     private init() {}
     
     var savedCards: List<CardModel> = List()
+    var modelsToRemove: List<CardModel> = List()
     
     private var realm: Realm? {
         var _realm: Realm? = nil
@@ -54,15 +55,29 @@ final class RealmManager {
         return _realm
     }
     
-    lazy var dataResults: Results<CardModel>? = {
-       return self.realm?.objects(CardModel.self)
-    }()
     
-  
+    func loadData() {
+        if let dataResults = realm?.objects(CardModel.self) {
+            print(dataResults)
+            for d in dataResults {
+                print(d.name)
+                savedCards.append(d)
+            }
+        }
+    }
     
-    private func saveCardModels() {
+     func saveCardModels() {
         do {
             try self.realm?.write {
+                for model in modelsToRemove {
+                    if let objects = realm?.objects(CardModel.self) {
+                        if  objects.contains(model) {
+                            self.realm?.delete(model)
+                        }
+                    }
+                    
+                }
+               
                 self.realm?.add(savedCards)
                 print("SHIT SAVED")
             }
@@ -73,17 +88,35 @@ final class RealmManager {
 
     func getCardsFromResults() -> [Card] {
         var cards = [Card]()
-        if let cardModels = dataResults {
-            print("RMAN:getCardFromResults - dataResults found")
-            for model in cardModels {
-                cards.append(createCardFrom(model: model))
-            }
-        } else {
-            print("RMAN:getCardFromResults - no data found")
+        for model in savedCards {
+            cards.append(createCardFrom(model: model))
+            print("getcardfromresults: \(model.name)")
         }
-
         return cards
     }
+    
+    func removeCardModel(card: Card) {
+        print("Removing \(card.name)")
+        for (i, model) in savedCards.enumerated() {
+            if model.name == card.name {
+                savedCards.remove(objectAtIndex: i)
+                modelsToRemove.append(model)
+                print("RMAN: card removed \(model.name)")
+            }
+        }
+    }
+    
+//    func saveCollection(collection: CardCollection) {
+//        var modelList: List<CardModel> = List()
+//        for c in collection.cards {
+//            let model = createModelFrom(card: c)
+//            modelList.append(model)
+//        }
+//        
+//        savedCards.removeAll()
+//        savedCards = modelList
+//        print("RMAN: savedCards updated")
+//    }
     
     func saveCardAsModel(card: Card, inCollection: String) {
         
@@ -92,7 +125,7 @@ final class RealmManager {
         
         savedCards.append(model)
         
-        saveCardModels()
+       // saveCardModels()
         
       //  print("RMAN:saveCardAsModel - appended \(model)\n")
         

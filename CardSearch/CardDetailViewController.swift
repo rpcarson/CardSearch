@@ -62,8 +62,7 @@ class CardDetailViewController: UIViewController {
     }
     
     func addToDefaultCollection() {
-        
-        if isInCollection { print("is in collection") ; return }
+       // if isInCollection { print("already in collection") ; return }
         
         guard let card = self.card else {
             print("CDVC: addToCollection - no card")
@@ -76,15 +75,43 @@ class CardDetailViewController: UIViewController {
         
         toggleStar()
         
+        print("added to collection")
+        
+    }
+    
+    func removeCardFromCollection() {
+       // if !isInCollection { print("card not in llection - this sholdnt be called") ; return }
+        
+        guard let card = self.card else {
+            print("CDVC: addToCollection - no card")
+            return
+        }
+        
+        CollectionsManager.sharedManager.removeFromCollection(card: card)
+        
+        isInCollection = false
+        
+        toggleStar()
+        
+        print("removed from collection")
+        
+    }
+    
+    func pressStarButton() {
+        if isInCollection {
+            removeCardFromCollection()
+        } else {
+            addToDefaultCollection()
+        }
     }
     
     func toggleStar() {
         if isInCollection {
             favoritesButton.setImage(goldStar, for: .normal)
-            favoritesButton.isUserInteractionEnabled = false
+           // favoritesButton.isUserInteractionEnabled = false
         } else {
             favoritesButton.setImage(greyStar, for: .normal)
-            favoritesButton.isUserInteractionEnabled = true
+           // favoritesButton.isUserInteractionEnabled = true
         }
     }
     
@@ -92,6 +119,12 @@ class CardDetailViewController: UIViewController {
         _ = checkIfInCollection()
         toggleStar()
 
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        
+        
     }
     
     override func viewDidLoad() {
@@ -141,7 +174,7 @@ extension CardDetailViewController {
     
     func setupFavoritesButton() {
         favoritesButton.setImage(greyStar, for: .normal)
-        favoritesButton.addTarget(self, action: #selector(CardDetailViewController.addToDefaultCollection), for: .touchUpInside)
+        favoritesButton.addTarget(self, action: #selector(CardDetailViewController.pressStarButton), for: .touchUpInside)
         favoritesButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
     }
 }
