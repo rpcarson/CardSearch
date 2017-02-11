@@ -88,7 +88,8 @@ class NetworkOperation {
                     completion(json!)
                     
                 case 400...499: print("HTTP Response: 400+ client error")
-                case 500...599: print("HTTP Response: 500+ server error")
+                case 503: print("HTTP Resonse: 503 server offline")
+                case 500: print("HTTP Response: 500 server error")
                     
                 default: print("HTTP Response: Some Error")
                     

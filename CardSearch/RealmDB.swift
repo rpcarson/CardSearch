@@ -14,79 +14,74 @@ import RealmSwift
 
 class CardModel: Object {
     
-    var collection: String = ""
+   dynamic var collection: String = ""
     
-    var name: String = ""
-    var colors: String = ""
-    var manaCost: String = ""
-    var cmc: Int = 0
-    var power: String = ""
-    var toughness: String = ""
-    var type: String = ""
-    var types: String = ""
-    var subtypes: String = ""
-    var flavor: String = ""
-    var imageURL: String = ""
-    var rarity: String = ""
-    var id: Int = 0
-    var set: String = ""
-    var otherVersionIDs: String = ""
-    var imageData: NSData = NSData()
+    dynamic var name: String = ""
+    dynamic var colors: String = ""
+    dynamic var manaCost: String = ""
+    dynamic var cmc: Int = 0
+    dynamic var power: String = ""
+    dynamic var toughness: String = ""
+    dynamic var type: String = ""
+    dynamic var types: String = ""
+    dynamic var subtypes: String = ""
+    dynamic var flavor: String = ""
+    dynamic var imageURL: String = ""
+    dynamic var rarity: String = ""
+    dynamic var id: Int = 0
+    dynamic var set: String = ""
+    dynamic var otherVersionIDs: String = ""
+    dynamic var imageData: NSData = NSData()
     
 }
 
 
 final class RealmManager {
     static let sharedManager = RealmManager()
-    
-//   private let realm: Realm? = {
-//        var _realm: Realm
-//        do {
-//           try _realm = Realm()
-//            return _realm
-//        } catch {
-//            print("let realm catch")
-//            return nil
-//        }
-//    }()
+    private init() {}
     
     var savedCards: List<CardModel> = List()
     
-    private init() {}
-    
-    func saveCardModels() {
-        
-        let realm = try! Realm()
-        
+    private var realm: Realm? {
+        var _realm: Realm? = nil
         do {
-            try realm.write {
-                realm.add(savedCards)
+           try _realm = Realm()
+        } catch {
+            print("Error instantiating realm instance")
+        }
+        let message = _realm != nil ? "success" : "fail"
+        print("Realm Instance: \(message)")
+        return _realm
+    }
+    
+    lazy var dataResults: Results<CardModel>? = {
+       return self.realm?.objects(CardModel.self)
+    }()
+    
+  
+    
+    private func saveCardModels() {
+        do {
+            try self.realm?.write {
+                self.realm?.add(savedCards)
                 print("SHIT SAVED")
             }
         } catch {
             print("LOL PFFFFFFFFF CHANGS")
         }
     }
-    
-    func loadCardModels() {
-      
-         let realm = try! Realm()
-        
-        let models = realm.objects(CardModel.self)
-            for m in models {
-                savedCards.append(m)
-        
-           // print("no modeulz")
-            //handle eerrorr
-        }
-        
-        print(savedCards)
-    }
-    func getCards() -> [Card] {
+
+    func getCardsFromResults() -> [Card] {
         var cards = [Card]()
-        for model in savedCards {
-            cards.append(createCardFrom(model: model))
+        if let cardModels = dataResults {
+            print("RMAN:getCardFromResults - dataResults found")
+            for model in cardModels {
+                cards.append(createCardFrom(model: model))
+            }
+        } else {
+            print("RMAN:getCardFromResults - no data found")
         }
+
         return cards
     }
     
@@ -97,9 +92,11 @@ final class RealmManager {
         
         savedCards.append(model)
         
-        print("RMAN:saveCardAsModel - appended \(model)\n")
+        saveCardModels()
         
-        print("RMAN: savedCards count - \(savedCards.count)")
+      //  print("RMAN:saveCardAsModel - appended \(model)\n")
+        
+      //  print("RMAN: savedCards count - \(savedCards.count)")
         
     }
     
@@ -140,11 +137,12 @@ final class RealmManager {
         }
         
         
-        print("RMAN:createCardfrommodel: \(card)")
+       // print("RMAN:createCardfrommodel: \(card)")
         return card
     }
     
     private func createModelFrom(card: Card) -> CardModel {
+        
         let model: CardModel = CardModel()
         
         model.name = card.name
@@ -161,14 +159,6 @@ final class RealmManager {
         model.rarity = card.rarity
         model.id = card.id
         model.set = card.set
-        
-//        var strArray = [String]()
-//        for int in card.otherVersionIDs {
-//            if let str = String(Int) {
-//                strArray.append(str)
-//            }
-//        }
-//        
 
         model.otherVersionIDs = (card.otherVersionIDs.map({String($0)}) as [String]).joined(separator: separator)
         
@@ -180,12 +170,19 @@ final class RealmManager {
             }
         }
         
-        print("RMAN: create model form card: \(model)")
+       // print("RMAN: create model form card: \(model)")
         
         return model
     }
     
     private let separator = "-"
+}
+
+
+//MARK: - card helpers
+extension RealmManager {
+    
+    
 }
 
 

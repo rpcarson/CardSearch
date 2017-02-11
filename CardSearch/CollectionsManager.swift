@@ -38,22 +38,18 @@ struct CollectionsManager {
         return availableCollections
     }
     
-    mutating func loadCollections(data: String) {
-        
-        
-        
-    }
+    mutating func loadCollections(data: String) {}
     
     mutating func loadFavorites() {
-        let manager = RealmManager.sharedManager
-       
-        defaultCollection.cards = manager.getCards()
+        defaultCollection.cards = RealmManager.sharedManager.getCardsFromResults()
     }
     
     mutating func addCardToCollection(card: Card, collection: String) {
-        
         if collection == "Favorites" {
             defaultCollection.addCard(card)
+            
+            RealmManager.sharedManager.saveCardAsModel(card: card, inCollection: "Favorites")
+            
         } else {
             for (i, c) in customCollections.enumerated() {
                 if collection == c.name {
@@ -61,10 +57,8 @@ struct CollectionsManager {
                 }
             }
         }
-        
-      //  displayDelegate?.didUpdateData()
-        
-        print("Card: \(card) added to \(collection)")
+                
+      //  print("Card: \(card) added to \(collection)")
     }
     
     mutating func createCollection(name: String) {

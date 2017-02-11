@@ -13,13 +13,13 @@ import UIKit
 
 let testingSets = false
 
-let testingPageSize = "1"
+let testingPageSize = "6"
 let testingResultsToDisplay = 36
 
 
 let autoLoad = false
 
-let useDummyData = true
+let useDummyData = false
 
 let useDebuggerCells = true
 

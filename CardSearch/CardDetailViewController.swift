@@ -16,10 +16,16 @@ var cardSizeRatio: CGFloat {
     return cardSize.height/cardSize.width
 }
 
+private var greyStar: UIImage = {
+    return UIImage(named: "66x66gray.png")!
+}()
+
+private var goldStar: UIImage = {
+    return UIImage(named: "66x66gold.png")!
+}()
 
 
 class CardDetailViewController: UIViewController {
-    
     
     @IBOutlet weak var nameLabel: UILabel!
     
@@ -27,13 +33,21 @@ class CardDetailViewController: UIViewController {
     
     @IBOutlet weak var setLabel: UILabel!
     
+    @IBOutlet weak var cardView: UIImageView!
+    
     let storyboardID = "cardDetailControllerID"
     
     var swipeRecognizer = UISwipeGestureRecognizer()
     
-    @IBOutlet weak var cardView: UIImageView!
-    
     var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    
+    let favoritesButton: UIButton = UIButton(type: .custom)
+    
+    var barButton: UIBarButtonItem {
+        return UIBarButtonItem(customView: favoritesButton)
+    }
+    
+    var isInCollection: Bool = false
     
     var image: UIImage? {
         didSet {
@@ -44,10 +58,78 @@ class CardDetailViewController: UIViewController {
     var card: Card?
     
     func swipeToDismiss() {
-        print("swipe detected")
-      //  cardView.removeGestureRecognizer(swipeRecognizer)
-       _ = navigationController?.popViewController(animated: true)
-       // dismiss(animated: true, completion: nil)
+        _ = navigationController?.popViewController(animated: true)
+    }
+    
+    func addToDefaultCollection() {
+        
+        if isInCollection { print("is in collection") ; return }
+        
+        guard let card = self.card else {
+            print("CDVC: addToCollection - no card")
+            return
+        }
+        
+        CollectionsManager.sharedManager.addCardToCollection(card: card, collection: "Favorites")
+        
+        isInCollection = true
+        
+        toggleStar()
+        
+    }
+    
+    func toggleStar() {
+        if isInCollection {
+            favoritesButton.setImage(goldStar, for: .normal)
+            favoritesButton.isUserInteractionEnabled = false
+        } else {
+            favoritesButton.setImage(greyStar, for: .normal)
+            favoritesButton.isUserInteractionEnabled = true
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        _ = checkIfInCollection()
+        toggleStar()
+
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupUI()
+        setupGestureRecognizer()
+        
+    }
+}
+
+extension CardDetailViewController {
+    func checkIfInCollection() -> Bool {
+        let cards = CollectionsManager.sharedManager.collections[0].cards
+        for c in cards {
+            if c.id == card?.id {
+                isInCollection = true
+                return true
+            }
+        }
+        isInCollection = false
+        return false
+    }
+}
+
+
+//MARK: - Setup
+extension CardDetailViewController {
+    
+    func setupUI() {
+        nameLabel.text = card?.name
+        typeLabel.text = card?.type
+        setLabel.text = card?.set
+        cardView.image = image
+        
+        setupFavoritesButton()
+        
+        navigationItem.rightBarButtonItem = barButton
     }
     
     func setupGestureRecognizer() {
@@ -57,62 +139,27 @@ class CardDetailViewController: UIViewController {
         cardView.isUserInteractionEnabled = true
     }
     
-    func addToDefaultCollection() {
-        
-        guard let card = self.card else {
-            print("CDVC: addToCollection - no card")
-            return
-        }
-    
-        RealmManager.sharedManager.saveCardAsModel(card: card, inCollection: "Favorites")
-        RealmManager.sharedManager.saveCardModels()
-    
-        CollectionsManager.sharedManager.addCardToCollection(card: card, collection: "Favorites")
+    func setupFavoritesButton() {
+        favoritesButton.setImage(greyStar, for: .normal)
+        favoritesButton.addTarget(self, action: #selector(CardDetailViewController.addToDefaultCollection), for: .touchUpInside)
+        favoritesButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
     }
-    
-    func setupLabels() {
-        nameLabel.text = card?.name
-        typeLabel.text = card?.type
-        setLabel.text = card?.set
-        
-        cardView.image = image
-
-    }
-    
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let barButtonAdd = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(CardDetailViewController.addToDefaultCollection))
-        
-        navigationItem.rightBarButtonItem = barButtonAdd
-        
-      //  cardView.frame.width = cardView.frame.width/cardSizeRatio
-        
-        
-        setupLabels()
-        
-        setupGestureRecognizer()
-
-        
-        print("card detail viewloaded")
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//

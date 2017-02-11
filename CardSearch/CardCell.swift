@@ -18,7 +18,7 @@ class CardCell: UICollectionViewCell {
 
     var cardData = Card() {
         didSet {
-            print("isNew: \(isNew)")
+           // print("isNew: \(isNew)")
             isNew = false
         }
     }

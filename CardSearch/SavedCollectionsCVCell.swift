@@ -12,5 +12,6 @@ class SavedCollectionsCVCell: UICollectionViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     
+    @IBOutlet weak var cardImageView: UIImageView!
     
 }

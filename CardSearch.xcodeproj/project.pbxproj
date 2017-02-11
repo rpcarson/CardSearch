@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5B04C0281E304AAA00CFD58A /* CardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B04C0271E304AAA00CFD58A /* CardManager.swift */; };
+		5B06D8CC1E4EA68700059C92 /* GoldStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B06D8CA1E4EA68700059C92 /* GoldStar.png */; };
+		5B06D8CD1E4EA68700059C92 /* GreyStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B06D8CB1E4EA68700059C92 /* GreyStar.png */; };
 		5B37F2831E2C6EB4007442B2 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B37F2821E2C6EB4007442B2 /* SearchManager.swift */; };
 		5B67281E1E4CE4AB00F35639 /* PreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B67281D1E4CE4AB00F35639 /* PreviewVC.swift */; };
 		5B6728201E4CF37F00F35639 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B67281F1E4CF37F00F35639 /* RealmSwift.framework */; };
@@ -32,6 +34,8 @@
 		5BF266601E4DDE140052D474 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6728211E4CF3AC00F35639 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5BF266621E4DDE180052D474 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B67281F1E4CF37F00F35639 /* RealmSwift.framework */; };
 		5BF266631E4DDE180052D474 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5B67281F1E4CF37F00F35639 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5BF266651E4E0EF00052D474 /* SavedCardsLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF266641E4E0EF00052D474 /* SavedCardsLayout.swift */; };
+		5BF266671E4E11F80052D474 /* SavedCardsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF266661E4E11F80052D474 /* SavedCardsDataSource.swift */; };
 		5BFC78921E359085009960B5 /* OptionsPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFC78911E359085009960B5 /* OptionsPicker.swift */; };
 		5BFC78941E35A0B3009960B5 /* ParameterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFC78931E35A0B3009960B5 /* ParameterButton.swift */; };
 		5BFC78981E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFC78971E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift */; };
@@ -60,6 +64,8 @@
 
 /* Begin PBXFileReference section */
 		5B04C0271E304AAA00CFD58A /* CardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardManager.swift; sourceTree = "<group>"; };
+		5B06D8CA1E4EA68700059C92 /* GoldStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GoldStar.png; sourceTree = "<group>"; };
+		5B06D8CB1E4EA68700059C92 /* GreyStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreyStar.png; sourceTree = "<group>"; };
 		5B37F2821E2C6EB4007442B2 /* SearchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
 		5B67281D1E4CE4AB00F35639 /* PreviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewVC.swift; sourceTree = "<group>"; };
 		5B67281F1E4CF37F00F35639 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
@@ -80,6 +86,8 @@
 		5BF07CEC1E44253700C11C6D /* SavedCollectionsCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedCollectionsCVCell.swift; sourceTree = "<group>"; };
 		5BF0B1A41E4564E10015C6FD /* CollectionsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsManager.swift; sourceTree = "<group>"; };
 		5BF2665C1E4DC6A50052D474 /* RealmDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmDB.swift; sourceTree = "<group>"; };
+		5BF266641E4E0EF00052D474 /* SavedCardsLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedCardsLayout.swift; sourceTree = "<group>"; };
+		5BF266661E4E11F80052D474 /* SavedCardsDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedCardsDataSource.swift; sourceTree = "<group>"; };
 		5BFC78911E359085009960B5 /* OptionsPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsPicker.swift; sourceTree = "<group>"; };
 		5BFC78931E35A0B3009960B5 /* ParameterButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterButton.swift; sourceTree = "<group>"; };
 		5BFC78971E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameteTableViewExtensionCSVC.swift; sourceTree = "<group>"; };
@@ -169,7 +177,9 @@
 			isa = PBXGroup;
 			children = (
 				5BF07CE71E44245A00C11C6D /* SavedCollectionsCVC.swift */,
+				5BF266641E4E0EF00052D474 /* SavedCardsLayout.swift */,
 				5BF07CEC1E44253700C11C6D /* SavedCollectionsCVCell.swift */,
+				5BF266661E4E11F80052D474 /* SavedCardsDataSource.swift */,
 			);
 			name = SavedCardsCV;
 			sourceTree = "<group>";
@@ -198,6 +208,8 @@
 				5BFE71F41E284AF3003666B5 /* AppDelegate.swift */,
 				5BFE71F81E284AF3003666B5 /* Main.storyboard */,
 				5BFE71FB1E284AF3003666B5 /* Assets.xcassets */,
+				5B06D8CA1E4EA68700059C92 /* GoldStar.png */,
+				5B06D8CB1E4EA68700059C92 /* GreyStar.png */,
 				5BD1DDF21E29B81B00D52C8B /* 8.png */,
 				5BFE71FD1E284AF3003666B5 /* LaunchScreen.storyboard */,
 				5BFE72001E284AF3003666B5 /* Info.plist */,
@@ -275,6 +287,8 @@
 				5BD1DDF31E29B81B00D52C8B /* 8.png in Resources */,
 				5BFE71FF1E284AF3003666B5 /* LaunchScreen.storyboard in Resources */,
 				5BFE71FC1E284AF3003666B5 /* Assets.xcassets in Resources */,
+				5B06D8CC1E4EA68700059C92 /* GoldStar.png in Resources */,
+				5B06D8CD1E4EA68700059C92 /* GreyStar.png in Resources */,
 				5BFE71FA1E284AF3003666B5 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -308,6 +322,7 @@
 				5BF07CE41E44120500C11C6D /* Sets.swift in Sources */,
 				5BF07CEB1E44251900C11C6D /* CollectionsTBVCell.swift in Sources */,
 				5B37F2831E2C6EB4007442B2 /* SearchManager.swift in Sources */,
+				5BF266671E4E11F80052D474 /* SavedCardsDataSource.swift in Sources */,
 				5BE7C9B81E3FF05900775DBD /* SearchCollectionFlowDelegate.swift in Sources */,
 				5BFC78941E35A0B3009960B5 /* ParameterButton.swift in Sources */,
 				5BF07CE81E44245A00C11C6D /* SavedCollectionsCVC.swift in Sources */,
@@ -316,6 +331,7 @@
 				5B8811861E292E4B00647253 /* Parser.swift in Sources */,
 				5BA8AAAD1E2D7E4C00B895B5 /* CardDetailViewController.swift in Sources */,
 				5BE7C9B61E3FEC0A00775DBD /* SearchCollectionViewDatasource.swift in Sources */,
+				5BF266651E4E0EF00052D474 /* SavedCardsLayout.swift in Sources */,
 				5BFC78921E359085009960B5 /* OptionsPicker.swift in Sources */,
 				5BEB60FC1E341991009A81EB /* NetworkServices.swift in Sources */,
 				5BA8AAAB1E2D756700B895B5 /* CardSorter.swift in Sources */,

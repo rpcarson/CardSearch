@@ -77,7 +77,7 @@
                             </connections>
                         </barButtonItem>
                         <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" id="0k1-jp-tUi">
-                            <rect key="frame" x="113" y="7" width="150" height="30"/>
+                            <rect key="frame" x="112.5" y="7" width="150" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -353,7 +353,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Sz-nk-cxb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2257" y="18"/>
+            <point key="canvasLocation" x="2188" y="-373"/>
         </scene>
         <!--Card Detail View Controller-->
         <scene sceneID="73M-th-oN4">
@@ -418,7 +418,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MLM-6x-WuI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2256.8000000000002" y="-681.40929535232385"/>
+            <point key="canvasLocation" x="3114" y="0.0"/>
         </scene>
         <!--PreviewVC-->
         <scene sceneID="ABH-kq-E9r">
@@ -463,7 +463,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sni-2h-sDK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3040" y="-681"/>
+            <point key="canvasLocation" x="3796" y="0.0"/>
         </scene>
         <!--CollectionsTBVC-->
         <scene sceneID="luN-ek-F8J">
@@ -525,7 +525,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="savedCollectionsCVCellID" id="0qU-12-eAQ" customClass="SavedCollectionsCVCell" customModule="CardSearch" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="savedCollectionsCVCellID" id="0qU-12-eAQ" customClass="CardCell" customModule="CardSearch" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -538,6 +538,9 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QsY-ks-pHU">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        </imageView>
                                     </subviews>
                                 </view>
                                 <constraints>
@@ -545,9 +548,15 @@
                                     <constraint firstAttribute="bottom" secondItem="Tdp-5v-TN8" secondAttribute="bottom" id="3LB-ht-g6y"/>
                                     <constraint firstItem="Tdp-5v-TN8" firstAttribute="top" secondItem="0qU-12-eAQ" secondAttribute="top" id="F7J-yG-RY7"/>
                                     <constraint firstAttribute="trailing" secondItem="Tdp-5v-TN8" secondAttribute="trailing" id="Sxq-eP-fe9"/>
+                                    <constraint firstItem="QsY-ks-pHU" firstAttribute="top" secondItem="0qU-12-eAQ" secondAttribute="top" id="ahl-CV-VIP"/>
+                                    <constraint firstAttribute="bottom" secondItem="QsY-ks-pHU" secondAttribute="bottom" id="epF-8C-kuW"/>
+                                    <constraint firstAttribute="trailing" secondItem="QsY-ks-pHU" secondAttribute="trailing" id="omY-sM-M12"/>
+                                    <constraint firstItem="QsY-ks-pHU" firstAttribute="leading" secondItem="0qU-12-eAQ" secondAttribute="leading" id="wlR-uR-XnD"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="nameLabel" destination="Tdp-5v-TN8" id="Qvj-yq-xgE"/>
+                                    <outlet property="cardImageView" destination="QsY-ks-pHU" id="1Ep-Qm-9uj"/>
+                                    <outlet property="cardNameLabel" destination="Tdp-5v-TN8" id="3uC-0T-QQp"/>
+                                    <segue destination="zmh-7c-Q6u" kind="show" identifier="cardDetailSegue" id="5iM-se-dP0"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -558,7 +567,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NmO-5c-Wc5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2258" y="738"/>
+            <point key="canvasLocation" x="2254" y="734"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="y7a-67-f9x">
@@ -617,4 +626,7 @@
             <point key="canvasLocation" x="288.80000000000001" y="734.48275862068976"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="5iM-se-dP0"/>
+    </inferredMetricsTieBreakers>
 </document>
