@@ -14,6 +14,7 @@ class CardCell: UICollectionViewCell {
     
     @IBOutlet  weak var cardImageView: UIImageView!
     
+    
     var isNew = true
 
     var cardData = Card() {

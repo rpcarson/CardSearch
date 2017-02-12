@@ -116,6 +116,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B88BA691E511761004EE9A5 /* Card Data */ = {
+			isa = PBXGroup;
+			children = (
+				5B8811831E292A1B00647253 /* CardModel.swift */,
+			);
+			name = "Card Data";
+			sourceTree = "<group>";
+		};
 		5BA8AAAE1E2D7E5800B895B5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,7 +144,6 @@
 				5BA8AAAA1E2D756700B895B5 /* CardSorter.swift */,
 				5BEB60FB1E341991009A81EB /* NetworkServices.swift */,
 				5B37F2821E2C6EB4007442B2 /* SearchManager.swift */,
-				5B8811831E292A1B00647253 /* CardModel.swift */,
 				5B04C0271E304AAA00CFD58A /* CardManager.swift */,
 				5B8811851E292E4B00647253 /* Parser.swift */,
 				5BF07CE31E44120500C11C6D /* Sets.swift */,
@@ -213,6 +220,7 @@
 				5BD1DDF21E29B81B00D52C8B /* 8.png */,
 				5BFE71FD1E284AF3003666B5 /* LaunchScreen.storyboard */,
 				5BFE72001E284AF3003666B5 /* Info.plist */,
+				5B88BA691E511761004EE9A5 /* Card Data */,
 				5BA8AAB01E2D7E9000B895B5 /* Views */,
 				5BA8AAAF1E2D7E6C00B895B5 /* Models */,
 				5BA8AAAE1E2D7E5800B895B5 /* ViewControllers */,

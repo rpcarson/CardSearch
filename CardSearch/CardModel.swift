@@ -9,6 +9,20 @@
 import UIKit
 
 
+
+enum CardColor {
+    case red
+    case blue
+    case black
+    case white
+    case green
+    case colorless
+    case multi
+}
+
+
+
+
 extension Card: Equatable {
     public static func ==(lhs: Card, rhs: Card) -> Bool {
         return lhs.id == rhs.id
@@ -35,6 +49,23 @@ struct Card {
         }
         return string
     }
+    
+    var cardColor: CardColor {
+        guard self.colors.count >= 1 else { return .colorless }
+        
+        if self.colors.count > 1 {
+            return .multi
+        }
+        
+        switch self.colors[0] {
+        case "red": return .red
+        case "blue": return .blue
+        case "green": return .green
+        case "black": return .black
+        case "white": return .white
+        default: return .colorless
+        }
+    }
 
     
     var manaCost: String
@@ -60,9 +91,11 @@ struct Card {
     var otherVersionIDs: [Int]
     
     var image: UIImage?
-
-
     
+    var rulings: [[String:String]]
+    
+    var printings: [String]
+
     init() {
         name = "blank"
         colors = ["blank"]
@@ -79,7 +112,10 @@ struct Card {
         id = 0
         otherVersionIDs = [0]
         set = "blank"
+        rulings = [["none":"none"]]
+        printings = ["blank"]
     }
+    
     
 }
 

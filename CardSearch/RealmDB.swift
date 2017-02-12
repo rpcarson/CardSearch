@@ -9,7 +9,13 @@
 import UIKit
 import RealmSwift
 
-
+enum RealmError: Error {
+    case badData
+    case noData
+    case badWrite
+    case badRealm
+    
+}
 
 
 class CardModel: Object {
@@ -43,30 +49,45 @@ final class RealmManager {
     var savedCards: List<CardModel> = List()
     var modelsToRemove: List<CardModel> = List()
     
-    private var realm: Realm? {
-        var _realm: Realm? = nil
+    private func createRealm() throws -> Realm? {
+        var realm: Realm? = nil
         do {
-           try _realm = Realm()
+            try realm = Realm()
         } catch {
-            print("Error instantiating realm instance")
+            throw RealmError.badRealm
         }
-        let message = _realm != nil ? "success" : "fail"
+        let message = realm != nil ? "success" : "fail"
         print("Realm Instance: \(message)")
-        return _realm
+        return realm
+    }
+    
+    private var realm: Realm? {
+        do {
+            return try createRealm()
+        } catch {
+            print(error)
+            return nil
+        }
     }
     
     
-    func loadData() {
+    func loadData() throws {
+        
         if let dataResults = realm?.objects(CardModel.self) {
-            print(dataResults)
+            if dataResults.count == 0 {
+                print("no saved data")
+                return
+            }
             for d in dataResults {
-                print(d.name)
+                print("RMAN:loadData loaded: \(d.name)")
                 savedCards.append(d)
             }
+        } else {
+            throw RealmError.badData
         }
     }
     
-     func saveCardModels() {
+     func saveCardModels() throws {
         do {
             try self.realm?.write {
                 for model in modelsToRemove {
@@ -75,14 +96,13 @@ final class RealmManager {
                             self.realm?.delete(model)
                         }
                     }
-                    
                 }
-               
                 self.realm?.add(savedCards)
                 print("SHIT SAVED")
             }
         } catch {
-            print("LOL PFFFFFFFFF CHANGS")
+            print("RMAN:saveCardModels - bad write")
+            throw RealmError.badWrite
         }
     }
 

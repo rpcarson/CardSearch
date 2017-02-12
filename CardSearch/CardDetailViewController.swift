@@ -127,6 +127,8 @@ class CardDetailViewController: UIViewController {
         
     }
     
+    var borderColor: UIColor = .lightGray
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -162,7 +164,11 @@ extension CardDetailViewController {
         
         setupFavoritesButton()
         
+        navigationItem.title = card?.name
+        
         navigationItem.rightBarButtonItem = barButton
+        
+        configureBorder()
     }
     
     func setupGestureRecognizer() {
@@ -176,6 +182,23 @@ extension CardDetailViewController {
         favoritesButton.setImage(greyStar, for: .normal)
         favoritesButton.addTarget(self, action: #selector(CardDetailViewController.pressStarButton), for: .touchUpInside)
         favoritesButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+    }
+    
+    func configureBorder() {
+        
+        if let c = card {
+            switch c.cardColor {
+            case .red: borderColor = .red
+            case .blue: borderColor = .blue
+            case .white: borderColor = .white
+            case .black: borderColor = .black
+            case .green: borderColor = .green
+            case .multi: borderColor = .yellow
+            case .colorless: borderColor = .lightGray
+            }
+        }
+        
+        view.backgroundColor = borderColor
     }
 }
 

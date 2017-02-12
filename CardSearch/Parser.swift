@@ -184,6 +184,11 @@ class JSONParser {
                 newCard.set = set
             }
             
+            if let rulings = card["rulings"] as? [[String:String]] {
+               newCard.rulings = rulings
+            }
+            
+            
             cardArray.append(newCard)
             
             }

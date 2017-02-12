@@ -82,6 +82,8 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICo
         indicator.frame = cell.bounds
         indicator.startAnimating()
         
+        cell.cardNameLabel.text = "?"
+        
         if cell.cardImageView.image == nil {
         
         DispatchQueue.global(qos: .background).async {

@@ -9,7 +9,16 @@
 import UIKit
 
 
+var testCard: Card = {
+    var card = Card()
+    card.name = "Allosaurus"
+    card.set = "Worst"
+    card.colors = ["blue"]
+    card.rulings = [["date":"10-11-12","text":"cant use to wipe"],["date":"11-12-13","text":"cant use to pee pee"]]
+    card.image = UIImage(named: "8.png")
 
+    return card
+}()
 
 let testingSets = false
 
@@ -19,7 +28,7 @@ let testingResultsToDisplay = 36
 
 let autoLoad = false
 
-let useDummyData = false
+let useDummyData = true
 
 let useDebuggerCells = true
 
@@ -34,12 +43,17 @@ class CardCollectionViewController: UICollectionViewController  {
     
     var dummyData: [Card] = {
         var data = [Card]()
-        for i in 1...24 {
-            var card = Card()
-            card.image = UIImage(named: "8.png")
-            data.append(card)
+        for i in 1...36 {
+            data.append(testCard)
         }
         return data
+//        var data = [Card]()
+//        for i in 1...24 {
+//            var card = Card()
+//            card.image = UIImage(named: "8.png")
+//            data.append(card)
+//        }
+//        return data
     }()
     
     var mtgAPISerivce = MTGAPIService()
