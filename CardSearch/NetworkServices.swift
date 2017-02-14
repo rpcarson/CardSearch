@@ -9,6 +9,8 @@
 import Foundation
 
 
+let testURL = URL(string: "https://api.magicthegathering.io/v1/cards?pageSize=20&subtypes=warrior&set=KTK&text=warrior")
+
 
 
 struct MTGAPIService {

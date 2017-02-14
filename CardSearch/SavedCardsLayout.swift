@@ -12,7 +12,7 @@ import UIKit
 extension SavedCollectionsCVC: UICollectionViewDelegateFlowLayout {
     
     var cardsPerRow: CGFloat {
-       return 4
+       return 3
     }
     var sectionInsets: UIEdgeInsets {
         return UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
@@ -24,10 +24,15 @@ extension SavedCollectionsCVC: UICollectionViewDelegateFlowLayout {
         return cardSize.height/cardSize.width
     }
     
+    var paddingSpace: CGFloat {
+     return (sectionInsets.left * (cardsPerRow + 1))
+    }
+
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let paddingSpace = sectionInsets.left * (cardsPerRow + 1)
+        
         let availableWidth = UIScreen.main.bounds.width - paddingSpace
         let widthPerItem = availableWidth / cardsPerRow
         let height = widthPerItem * cardSizeRatio
@@ -42,17 +47,16 @@ extension SavedCollectionsCVC: UICollectionViewDelegateFlowLayout {
         
     }
     
-    
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        
-        return 10
+        return sectionInsets.left
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
+        return sectionInsets.left
     }
+    
+    
     
     
 }

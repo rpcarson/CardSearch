@@ -13,8 +13,8 @@ var testCard: Card = {
     var card = Card()
     card.name = "Allosaurus"
     card.set = "Worst"
-    card.colors = ["blue"]
-    card.rulings = [["date":"10-11-12","text":"cant use to wipe"],["date":"11-12-13","text":"cant use to pee pee"]]
+    card.colors = ["Blue"]
+    card.rulings = [["date":"10-11-12","text":"canif a player uses this card to wipe his ass first before peein g on his opponnent then the card is exiled and rtuend to the game only after the round is overt use to wipe"],["date":"11-12-13","text":"cant use to pee pee"],["date":"11-12222-13","text":"cant 1212212use to pee pee"],["date":"33-12-13","text":"cant useTHISRULING IS ULTRA LONG AND PRObably reflects the elgnth of the average ruling im gonna get back form the json results 3333to pee pee"],["date":"11-112122-13","text":"cant use to peePEEPEE pee"]]
     card.image = UIImage(named: "8.png")
 
     return card
@@ -22,13 +22,13 @@ var testCard: Card = {
 
 let testingSets = false
 
-let testingPageSize = "6"
+let testingPageSize = "12"
 let testingResultsToDisplay = 36
 
 
 let autoLoad = false
 
-let useDummyData = true
+let useDummyData = false
 
 let useDebuggerCells = true
 
@@ -47,13 +47,7 @@ class CardCollectionViewController: UICollectionViewController  {
             data.append(testCard)
         }
         return data
-//        var data = [Card]()
-//        for i in 1...24 {
-//            var card = Card()
-//            card.image = UIImage(named: "8.png")
-//            data.append(card)
-//        }
-//        return data
+
     }()
     
     var mtgAPISerivce = MTGAPIService()
@@ -80,10 +74,14 @@ class CardCollectionViewController: UICollectionViewController  {
     
     func performSearch(completion: @escaping () -> Void) {
         searchManager.updateSearchTerm(term: searchTerm)
+       
         guard let url = searchManager.constructURLWithComponents() else {
             print("CardCollectionVC:performSearch - url construction failed")
             return
         }
+        
+        
+      // guard let url = testURL else { print("BAD URL") ; return }
         
         mtgAPISerivce.performSearch(url: url) {
             results in
@@ -250,7 +248,7 @@ extension CardCollectionViewController: UIViewControllerPreviewingDelegate {
         
         detailVC.labelText = cell.cardData.name
         
-        print("CELL CARD DATA : \(cell.cardData)")
+       // print("CELL CARD DATA : \(cell.cardData)")
         
         detailVC.cardData = cell.cardData
         

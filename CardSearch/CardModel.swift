@@ -36,7 +36,7 @@ struct Card {
     
     var name: String
     
-    var colors: [String]
+    var colors: [String] 
     
     var color: String {
         var string = ""
@@ -51,19 +51,19 @@ struct Card {
     }
     
     var cardColor: CardColor {
-        guard self.colors.count >= 1 else { return .colorless }
+        guard self.colors.count >= 1 else { print("colorlesss") ; return .colorless }
         
         if self.colors.count > 1 {
             return .multi
         }
         
         switch self.colors[0] {
-        case "red": return .red
-        case "blue": return .blue
-        case "green": return .green
-        case "black": return .black
-        case "white": return .white
-        default: return .colorless
+        case "Red": return .red
+        case "Blue": return .blue
+        case "Green": return .green
+        case "Black": return .black
+        case "White": return .white
+        default: print("cardColor for \(name): No valid color") ; return .colorless
         }
     }
 

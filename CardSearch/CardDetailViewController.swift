@@ -35,6 +35,10 @@ class CardDetailViewController: UIViewController {
     
     @IBOutlet weak var cardView: UIImageView!
     
+    @IBOutlet weak var textView: UITextView!
+    
+    @IBOutlet weak var stupidStackView: UIStackView!
+    
     let storyboardID = "cardDetailControllerID"
     
     var swipeRecognizer = UISwipeGestureRecognizer()
@@ -120,20 +124,22 @@ class CardDetailViewController: UIViewController {
         toggleStar()
 
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        
-        
-    }
-    
+
     var borderColor: UIColor = .lightGray
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        textView.isUserInteractionEnabled = true
+        textView.isScrollEnabled = true
+        
         setupUI()
         setupGestureRecognizer()
+        
+        addColoredBorder()
+        
+        
+        setRulingsText()
         
     }
 }
@@ -168,7 +174,6 @@ extension CardDetailViewController {
         
         navigationItem.rightBarButtonItem = barButton
         
-        configureBorder()
     }
     
     func setupGestureRecognizer() {
@@ -185,7 +190,6 @@ extension CardDetailViewController {
     }
     
     func configureBorder() {
-        
         if let c = card {
             switch c.cardColor {
             case .red: borderColor = .red
@@ -197,10 +201,66 @@ extension CardDetailViewController {
             case .colorless: borderColor = .lightGray
             }
         }
-        
-        view.backgroundColor = borderColor
     }
 }
+
+extension CardDetailViewController {
+    
+    func addColoredBorder() {
+        configureBorder()
+       
+        let border = DetailBorder(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+        
+        border.borderColor = borderColor
+        border.backgroundColor = UIColor.clear
+        view.addSubview(border)
+
+        view.insertSubview(border, belowSubview: stupidStackView)
+        
+    }
+    
+}
+
+extension CardDetailViewController {
+    
+    func setRulingsText() {
+        
+        var text = String()
+        
+        var rulingsArray = [String]()
+        
+        var date = String()
+        var rulingText = String()
+        
+        guard let rulings = card?.rulings else { return }
+        
+        for rule in rulings {
+            if let _date = rule["date"] {
+                date = _date
+            }
+            if let text = rule["text"] {
+                rulingText = text
+            }
+            
+            rulingText = "\(date): \(rulingText)"
+            if rulingText == ": " {
+                rulingText = "no rulings found"
+            }
+            rulingsArray.append(rulingText)
+            
+        }
+        
+        for ruling in rulingsArray {
+            text += "\(ruling)\n"
+            text += "\n"
+        }
+        
+        textView.text = text
+        
+        
+    }
+}
+
 
 
 

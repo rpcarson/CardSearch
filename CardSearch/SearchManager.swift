@@ -53,19 +53,12 @@ struct Search {
     var sizeLimit: String = "\(testingPageSize)"
     
     init() {
-        // searchTerm = "zombie"
-        // searchParamter = .name
-        
     }
     
     init(sizeLimit: String = "50", term: String, parameters: [Parameter]) {
         searchTerm = term
-        // searchParamter = parameters
         self.parameters = parameters
     }
-    
-    
-    
 }
 
 
@@ -195,6 +188,9 @@ class SearchManager {
         
         
     }
+    
+    
+    
 }
 
 extension CharacterSet {
