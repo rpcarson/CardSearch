@@ -10,15 +10,7 @@ import UIKit
 
 
 
-enum CardColor {
-    case red
-    case blue
-    case black
-    case white
-    case green
-    case colorless
-    case multi
-}
+
 
 
 
@@ -32,11 +24,9 @@ extension Card: Equatable {
 
 struct Card {
     
-    
-    
     var name: String
     
-    var colors: [String] 
+    var colors: [String]
     
     var color: String {
         var string = ""
@@ -66,7 +56,7 @@ struct Card {
         default: print("cardColor for \(name): No valid color") ; return .colorless
         }
     }
-
+    
     
     var manaCost: String
     var cmc: Int
@@ -90,12 +80,32 @@ struct Card {
     
     var otherVersionIDs: [Int]
     
-    var image: UIImage?
+    var image: UIImage? {
+        get {
+            for x in ImageStore.images {
+                if x.associatedCardID == self.id {
+                    print("\(name): Associated Image Found")
+                    return x.image
+                }
+            }
+            print("\(name): No Associated Image Found")
+            return nil
+        }
+        set {
+            let img = CardImage(image: newValue!, associatedCardID: self.id)
+            if !ImageStore.images.contains(img) {
+                print("\(name): Adding image to ImageStore")
+                ImageStore.images.append(img)
+            }
+        
+        }
+        
+    }
     
     var rulings: [[String:String]]
     
     var printings: [String]
-
+    
     init() {
         name = "blank"
         colors = ["blank"]

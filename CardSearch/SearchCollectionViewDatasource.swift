@@ -44,22 +44,14 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CardCell
         
         let card = cardManager.cards[indexPath.row]
-
+        
         cell.cardImageView.image = nil
         
         if let image = card.image {
             cell.cardImageView.image = image
         }
-
-        cell.cardData = card
-       
-        if cell.isNew {
-            
-            print("SETTING CARD DATA CELLFORITEM: \(card)")
-           // cell.cardData = card
-                                        // <---- keeps cards from  losing/getting data mixed up - but turns out it just never sets the card data
-        }
         
+        cell.cardData = card
         
         if useDummyData {
             cell.cardNameLabel.text = String(describing: indexPath.row)
@@ -76,81 +68,49 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICo
         cell.cardNameLabel.isHidden = true
         cell.backgroundColor = UIColor.lightGray
         
-        
-        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-        cell.addSubview(indicator)
-        indicator.frame = cell.bounds
-        indicator.startAnimating()
-        
-        cell.cardNameLabel.text = "?"
-        
-        if cell.cardImageView.image == nil {
-        
-        DispatchQueue.global(qos: .background).async {
-            guard let image = JSONParser.parser.getImageNoQueue(imageURL: card.imageURL) else {
-                print("CCVC:willDisplayCell  - no card image retrieved")
-                return
-            }
-            
-            DispatchQueue.main.async {
-                
-                cell.setImage(image: image, andDisplay: true) {
-                            
-                    indicator.stopAnimating()
-                    
-                    cell.setNeedsLayout()
-                }
-            }
-        }
-        } else {
-            print("ALREADY HAS IMAGE, NOT DOWNLOADING")
-        }
-        
+      
         return cell
     }
     
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        /*
+        
         print("will display")
         
         let card = cardManager.cards[indexPath.row]
         
         guard useImages else { return }
         
-//      if (cell as! CardCell).cardData.image != nil { return }
-        
-        if card.image != nil { print("image is not nil") ; return }
-        
-    print(card.image)
-        
-        if (cell as! CardCell).cardImageView.image != nil { print("image was already set")
-            return
+        for cardImage in ImageStore.images {
+            if card.id == cardImage.associatedCardID {
+                (cell as! CardCell).setImage(image: cardImage.image, andDisplay: true, completion: nil)
+                print("already has image - returning from func")
+                return
+            }
         }
-        
         
         let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         cell.addSubview(indicator)
         indicator.frame = cell.bounds
         indicator.startAnimating()
         
-        
         print("DOWNLOADING IMAGE")
         
         DispatchQueue.global(qos: .background).async {
-           // print("willDisplayCell background queue")
-            
             guard let image = JSONParser.parser.getImageNoQueue(imageURL: card.imageURL) else {
                 print("CCVC:willDisplayCell  - no card image retrieved")
                 // TODO - display question mark
                 return
             }
             
+            let cardImage = CardImage(image: image, associatedCardID: card.id)
+            if !ImageStore.images.contains(cardImage) {
+                ImageStore.images.append(cardImage)
+            }
+            
             DispatchQueue.main.async {
                 
                 (cell as! CardCell).setImage(image: image, andDisplay: true) {
-                    
-                  //  print("willDisplayCell main queue")
                     
                     indicator.stopAnimating()
                     
@@ -160,9 +120,9 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICo
         }
         
         print("CCVC willDisplayCell  card.image set")
-      */
+        
     }
- 
+    
 }
 
 

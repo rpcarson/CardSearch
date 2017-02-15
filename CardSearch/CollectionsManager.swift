@@ -8,12 +8,6 @@
 
 import Foundation
 
-protocol DisplayDelegate {
-    func didUpdateData()
-}
-
-
-
 struct CollectionsManager {
     static var sharedManager = CollectionsManager()
         

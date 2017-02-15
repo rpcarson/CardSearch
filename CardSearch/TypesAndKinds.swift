@@ -9,6 +9,16 @@
 import Foundation
 
 
+enum CardColor {
+    case red
+    case blue
+    case black
+    case white
+    case green
+    case colorless
+    case multi
+}
+
 struct CardSpecifications {
     static let types =
         

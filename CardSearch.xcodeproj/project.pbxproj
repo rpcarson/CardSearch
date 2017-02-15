@@ -21,6 +21,7 @@
 		5BD32DE81E314E4000A1E070 /* ConfigSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD32DE71E314E4000A1E070 /* ConfigSearchVC.swift */; };
 		5BDE0B0B1E5285C300B71286 /* CardIllustration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDE0B0A1E5285C300B71286 /* CardIllustration.swift */; };
 		5BDE0B0D1E52A6CF00B71286 /* TypesAndKinds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDE0B0C1E52A6CF00B71286 /* TypesAndKinds.swift */; };
+		5BE17E621E53ECB40062DD81 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE17E611E53ECB40062DD81 /* ImageStore.swift */; };
 		5BE7C9B61E3FEC0A00775DBD /* SearchCollectionViewDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE7C9B51E3FEC0A00775DBD /* SearchCollectionViewDatasource.swift */; };
 		5BE7C9B81E3FF05900775DBD /* SearchCollectionFlowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE7C9B71E3FF05900775DBD /* SearchCollectionFlowDelegate.swift */; };
 		5BEB60FC1E341991009A81EB /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEB60FB1E341991009A81EB /* NetworkServices.swift */; };
@@ -80,6 +81,7 @@
 		5BD32DE71E314E4000A1E070 /* ConfigSearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigSearchVC.swift; sourceTree = "<group>"; };
 		5BDE0B0A1E5285C300B71286 /* CardIllustration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardIllustration.swift; sourceTree = "<group>"; };
 		5BDE0B0C1E52A6CF00B71286 /* TypesAndKinds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypesAndKinds.swift; sourceTree = "<group>"; };
+		5BE17E611E53ECB40062DD81 /* ImageStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
 		5BE7C9B51E3FEC0A00775DBD /* SearchCollectionViewDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewDatasource.swift; sourceTree = "<group>"; };
 		5BE7C9B71E3FF05900775DBD /* SearchCollectionFlowDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCollectionFlowDelegate.swift; sourceTree = "<group>"; };
 		5BEB60FB1E341991009A81EB /* NetworkServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkServices.swift; sourceTree = "<group>"; };
@@ -118,11 +120,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B5C0E3B1E54686C00662983 /* ConfigureSearch */ = {
+			isa = PBXGroup;
+			children = (
+				5BD32DE71E314E4000A1E070 /* ConfigSearchVC.swift */,
+				5BFC78971E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift */,
+			);
+			name = ConfigureSearch;
+			sourceTree = "<group>";
+		};
+		5B5C0E3C1E54689A00662983 /* DetailAndPreView */ = {
+			isa = PBXGroup;
+			children = (
+				5BA8AAAC1E2D7E4C00B895B5 /* CardDetailViewController.swift */,
+				5B67281D1E4CE4AB00F35639 /* PreviewVC.swift */,
+			);
+			name = DetailAndPreView;
+			sourceTree = "<group>";
+		};
+		5B5C0E3D1E5468C400662983 /* REST */ = {
+			isa = PBXGroup;
+			children = (
+				5B37F2821E2C6EB4007442B2 /* SearchManager.swift */,
+				5B8811851E292E4B00647253 /* Parser.swift */,
+				5BEB60FB1E341991009A81EB /* NetworkServices.swift */,
+			);
+			name = REST;
+			sourceTree = "<group>";
+		};
 		5B88BA691E511761004EE9A5 /* Card Data */ = {
 			isa = PBXGroup;
 			children = (
+				5BF07CE31E44120500C11C6D /* Sets.swift */,
 				5B8811831E292A1B00647253 /* CardModel.swift */,
 				5BDE0B0C1E52A6CF00B71286 /* TypesAndKinds.swift */,
+				5BE17E611E53ECB40062DD81 /* ImageStore.swift */,
 			);
 			name = "Card Data";
 			sourceTree = "<group>";
@@ -130,13 +162,11 @@
 		5BA8AAAE1E2D7E5800B895B5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				5B67281D1E4CE4AB00F35639 /* PreviewVC.swift */,
+				5B5C0E3C1E54689A00662983 /* DetailAndPreView */,
+				5B5C0E3B1E54686C00662983 /* ConfigureSearch */,
 				5BD5F2811E4A86880098EB67 /* CollexTable */,
 				5BF07CE91E44245D00C11C6D /* SavedCardsCV */,
 				5BE7C9B91E3FF68800775DBD /* SearchCollectionView */,
-				5BA8AAAC1E2D7E4C00B895B5 /* CardDetailViewController.swift */,
-				5BD32DE71E314E4000A1E070 /* ConfigSearchVC.swift */,
-				5BFC78971E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -144,12 +174,13 @@
 		5BA8AAAF1E2D7E6C00B895B5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5BF0B1A41E4564E10015C6FD /* CollectionsManager.swift */,
+				5BFE720A1E284BA2003666B5 /* CardCell.swift */,
+				5BF2665C1E4DC6A50052D474 /* RealmDB.swift */,
 				5BA8AAAA1E2D756700B895B5 /* CardSorter.swift */,
-				5BEB60FB1E341991009A81EB /* NetworkServices.swift */,
-				5B37F2821E2C6EB4007442B2 /* SearchManager.swift */,
 				5B04C0271E304AAA00CFD58A /* CardManager.swift */,
-				5B8811851E292E4B00647253 /* Parser.swift */,
-				5BF07CE31E44120500C11C6D /* Sets.swift */,
+				5B5C0E3D1E5468C400662983 /* REST */,
+				5B88BA691E511761004EE9A5 /* Card Data */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -157,9 +188,9 @@
 		5BA8AAB01E2D7E9000B895B5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5BDE0B0A1E5285C300B71286 /* CardIllustration.swift */,
 				5BFC78931E35A0B3009960B5 /* ParameterButton.swift */,
 				5BFC78911E359085009960B5 /* OptionsPicker.swift */,
-				5BFE720A1E284BA2003666B5 /* CardCell.swift */,
 				5B88BA6A1E511C64004EE9A5 /* DetailBorder.swift */,
 			);
 			name = Views;
@@ -224,13 +255,9 @@
 				5BD1DDF21E29B81B00D52C8B /* 8.png */,
 				5BFE71FD1E284AF3003666B5 /* LaunchScreen.storyboard */,
 				5BFE72001E284AF3003666B5 /* Info.plist */,
-				5B88BA691E511761004EE9A5 /* Card Data */,
 				5BA8AAB01E2D7E9000B895B5 /* Views */,
 				5BA8AAAF1E2D7E6C00B895B5 /* Models */,
 				5BA8AAAE1E2D7E5800B895B5 /* ViewControllers */,
-				5BF0B1A41E4564E10015C6FD /* CollectionsManager.swift */,
-				5BF2665C1E4DC6A50052D474 /* RealmDB.swift */,
-				5BDE0B0A1E5285C300B71286 /* CardIllustration.swift */,
 			);
 			path = CardSearch;
 			sourceTree = "<group>";
@@ -354,6 +381,7 @@
 				5BFE71F51E284AF3003666B5 /* AppDelegate.swift in Sources */,
 				5BF07CED1E44253700C11C6D /* SavedCollectionsCVCell.swift in Sources */,
 				5BFE720B1E284BA2003666B5 /* CardCell.swift in Sources */,
+				5BE17E621E53ECB40062DD81 /* ImageStore.swift in Sources */,
 				5BF0B1A51E4564E10015C6FD /* CollectionsManager.swift in Sources */,
 				5BFC78981E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift in Sources */,
 				5B8811841E292A1B00647253 /* CardModel.swift in Sources */,

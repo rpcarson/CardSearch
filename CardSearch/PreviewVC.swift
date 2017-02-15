@@ -12,26 +12,19 @@ let previewVCStoryboardID = "previewVCID"
 
 class PreviewVC: UIViewController {
 
-  
     @IBOutlet weak var cardImageView: UIImageView!
-    
     
     @IBOutlet weak var cardNameLabel: UILabel!
     
     var image: UIImage?
     var labelText: String?
     
-    
     var cardData: Card?
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         cardImageView.image = image
         cardNameLabel.text = labelText
-        
         view.backgroundColor = UIColor.clear
     
     }

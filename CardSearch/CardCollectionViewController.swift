@@ -22,7 +22,7 @@ var testCard: Card = {
 
 let testingSets = false
 
-let testingPageSize = "12"
+let testingPageSize = "24"
 let testingResultsToDisplay = 36
 
 
