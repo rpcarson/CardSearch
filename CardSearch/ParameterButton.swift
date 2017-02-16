@@ -25,7 +25,7 @@ enum ButtonFunc {
         
         let visibleContentOffset: CGFloat = 10
         
-        let insetRect = rect.insetBy(dx: 5 + visibleContentOffset, dy: 5 + visibleContentOffset)
+       // let insetRect = rect.insetBy(dx: 5 + visibleContentOffset, dy: 5 + visibleContentOffset)
         
         let radius = rect.size.width/2 - visibleContentOffset
 

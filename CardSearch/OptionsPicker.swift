@@ -25,10 +25,10 @@ class OptionsPicker: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource 
     
     var data: [String] {
         switch pickerType {
-        case .color: return ["red", "green", "blue", "white", "black", "colorless"]
-        case .cmc: return ["1","2","3","4","5","6","7","8","9"]
-        case .set: return ["DTK","FRF","KTK","ORI","BFZ","OGW","SOI","EMN","KLD","Standard"]
-        case .type: return ["creature", "sorcery", "instant", "land", "fuck planeswalkers"]
+        case .color: return CardSpecifications.colors
+        case .cmc: return ["1","2","3","4","5","6","7","8","9","9+"]
+        case .set: return ["DTK","FRF","KTK","ORI","BFZ","OGW","SOI","EMN","KLD","AER"]
+        case .type: return CardSpecifications.types
         }
     }
     

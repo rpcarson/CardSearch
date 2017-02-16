@@ -76,22 +76,20 @@ class ConfigSearchVC: UIViewController {
         parameter.value = value
         
         parameters.append(parameter)
-        
-      //  groupParameters()
-        
+                
         parameterTableView.reloadData()
 
     }
     
     
-    func getLogicStateForParameters() {
+    func updateLogicStateForParameters() {
         
         for (i, _) in parameters.enumerated() {
             let indexPath = IndexPath(row: i, section: 0)
             if let cell = parameterTableView.cellForRow(at: indexPath) as? ParameterCell {
                 let state = cell.logicState
                 parameters[i].logicState = state
-                print("state set")
+               // print("state set")
             }
            
         }  
@@ -100,15 +98,11 @@ class ConfigSearchVC: UIViewController {
     
     @IBAction func backToCollectionView() {
         
-        getLogicStateForParameters()
+        updateLogicStateForParameters()
         
-        //collectionView?.searchManager.search.parameters = parameters
         collectionView?.searchManager.updateParameters(parameters: parameters)
         
-        print(parameters.description)
-        
         self.dismiss(animated: true, completion: nil)
-        
     
     }
     
@@ -142,21 +136,7 @@ class ConfigSearchVC: UIViewController {
         
         
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-    
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
+
 }
 
 

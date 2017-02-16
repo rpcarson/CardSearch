@@ -39,6 +39,7 @@ class CardManager {
             for i in 0..<amount {
                 if i <= maxIndex {
                     limitedJson.append(cards[i])
+                  
                     
                 }
             }
@@ -50,6 +51,8 @@ class CardManager {
         
     }
     
+    // TODO: - this function in general needs to be rerworked
+    
     func createUniqueCardsWithMaxFromJSON(json: JSONResults, amount: Int) {
         
         allJSONResults = json
@@ -58,13 +61,25 @@ class CardManager {
         
         var limitedJson = JSONCardData()
         
+        var appended = 0
+
+        
         if let cards = uniqueJSONResults["cards"] as? [[String:Any]] {
             
             let maxIndex = cards.count - 1
             
-            for i in 0..<amount {
-                if i <= maxIndex {
+            
+            print(amount)
+            print(maxIndex)
+            
+            guard maxIndex >= 0 else { print("card results less than 1") ; return }
+            for i in 0...maxIndex {
+                if i <= amount {
                     limitedJson.append(cards[i])
+                    appended += 1
+                    let card = cards[i]
+                    let name = card["name"]
+                    print("appending \(name)")
                     
                 }
             }
@@ -72,10 +87,11 @@ class CardManager {
         }
         
         let cardData = JSONParser.parser.createCardsFromCardsData(data: limitedJson)
+        
+        print("cards appened: \(appended)")
+        
         cards = cardData
-        
-        print("CardManager createUniquecards ended")
-        
+            
     }
     
     func configureWithJSON(json: JSONResults) {
@@ -84,25 +100,22 @@ class CardManager {
     }
     
     
-    func generateCardImages() {
-        for (index, _) in cards.enumerated() {
-            let card = cards[index]
-            if card.image == nil {
-                JSONParser.parser.imageFromURL(imageURL: card.imageURL) {
-                    result in
-                    self.cards[index].image = result
-                }
-            }
-        }
-    }
+//    func generateCardImages() {
+//        for (index, _) in cards.enumerated() {
+//            let card = cards[index]
+//            if card.image == nil {
+//                JSONParser.parser.imageFromURL(imageURL: card.imageURL) {
+//                    result in
+//                    self.cards[index].image = result
+//                }
+//            }
+//        }
+//    }
     
     init(json: JSONResults) {
         allJSONResults = json
     }
-    
-    init() {
-        
-    }
-    
+    init() {}
+
     
 }

@@ -47,284 +47,126 @@ enum SearchParameter: String {
 struct Search {
     
     var searchTerm: String = ""
-   
-    //var searchParamter: SearchParameter
-    
     
     var parameters = [Parameter]()
     
-    var sizeLimit: String = "2"
-    
-    var sizeString: String {
-        return "pageSize=\(sizeLimit)"
-    }
+    var sizeLimit: String = "\(testingPageSize)"
     
     init() {
-      // searchTerm = "zombie"
-       // searchParamter = .name
-        
     }
     
     init(sizeLimit: String = "50", term: String, parameters: [Parameter]) {
         searchTerm = term
-       // searchParamter = parameters
         self.parameters = parameters
     }
-    
-//    func getSearchURL(baseURL: String) -> URL? {
-//        
-//        var urlString: String = ""
-//        
-//        
-//        // TODO: url endpoints(correct term?) shouldnt be hardcoded here
-//        
-//        switch searchParamter {
-//        case .name: urlString = baseURL + sizeString + "&name=\(searchTerm)"
-//        case .color: urlString = baseURL + "&colors=\(searchTerm)"
-//        case .cmc: urlString = baseURL + "&cmc=\(searchTerm)"
-//        case .set:urlString = baseURL + "&set=\(searchTerm)"
-//        default: urlString = ""
-//        }
-//        
-//        
-//        if let url = URL(string: urlString) {
-//            return url
-//        }
-//        
-//        print("Search getSearchURL failed")
-//        return nil
-//        
-//    }
-    
-    /*
-     name|name|name   = or
-     "red,white,blue"  = not black, green or colorless
-     not black = "red,white,green,blue,colorless"
-     
-     */
-    
-    
-//    func formatValueWithLogic(values: [String], logic: LogicState) -> String {
-//        
-//        var formattedValue = ""
-//        
-//        for val in values {
-//            if formattedValue == "" {
-//                formattedValue += val
-//            } else {
-//                formattedValue += "\(logic.rawValue)\(val)"
-//            }
-//        }
-//        
-//    }
+}
 
+
+
+class SearchManager {
+    
+    
+    var search: Search = Search()
+    
+    func updateParameters(parameters: [Parameter]) {
+        search.parameters = parameters
+    }
+    
+    func updateSearchTerm(term: String?) {
         
-//        func getQueryItemsFromParameters() -> [URLQueryItem] {
-//            
-//            var colors = String()
-//            var cmc = [String]()
-//            var types = String()
-//            var sets = [String]()
-//            
-//            for parameter in parameters {
-//                
-//                switch parameter.parameterType {
-//                    
-//                case .color:
-//                    if parameter.logicState == ._is {
-//                        colors += ",\(parameter.value)"
-//                    } else if parameter.logicState == ._or {
-//                        colors += "|\(parameter.value)"
-//                    }
-//                case .cmc:
-//                    cmc.append(parameter.value)
-//                case .type:
-//                    if parameter.logicState == ._is {
-//                        types += ",\(parameter.value)"
-//                    } else if parameter.logicState == ._or {
-//                        types += "|\(parameter.value)"
-//                    }
-//                case .set:
-//                    sets.append(parameter.value)
-//                default: print("getQueryItems FAIL")
-//                    
-//                    
-//                }
-//                
-//                
-//            }
-//            let typesQuery = URLQueryItem(name: "types", value: types)
-//            let colorsQuery = URLQueryItem(name: "colors", value: colors)
-//            // let name = URLQueryItem(name: "name", value: searchTerm)
-//            return [typesQuery,colorsQuery]
-//        }
-    
-//        
-//        func getURLWithComponents(queryItems: [URLQueryItem]) -> URL? {
-//            var urlComponents = URLComponents()
-//            urlComponents.scheme = "https"
-//            urlComponents.host = "api.magicthegathering.io"
-//            urlComponents.path = "/v1/cards"
-//            
-//            var items = queryItems
-//            // let name = URLQueryItem(name: "name", value: "")
-//            //  let item = URLQueryItem(name: "colors", value: "blue")
-//            let item2 = URLQueryItem(name: "pageSize", value: "20")
-//            // items.append(name)
-//            items.append(item2)
-//            //  queryItems.append(item)
-//            
-//            urlComponents.queryItems = items
-//            
-//            print(urlComponents.url)
-//            
-//            return urlComponents.url
-//        }
-    
+        search.searchTerm = (term != nil ? term! : "")
     }
     
     
+    func configureSearch(sizeLimit: String = "12", searchTerm: String, parameters: [Parameter] = [Parameter]()) {
+        search.parameters = parameters
+        search.searchTerm = searchTerm
+        search.sizeLimit = sizeLimit
+        
+    }
     
-    class SearchManager {
+    func constructURLWithComponents() -> URL? {
         
+        let queryItems = getQueryItemsFromParameters()
         
-        var search: Search = Search()
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.magicthegathering.io"
+        urlComponents.path = "/v1/cards"
+        urlComponents.queryItems = queryItems
         
-        func updateParameters(parameters: [Parameter]) {
-            search.parameters = parameters
+        var stringWithoutBullshit = urlComponents.string!.replacingOccurrences(of: "%7C", with: "|")
+        stringWithoutBullshit = stringWithoutBullshit.replacingOccurrences(of: "%20", with: " ")
+        
+        guard let encodedURL = stringWithoutBullshit.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else {
+            print("constructURLWithComponents - addingPercentEncoding fail")
+            return nil
         }
-       
-        func updateSearchTerm(term: String?) {
+        
+        
+        print("URLComponents.url:\(urlComponents.url)")
+        print("URL String: \(encodedURL)")
+        
+        let uRaEl = URL(string: encodedURL)
+        print("URAEL: \(uRaEl)")
+        return uRaEl
+    }
     
-            search.searchTerm = (term != nil ? term! : "")
-        }
+
+
+    private func getQueryItemsFromParameters() -> [URLQueryItem] {
         
+        var colors = String()
+        var cmc = [String]()
+        var types = String()
+        var sets = String()
         
-        func configureSearch(sizeLimit: String = "12", searchTerm: String, parameters: [Parameter] = [Parameter]()) {
-            search.parameters = parameters
-            search.searchTerm = searchTerm
-            search.sizeLimit = sizeLimit
+        for parameter in search.parameters {
             
-        }
-        
-        func constructURLWithComponents() -> URL? {
-            
-            var queryItems = getQueryItemsFromParameters()
-            
-            var urlComponents = URLComponents()
-            urlComponents.scheme = "https"
-            urlComponents.host = "api.magicthegathering.io"
-            urlComponents.path = "/v1/cards"
-            
-            if search.searchTerm != "" {
-                let nameQuery = URLQueryItem(name: "name", value: search.searchTerm)
-                queryItems.append(nameQuery)
-            }
-            
-            urlComponents.queryItems = queryItems
-            
-            let stringWithoutBullshit = urlComponents.string!.replacingOccurrences(of: "%7C", with: "|")
-            //ignore the force unwrap
-            guard let encodedURL = stringWithoutBullshit.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else {
-                print("unhelpful message")
-                return nil
-            }
-            
-            //let correctURL = URL(string: encodedURL)
-            
-//            print"URLComponents.url:\(urlComponents.url)"
-//            print"URL String: \(stringWithoutBullshit)"
-//            
-           
-            let uRaEl = URL(string: encodedURL)
-            print("URAEL: \(uRaEl)")
-            return uRaEl
-        }
-        
-        
-       private func getQueryItemsFromParameters() -> [URLQueryItem] {
-            
-            var colors = String()
-            var cmc = [String]()
-            var types = String()
-            var sets = String()
-            
-            for parameter in search.parameters {
-                
-                switch parameter.parameterType {
-                    
-                case .color:
-                    if parameter.logicState == ._is {
-                        if colors.isEmpty {
-                            colors += parameter.value
-                        } else {
-                            colors += ",\(parameter.value)"
-                        }
-                        
-                    } else if parameter.logicState == ._or {
-                        if colors.isEmpty {
-                            colors += parameter.value
-                        } else {
-                            colors += ",\(parameter.value)"
-                        }
-                    }
-                case .cmc:
-                    cmc.append(parameter.value)
-                case .type:
-                    if parameter.logicState == ._is {
-                        if types.isEmpty {
-                            types += parameter.value
-                        } else {
-                            types += ",\(parameter.value)"
-                        }
-                        
-                    } else if parameter.logicState == ._or {
-                        if types.isEmpty {
-                            types += parameter.value
-                        } else {
-                            types += ",\(parameter.value)"
-                        }
-                    }
-                case .set:
-                    if parameter.logicState == ._is {
-                        if sets.isEmpty {
-                            sets += parameter.value
-                        } else {
-                            sets += ",\(parameter.value)"
-                        }
-                        
-                    } else if parameter.logicState == ._or {
-                        if sets.isEmpty {
-                            sets += parameter.value
-                        } else {
-                            sets += ",\(parameter.value)"
-                        }
-                    }
-                    
-                    if sets == "Standard" {
-                        sets = currentStandard
-                    }
-                    
-                default: print("getQueryItems FAIL")
-                    
-                    
+            var seperator: String {
+                switch parameter.logicState {
+                case ._is: return ","
+                case ._or: return "/"
+                case ._not: return "notsure yet"
                 }
-                
-                
             }
+            
+            var valueString = "\(parameter.value)"
+            
+            switch parameter.parameterType {
+                
+            case .color:
+                if !colors.isEmpty {
+                    valueString = "\(parameter.logicState.rawValue)\(parameter.value)"
+                }
+                colors += valueString
+       
+            case .cmc:
+                cmc.append(parameter.value)
+                
+            case .type:
+                if !types.isEmpty {
+                    valueString = "\(parameter.logicState.rawValue)\(parameter.value)"
+                }
+                types += valueString
+       
+            case .set:
+                if !sets.isEmpty {
+                    valueString = "\(parameter.logicState.rawValue)\(parameter.value)"
+                }
+                sets += valueString
+            default: print("getQueryItems FAIL")
+            }
+        }
         
-            var items = [URLQueryItem]()
+        var items = [URLQueryItem]()
         
-        
-        
-            let typesQuery = URLQueryItem(name: "types", value: types)
-            let colorsQuery = URLQueryItem(name: "colors", value: colors)
+        let typesQuery = URLQueryItem(name: "types", value: types)
+        let colorsQuery = URLQueryItem(name: "colors", value: colors)
         let setsQuery = URLQueryItem(name: "set", value: sets)
-            // let name = URLQueryItem(name: "name", value: searchTerm)
-        let sizeLimit = URLQueryItem(name: "pageSize", value: "12")
+        let sizeLimit = URLQueryItem(name: "pageSize", value: search.sizeLimit)
         
-      
-        
+        let nameQuery = URLQueryItem(name: "name", value: search.searchTerm)
         
         
         if !types.isEmpty {
@@ -336,11 +178,23 @@ struct Search {
         if !sets.isEmpty {
             items.append(setsQuery)
         }
-            
-            return items
-            
-            
+        if !search.searchTerm.isEmpty {
+            items.append(nameQuery)
         }
+        if Int(search.sizeLimit)! > 100 {
+            let pageQuery = URLQueryItem(name: "page", value: "2")
+            items.append(pageQuery)
+        }
+        
+        items.append(sizeLimit)
+        
+        return items
+        
+        
+    }
+    
+    
+    
 }
 
 extension CharacterSet {
@@ -350,24 +204,17 @@ extension CharacterSet {
         return allowed
     }()
     
-    
     static func urlQueryValueAllowed() -> CharacterSet {
         return CharacterSet(charactersIn: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~/?|=")
     }
 }
 
 extension String {
-  
+    
     func addingPercentEncodingForURLQueryValue() -> String? {
         let allowedCharacters = CharacterSet.urlQueryValueAllowed()
         return addingPercentEncoding(withAllowedCharacters: allowedCharacters)
-}
-
-
-
-
-
-
+    }
 }
 
 
