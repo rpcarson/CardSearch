@@ -22,8 +22,8 @@ var testCard: Card = {
 
 let testingSets = false
 
-let testingPageSize = "24"
-let testingResultsToDisplay = 36
+let testingPageSize = "100"
+let testingResultsToDisplay = 100
 
 
 let autoLoad = false
@@ -36,8 +36,6 @@ let useImages = true
 
 let reuseIdentifier = "CardCellID"
 let configSearchSegueID = "ConfigSearchSegue"
-
-
 
 class CardCollectionViewController: UICollectionViewController  {
     

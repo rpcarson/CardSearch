@@ -229,24 +229,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ls-ak-tnb">
-                                                    <rect key="frame" x="10" y="0.0" width="198" height="44"/>
+                                                    <rect key="frame" x="10" y="0.0" width="235" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GzI-cI-BlF" customClass="ParameterCellLogicSelector" customModule="CardSearch" customModuleProvider="target">
-                                                    <rect key="frame" x="298" y="0.0" width="45" height="43.5"/>
-                                                    <color key="backgroundColor" red="1" green="0.18086733150140022" blue="0.34640991839835922" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="45" id="rT0-Lh-c45"/>
-                                                    </constraints>
-                                                    <state key="normal" title="NOT"/>
-                                                    <connections>
-                                                        <action selector="selectLogicStateWithSender:" destination="F6k-pw-c1Y" eventType="touchUpInside" id="M3q-31-rrb"/>
-                                                    </connections>
-                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="olC-xq-Vb0" customClass="ParameterCellLogicSelector" customModule="CardSearch" customModuleProvider="target">
-                                                    <rect key="frame" x="253" y="0.0" width="45" height="43.5"/>
+                                                    <rect key="frame" x="290" y="0.0" width="45" height="43.5"/>
                                                     <color key="backgroundColor" red="1" green="0.83248516539838679" blue="0.51225464474481686" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="sPQ-qc-tll"/>
@@ -257,7 +246,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nls-6H-Fud" customClass="ParameterCellLogicSelector" customModule="CardSearch" customModuleProvider="target">
-                                                    <rect key="frame" x="208" y="0.0" width="45" height="43.5"/>
+                                                    <rect key="frame" x="245" y="0.0" width="45" height="43.5"/>
                                                     <color key="backgroundColor" red="0.40954236728022386" green="1" blue="0.29845409431743541" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="ULV-kY-hEn"/>
@@ -271,23 +260,19 @@
                                             <constraints>
                                                 <constraint firstItem="6ls-ak-tnb" firstAttribute="top" secondItem="JLG-Fm-7vG" secondAttribute="top" id="6PX-50-QTl"/>
                                                 <constraint firstAttribute="bottom" secondItem="Nls-6H-Fud" secondAttribute="bottom" id="Qmb-Pf-n3M"/>
-                                                <constraint firstItem="GzI-cI-BlF" firstAttribute="top" secondItem="JLG-Fm-7vG" secondAttribute="top" id="UnM-WJ-QrF"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="olC-xq-Vb0" secondAttribute="trailing" id="RDG-MP-WhA"/>
                                                 <constraint firstItem="Nls-6H-Fud" firstAttribute="top" secondItem="JLG-Fm-7vG" secondAttribute="top" id="Vkp-jI-7t3"/>
                                                 <constraint firstAttribute="bottom" secondItem="olC-xq-Vb0" secondAttribute="bottom" id="Vqg-t2-QU2"/>
-                                                <constraint firstAttribute="bottom" secondItem="GzI-cI-BlF" secondAttribute="bottom" id="bDV-16-yJG"/>
                                                 <constraint firstAttribute="bottom" secondItem="6ls-ak-tnb" secondAttribute="bottom" id="f9t-d1-U48"/>
-                                                <constraint firstAttribute="trailing" secondItem="GzI-cI-BlF" secondAttribute="trailing" id="fma-GY-AAh"/>
                                                 <constraint firstItem="olC-xq-Vb0" firstAttribute="leading" secondItem="Nls-6H-Fud" secondAttribute="trailing" id="j5T-KZ-sKd"/>
                                                 <constraint firstItem="Nls-6H-Fud" firstAttribute="leading" relation="lessThanOrEqual" secondItem="6ls-ak-tnb" secondAttribute="trailing" id="u77-bq-2JJ"/>
                                                 <constraint firstItem="olC-xq-Vb0" firstAttribute="top" secondItem="JLG-Fm-7vG" secondAttribute="top" id="w7c-kH-9eh"/>
-                                                <constraint firstItem="GzI-cI-BlF" firstAttribute="leading" secondItem="olC-xq-Vb0" secondAttribute="trailing" id="xRM-W0-dud"/>
                                                 <constraint firstItem="6ls-ak-tnb" firstAttribute="leading" secondItem="JLG-Fm-7vG" secondAttribute="leading" constant="10" id="z9L-FS-8jX"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="andSelector" destination="Nls-6H-Fud" id="Igp-cw-8Hf"/>
                                             <outlet property="label" destination="6ls-ak-tnb" id="Ab7-7D-ikl"/>
-                                            <outlet property="notSelector" destination="GzI-cI-BlF" id="M6m-5Y-5cs"/>
                                             <outlet property="orSelector" destination="olC-xq-Vb0" id="vsb-oF-4ZH"/>
                                         </connections>
                                     </tableViewCell>
@@ -397,7 +382,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="150" id="tOH-rS-1AS"/>
                                         </constraints>
-                                        <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum rem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conrem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te condolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum rem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conrem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te condolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -516,13 +501,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="af3-IJ-IKC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1228" y="734.48275862068976"/>
+            <point key="canvasLocation" x="1217" y="1221"/>
         </scene>
         <!--Saved CollectionsCVC-->
         <scene sceneID="CZ0-Ey-onf">
             <objects>
                 <collectionViewController id="IXn-V9-nmd" customClass="SavedCollectionsCVC" customModule="CardSearch" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="xA5-ok-7hn">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="xA5-ok-7hn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -572,6 +557,7 @@
                             <outlet property="delegate" destination="IXn-V9-nmd" id="UKn-PQ-EzK"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="le4-Kj-m8Z"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NmO-5c-Wc5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -626,7 +612,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Yfo-BO-grA" kind="relationship" relationship="rootViewController" id="I9U-mS-lqc"/>
+                        <segue destination="IXn-V9-nmd" kind="relationship" relationship="rootViewController" id="UCY-j3-5Bx"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OIC-em-deQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -636,5 +622,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="IdS-z4-ShF"/>
+        <segue reference="n75-3g-vAJ"/>
     </inferredMetricsTieBreakers>
 </document>

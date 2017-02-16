@@ -53,34 +53,34 @@ class JSONParser {
         return cardSets
     }
     
-
+    
     func getImageNoQueue(imageURL: String) -> UIImage? {
         
         print("beginning getImage")
         
         if let url = URL(string: imageURL) {
-                do {
-                    
-                    let imageData = try Data(contentsOf: url)
-                    
-                    let image = UIImage(data: imageData)
-                    
-                    print("image set")
-                    return image
-                    
-                } catch {
-                    print("bad image data")
-                    return nil
-                    
-                }
+            do {
+                
+                let imageData = try Data(contentsOf: url)
+                
+                let image = UIImage(data: imageData)
+                
+                print("image set")
+                return image
+                
+            } catch {
+                print("bad image data")
+                return nil
+                
             }
+        }
         
         print("returning nil")
         return nil
         
     }
     
-   
+    
     
     
     
@@ -91,19 +91,26 @@ class JSONParser {
         
         var uniqueNames = [String]()
         
+        
+        
         if let cards = json["cards"] as? [[String:Any]] {
             
             for card in cards {
                 
-                if let name = card["name"] as? String {
+                if let name = card["id"] as? String {
                     if !uniqueNames.contains(name) {
-                        uniqueNames.append(name)
+                        if let set = card["set"] as? String  {
+                            if !set.contains("p") {
+                                uniqueNames.append(name)
+                                
+                                uniqueData.append(card)
+                            }
+                        }
                         
-                        uniqueData.append(card)
                         print("sortJSONByRemovingDuplicateNames unique card appended: \(name)")
                         
                     }
-                
+                    
                 }
                 
             }
@@ -129,7 +136,7 @@ class JSONParser {
             if let name = card["name"] as? String {
                 newCard.name = name
             }
-                
+            
             if let cmc = card["cmc"] as? Int {
                 newCard.cmc = cmc
             }
@@ -156,12 +163,10 @@ class JSONParser {
             
             if let toughness = card["toughness"] as? String {
                 newCard.toughness = toughness
-                print("TOUCHNESS: \(toughness)")
             }
             
             if let power = card["power"] as? String {
                 newCard.power = power
-                print("POWER: \(power)")
             }
             
             if let colors = card["colors"] as? [String] {
@@ -176,8 +181,9 @@ class JSONParser {
                 newCard.imageURL = imageURL
             }
             
-            if let id = card["multiverseid"] as? Int {
+            if let id = card["id"] as? String {
                 newCard.id = id
+                print("\(newCard.name): MVID: \(id)")
             }
             
             if let set = card["set"] as? String {
@@ -185,19 +191,18 @@ class JSONParser {
             }
             
             if let rulings = card["rulings"] as? [[String:String]] {
-               newCard.rulings = rulings
+                newCard.rulings = rulings
             }
-            
             
             cardArray.append(newCard)
             
-            }
-            
-            return cardArray
         }
         
+        return cardArray
     }
     
-    
+}
+
+
 
 

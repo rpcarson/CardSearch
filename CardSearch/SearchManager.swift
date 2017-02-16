@@ -181,6 +181,10 @@ class SearchManager {
         if !search.searchTerm.isEmpty {
             items.append(nameQuery)
         }
+        if Int(search.sizeLimit)! > 100 {
+            let pageQuery = URLQueryItem(name: "page", value: "2")
+            items.append(pageQuery)
+        }
         
         items.append(sizeLimit)
         

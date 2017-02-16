@@ -19,7 +19,6 @@ class CardCell: UICollectionViewCell {
 
     var cardData = Card() {
         didSet {
-           // print("isNew: \(isNew)")
             isNew = false
         }
     }
@@ -34,7 +33,6 @@ class CardCell: UICollectionViewCell {
         
         if completion != nil {
             completion!()
-
         }
         
     }

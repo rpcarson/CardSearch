@@ -18,7 +18,7 @@ struct CardImage: Equatable {
    
     let image: UIImage
     
-    let associatedCardID: Int
+    let associatedCardID: String
     
     static func ==(lhs: CardImage, rhs: CardImage) -> Bool {
         return lhs.associatedCardID == rhs.associatedCardID

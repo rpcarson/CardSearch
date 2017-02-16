@@ -12,6 +12,8 @@ import Foundation
 struct CardSorter {
     
     // TODO: - Consolidate remove duplicates functions
+    
+    
 
     static func removeDuplicatesByName(cards:[Card])->[Card] {
         var uniqueNames = [String]()
@@ -28,7 +30,7 @@ struct CardSorter {
     }
     
     static func removeDuplicatesByID(cards: [Card]) -> [Card] {
-        var uniqueIDs = [Int]()
+        var uniqueIDs = [String]()
         var uniqueCards = [Card]()
         
         for card in cards {

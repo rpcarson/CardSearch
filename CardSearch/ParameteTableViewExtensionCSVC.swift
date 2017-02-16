@@ -38,14 +38,14 @@ class ParameterCell: UITableViewCell {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var andSelector: ParameterCellLogicSelector!
     @IBOutlet weak var orSelector: ParameterCellLogicSelector!
-    @IBOutlet weak var notSelector: ParameterCellLogicSelector!
+   // weak var notSelector: ParameterCellLogicSelector!
     
     var logicState: LogicState = ._is
  
     func toggle(button: ParameterCellLogicSelector) {
         andSelector.isSelected = false
         orSelector.isSelected = false
-        notSelector.isSelected = false
+      //  notSelector.isSelected = false
         
         button.isSelected = true
         print("toggle")
@@ -94,7 +94,8 @@ extension ConfigSearchVC: UITableViewDelegate, UITableViewDataSource, LogicDeleg
         switch cell.logicState {
         case ._is: cell.toggle(button: cell.andSelector)
         case ._or: cell.toggle(button: cell.orSelector)
-        case ._not: cell.toggle(button: cell.notSelector)
+        case ._not: print("old notSelectore")
+            //cell.toggle(button: cell.notSelector)
 
         }
         

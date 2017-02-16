@@ -8,13 +8,6 @@
 
 import UIKit
 
-
-
-
-
-
-
-
 extension Card: Equatable {
     public static func ==(lhs: Card, rhs: Card) -> Bool {
         return lhs.id == rhs.id
@@ -74,7 +67,7 @@ struct Card {
     
     var rarity: String
     
-    var id: Int
+    var id: String
     
     var set: String
     
@@ -84,12 +77,16 @@ struct Card {
         get {
             for x in ImageStore.images {
                 if x.associatedCardID == self.id {
+                    if self.id == "0" {
+                        print("\(name): invalid card ID")
+                        return UIImage(named: "Magic_card_back")
+                    }
                     print("\(name): Associated Image Found")
                     return x.image
                 }
             }
             print("\(name): No Associated Image Found")
-            return nil
+            return UIImage(named: "Magic_card_back")
         }
         set {
             let img = CardImage(image: newValue!, associatedCardID: self.id)
@@ -119,7 +116,7 @@ struct Card {
         flavor = "blank"
         imageURL = "blank"
         rarity = "blank"
-        id = 0
+        id = "0"
         otherVersionIDs = [0]
         set = "blank"
         rulings = [["none":"none"]]

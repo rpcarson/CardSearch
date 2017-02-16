@@ -34,7 +34,7 @@ class CardModel: Object {
     dynamic var flavor: String = ""
     dynamic var imageURL: String = ""
     dynamic var rarity: String = ""
-    dynamic var id: Int = 0
+    dynamic var id: String = ""
     dynamic var set: String = ""
     dynamic var otherVersionIDs: String = ""
     dynamic var imageData: NSData = NSData()
