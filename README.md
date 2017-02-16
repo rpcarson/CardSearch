@@ -1,6 +1,6 @@
 # CardSearch
 
-##app for searching a magic the gathering card databse and viewing them
+##app for browsing magic the gathering cards and saving to a favorites collection
 
 ###REST
 ###Realm
