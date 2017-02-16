@@ -6,8 +6,8 @@
 ###Realm
 ###JSON
 ###Collection Views
-##force touch - peek and pop
-##data persistence 
+####force touch - peek and pop
+####data persistence with realm
 
 
 search for cards and view them in a collection using magicthegathering.io's api
