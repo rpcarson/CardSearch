@@ -2,16 +2,16 @@
 
 ##app for searching a magic the gathering card databse and viewing them
 
-###REST calls
+###REST
+###Realm
 ###JSON
 ###Collection Views
+##force touch - peek and pop
+##data persistence 
 
 
 search for cards and view them in a collection using magicthegathering.io's api
 
-final functionality yet to be decided. this is initially a project meant to help me become more 
-comfortable with rest calls, parsing json and using collection views. 
+Currently one can configure several different parameters to search through magic the gathering cards and browse the card. these cards can be saved to a favorites collection. Most of the heavy lifting is done and im beginning to focus on optimizations and UI/UX. Search parameters still need to be finalized. The core app should be ready for release soonish. From there I might add extra features.
 
 
-Most of the code will be refactored to some degree. Right now Im just trying to get core functionality working
-while feeling out what features I do or dont want it to have
