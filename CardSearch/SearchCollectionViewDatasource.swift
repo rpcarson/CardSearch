@@ -46,21 +46,13 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICo
         let card = cardManager.cards[indexPath.row]
         
         cell.cardImageView.image = nil
-
-        
-//        
-//        if let image = card.image {
-//            
-//            cell.cardImageView.image = image
-//        }
-        
         cell.cardData = card
         
-//        for cardImage in ImageStore.images {
-//            if card.id == cardImage.associatedCardID {
-//                cell.setImage(image: cardImage.image, andDisplay: true, completion: nil)
-//            }
-//        }
+
+        if let img = card.image {
+            cell.setImage(image: img, andDisplay: true, completion: nil)
+        }
+
         
         if useDummyData {
             cell.cardNameLabel.text = String(describing: indexPath.row)
@@ -84,16 +76,16 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICo
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        let card = cardManager.cards[indexPath.row]
-        let cardData = cardManager.cards[indexPath.row]
-        
-        
-    
         guard useImages else { return }
         
-        for cardImage in ImageStore.images {
-            if card.id == cardImage.associatedCardID {
-                (cell as! CardCell).setImage(image: cardImage.image, andDisplay: true, completion: nil)
+        let cardCell = (cell as! CardCell)
+        
+        let card = cardManager.cards[indexPath.row]
+        
+        guard card.image == nil else { return }
+        
+        if let img = card.image {
+            cardCell.setImage(image: img, andDisplay: true) {
                 print("already has image - returning from func")
                 return
             }
@@ -104,40 +96,24 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICo
         indicator.frame = cell.bounds
         indicator.startAnimating()
         
-        print("DOWNLOADING IMAGE")
-        
         DispatchQueue.global(qos: .background).async {
+            print("willDisplayItem \(card.name): image downloading")
             
-            guard let image = JSONParser.parser.getImageNoQueue(imageURL: card.imageURL) else {
-                print("CCVC:willDisplayCell  - no card image retrieved")
-                // TODO - display question mark
-                return
-            }
-            
-            let cardImage = CardImage(image: image, associatedCardID: card.id)
-            if !ImageStore.images.contains(cardImage) {
-                ImageStore.images.append(cardImage)
-            }
-            
-            DispatchQueue.main.async {
+            JSONParser.parser.createCardImageFor(card) {
+                cardImage in
                 
-                for cardImage in ImageStore.images {
-                    if card.id == cardImage.associatedCardID {
-                        (cell as! CardCell).setImage(image: cardImage.image, andDisplay: true) {
-                            indicator.stopAnimating()
-                            cell.setNeedsLayout()
-                        }
-                       // print("already has image - returning from func")
-                        return
+                print("willDisplayCell \(card.name): image finished downloading")
+                                
+                DispatchQueue.main.async {
+                    guard let img = card.image else { print("guard return") ; return }
+                    cardCell.setImage(image: img, andDisplay: true) {
+                        indicator.stopAnimating()
+                        print("willDisplayItem \(card.name): image has been set")
                     }
                 }
-                
-              //  (cell as! CardCell).setImage(image: image, andDisplay: true) {
-                
             }
+
         }
-        
-        print("CCVC willDisplayCell  card.image set")
         
     }
     

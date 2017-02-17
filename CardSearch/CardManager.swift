@@ -17,7 +17,7 @@ class CardManager {
     
     var uniqueJSONResults = JSONResults()
     
-    var jsonChunks = [Int:JSONResults]()
+  //  var jsonChunks = [Int:JSONResults]()
    
     var cards = [Card]()
 

@@ -9,12 +9,14 @@
 import UIKit
 
 
+//MARK: - dev settings
+
 var testCard: Card = {
     var card = Card()
     card.name = "Allosaurus"
     card.set = "Worst"
     card.colors = ["Blue"]
-    card.rulings = [["date":"10-11-12","text":"canif a player uses this card to wipe his ass first before peein g on his opponnent then the card is exiled and rtuend to the game only after the round is overt use to wipe"],["date":"11-12-13","text":"cant use to pee pee"],["date":"11-12222-13","text":"cant 1212212use to pee pee"],["date":"33-12-13","text":"cant useTHISRULING IS ULTRA LONG AND PRObably reflects the elgnth of the average ruling im gonna get back form the json results 3333to pee pee"],["date":"11-112122-13","text":"cant use to peePEEPEE pee"]]
+    card.rulings = [["date":"10-11-12","text":"something more appropriate"],["date":"11-12-13","text":"cant do this or that rule "],["date":"11-12222-13","text":"cant 1212212use to wipe"],["date":"33-12-13","text":"cant useTHISRULING IS ULTRA LONG AND PRObably reflects the elgnth of the average ruling im gonna get back form the json results 3333to"],["date":"11-112122-13","text":"cant use to randomtext randomt radnomdd"]]
     card.image = UIImage(named: "8.png")
 
     return card
@@ -39,7 +41,7 @@ let configSearchSegueID = "ConfigSearchSegue"
 
 class CardCollectionViewController: UICollectionViewController  {
     
-    var dummyData: [Card] = {
+   lazy var dummyData: [Card] = {
         var data = [Card]()
         for i in 1...36 {
             data.append(testCard)
@@ -52,7 +54,7 @@ class CardCollectionViewController: UICollectionViewController  {
     
     var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
-    var configVC: ConfigSearchVC?
+   // var configVC: ConfigSearchVC?
     
     var searchManager = SearchManager()
     
@@ -70,28 +72,7 @@ class CardCollectionViewController: UICollectionViewController  {
         performSegue(withIdentifier: configSearchSegueID, sender: nil)
     }
     
-    func performSearch(completion: @escaping () -> Void) {
-        searchManager.updateSearchTerm(term: searchTerm)
-       
-        guard let url = searchManager.constructURLWithComponents() else {
-            print("CardCollectionVC:performSearch - url construction failed")
-            return
-        }
-        
-        
-      // guard let url = testURL else { print("BAD URL") ; return }
-        
-        mtgAPISerivce.performSearch(url: url) {
-            results in
-            
-            self.dataSource.cardManager.createUniqueCardsWithMaxFromJSON(json: results, amount: testingResultsToDisplay)
-            print("CCVC cardManager.createUniqueCardsWithMaxFromJSON called in performSearch closure")
-            
-            completion()
-        }
-    }
-    
-    
+   
     @IBAction func loadData() {
         
     
@@ -146,26 +127,43 @@ class CardCollectionViewController: UICollectionViewController  {
         return
     }
     
+    func performSearch(completion: @escaping () -> Void) {
+        searchManager.updateSearchTerm(term: searchTerm)
+        
+        guard let url = searchManager.constructURLWithComponents() else {
+            print("CardCollectionVC:performSearch - url construction failed")
+            return
+        }
+        
+        
+        // guard let url = testURL else { print("BAD URL") ; return }
+        
+        mtgAPISerivce.performSearch(url: url) {
+            results in
+            
+            self.dataSource.cardManager.createUniqueCardsWithMaxFromJSON(json: results, amount: testingResultsToDisplay)
+            print("CCVC cardManager.createUniqueCardsWithMaxFromJSON called in performSearch closure")
+            
+            completion()
+        }
+    }
     
+    let peekAndPopDelegate = PeekAndPopDelegate()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-      //  navigationController?.prefersStatusBarHidden = false
-
         
         if autoLoad && useDummyData {
             loadData()
         }
         
+        peekAndPopDelegate.collectionVC = self
         
         if traitCollection.forceTouchCapability == .available {
-            registerForPreviewing(with: self, sourceView: collectionView!)
+            registerForPreviewing(with: peekAndPopDelegate, sourceView: collectionView!)
         }
         
         searchField.delegate = self
-        
         collectionView?.dataSource = dataSource
         collectionView?.delegate = dataSource
     
@@ -192,7 +190,7 @@ class CardCollectionViewController: UICollectionViewController  {
         if segue.identifier == configSearchSegueID {
             let destinationVC = segue.destination as! ConfigSearchVC
             destinationVC.collectionView = self
-            configVC = destinationVC
+          //  configVC = destinationVC
             
             let parameters = searchManager.search.parameters
             if !parameters.isEmpty {
@@ -219,72 +217,6 @@ extension CardCollectionViewController: UITextFieldDelegate {
     }
     
 }
-
-//MARK: - PeekNPop Delegate
-
-extension CardCollectionViewController: UIViewControllerPreviewingDelegate {
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        
-        guard let indexPath = collectionView?.indexPathForItem(at: location) else {
-            print("previewingContext  indexpath fail, got path: \(location)")
-            return nil
-        }
-        guard let cell = collectionView?.cellForItem(at: indexPath) as? CardCell else {
-            print("previewingContext get cell for indexpath fail")
-            return nil
-        }
-        
-        guard let detailVC = storyboard?.instantiateViewController(withIdentifier: previewVCStoryboardID) as? PreviewVC else {
-            print("previewingContext detailVC creation fail")
-            return nil
-        }
-        
-        
-        let image = cell.cardData.image
-        
-        detailVC.image = image
-        
-        detailVC.labelText = cell.cardData.name
-        
-       // print("CELL CARD DATA : \(cell.cardData)")
-        
-        detailVC.cardData = cell.cardData
-        
-       // let width = view.frame.width/3
-        
-       // let cardSizeRatio = dataSource.cardSizeRatio
-        
-        //detailVC.preferredContentSize = CGSize(width: width, height: width*cardSizeRatio)
-        
-        previewingContext.sourceRect = cell.frame
-            
-            //CGRect(x: view.frame.width/2, y: view.frame.height/2, width: width, height: width*cardSizeRatio)
-        
-        return detailVC
-        
-    }
-    
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
-        
-        
-        guard let detailVC = storyboard?.instantiateViewController(withIdentifier: cardDetailVCID) as? CardDetailViewController else {
-            print("problem loading detailVC")
-            return
-        }
-        if let image = (viewControllerToCommit as? PreviewVC)?.image {
-              detailVC.image = image
-        }
-        
-        if let card = (viewControllerToCommit as? PreviewVC)?.cardData {
-            detailVC.card = card
-            print("detailVC card set")
-        }
-      
-        navigationController?.pushViewController(detailVC, animated: true)
-    }
-}
-
-
 
 
 //

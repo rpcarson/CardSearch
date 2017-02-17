@@ -65,48 +65,27 @@ class CardDetailViewController: UIViewController {
         _ = navigationController?.popViewController(animated: true)
     }
     
-    func addToDefaultCollection() {
-       // if isInCollection { print("already in collection") ; return }
-        
+    func addRemoveCard(_ bool: Bool) {
         guard let card = self.card else {
             print("CDVC: addToCollection - no card")
             return
         }
-        
-        CollectionsManager.sharedManager.addCardToCollection(card: card, collection: "Favorites")
-        
-        isInCollection = true
-        
-        toggleStar()
-        
-        print("added to collection")
-        
-    }
-    
-    func removeCardFromCollection() {
-       // if !isInCollection { print("card not in llection - this sholdnt be called") ; return }
-        
-        guard let card = self.card else {
-            print("CDVC: addToCollection - no card")
-            return
+        if bool {
+            CollectionsManager.sharedManager.removeFromCollection(card: card)
+            isInCollection = false
+            print("removed from collection")
+        } else {
+            CollectionsManager.sharedManager.addCardToCollection(card: card, collection: "Favorites")
+            isInCollection = true
+            print("added to collection")
+            
         }
-        
-        CollectionsManager.sharedManager.removeFromCollection(card: card)
-        
-        isInCollection = false
-        
         toggleStar()
-        
-        print("removed from collection")
-        
     }
+
     
     func pressStarButton() {
-        if isInCollection {
-            removeCardFromCollection()
-        } else {
-            addToDefaultCollection()
-        }
+        addRemoveCard(isInCollection)
     }
     
     func toggleStar() {
@@ -122,7 +101,6 @@ class CardDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         _ = checkIfInCollection()
         toggleStar()
-
     }
 
     var borderColor: UIColor = .lightGray

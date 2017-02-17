@@ -8,12 +8,12 @@
 
 import UIKit
 
-enum ID: Int {
-    case colorPicker = 1
-    case setPicker = 2
-    case typePicker = 3
-    case cmcPicker = 4
-}
+//enum ID: Int {
+//    case colorPicker = 1
+//    case setPicker = 2
+//    case typePicker = 3
+//    case cmcPicker = 4
+//}
 
 
 struct Parameter {

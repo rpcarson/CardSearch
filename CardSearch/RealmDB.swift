@@ -83,7 +83,7 @@ final class RealmManager {
                 savedCards.append(d)
             }
         } else {
-            throw RealmError.badData
+            throw RealmError.noData
         }
     }
     

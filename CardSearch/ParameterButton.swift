@@ -17,7 +17,6 @@ enum ButtonFunc {
     
     @IBInspectable var cornerRad: CGFloat = 1
     
-
     
     override func draw(_ rect: CGRect) {
         
@@ -25,20 +24,14 @@ enum ButtonFunc {
         
         let visibleContentOffset: CGFloat = 10
         
-       // let insetRect = rect.insetBy(dx: 5 + visibleContentOffset, dy: 5 + visibleContentOffset)
-        
         let radius = rect.size.width/2 - visibleContentOffset
 
-        
         let center = CGPoint(x: rect.size.width/2, y: rect.size.height/2)
         let circlePath = UIBezierPath(arcCenter: center, radius: radius, startAngle: 0, endAngle: CGFloat(M_PI * 2), clockwise: true)
         
         UIColor.green.set()
-        
-
-        
+    
         context?.addPath(circlePath.cgPath)
-       // context?.strokePath()
         
         context?.fillPath()
         

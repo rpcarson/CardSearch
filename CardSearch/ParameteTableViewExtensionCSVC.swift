@@ -14,16 +14,12 @@ let parameterCellReuseID = "parameterCell"
 
 class ParameterCellLogicSelector: UIButton {
     
-    
-    
 }
 
 enum LogicState: String {
     case _not = "not"
     case _is = ","
     case _or = "|"
-    //    case greaterThanOrEqualTo  //3
-    //    case lessThanOrEqualTo //4
     
 }
 
@@ -69,7 +65,6 @@ class ParameterCell: UITableViewCell {
         }
     
         logicDelegate?.didChangeLogicState()
-        
         
     }
     

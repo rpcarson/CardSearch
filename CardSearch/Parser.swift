@@ -53,6 +53,24 @@ class JSONParser {
         return cardSets
     }
     
+    func createCardImageFor(_ card: Card, completion: (CardImage) -> Void) {
+        guard let url = URL(string: card.imageURL) else {
+            print("getCardImageFrom(:) bad url ")
+            return
+        }
+        do {
+            let data = try Data(contentsOf: url)
+            if let image = UIImage(data: data) {
+                let cardImage = CardImage(image: image, associatedCardID: card.id)
+                ImageStore.images.append(cardImage)
+                completion(cardImage)
+            }
+        } catch {
+            print("getCardImageFrom(:) error: \(error) ")
+        }
+        
+    }
+    
     
     func getImageNoQueue(imageURL: String) -> UIImage? {
         

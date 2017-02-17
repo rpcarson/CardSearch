@@ -10,6 +10,7 @@
 		5B04C0281E304AAA00CFD58A /* CardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B04C0271E304AAA00CFD58A /* CardManager.swift */; };
 		5B06D8CC1E4EA68700059C92 /* GoldStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B06D8CA1E4EA68700059C92 /* GoldStar.png */; };
 		5B06D8CD1E4EA68700059C92 /* GreyStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B06D8CB1E4EA68700059C92 /* GreyStar.png */; };
+		5B20D1BB1E56174C00469996 /* PeekAndPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B20D1BA1E56174C00469996 /* PeekAndPop.swift */; };
 		5B37F2831E2C6EB4007442B2 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B37F2821E2C6EB4007442B2 /* SearchManager.swift */; };
 		5B67281E1E4CE4AB00F35639 /* PreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B67281D1E4CE4AB00F35639 /* PreviewVC.swift */; };
 		5B8811841E292A1B00647253 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8811831E292A1B00647253 /* CardModel.swift */; };
@@ -68,6 +69,7 @@
 		5B04C0271E304AAA00CFD58A /* CardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardManager.swift; sourceTree = "<group>"; };
 		5B06D8CA1E4EA68700059C92 /* GoldStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GoldStar.png; sourceTree = "<group>"; };
 		5B06D8CB1E4EA68700059C92 /* GreyStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreyStar.png; sourceTree = "<group>"; };
+		5B20D1BA1E56174C00469996 /* PeekAndPop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeekAndPop.swift; sourceTree = "<group>"; };
 		5B37F2821E2C6EB4007442B2 /* SearchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
 		5B67281D1E4CE4AB00F35639 /* PreviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewVC.swift; sourceTree = "<group>"; };
 		5B67281F1E4CF37F00F35639 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RealmSwift.framework; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 		5BA8AAAE1E2D7E5800B895B5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5B20D1BA1E56174C00469996 /* PeekAndPop.swift */,
 				5B5C0E3C1E54689A00662983 /* DetailAndPreView */,
 				5B5C0E3B1E54686C00662983 /* ConfigureSearch */,
 				5BD5F2811E4A86880098EB67 /* CollexTable */,
@@ -361,6 +364,7 @@
 				5BFE72071E284B2A003666B5 /* CardCollectionViewController.swift in Sources */,
 				5BF07CE41E44120500C11C6D /* Sets.swift in Sources */,
 				5BF07CEB1E44251900C11C6D /* CollectionsTBVCell.swift in Sources */,
+				5B20D1BB1E56174C00469996 /* PeekAndPop.swift in Sources */,
 				5B37F2831E2C6EB4007442B2 /* SearchManager.swift in Sources */,
 				5BF266671E4E11F80052D474 /* SavedCardsDataSource.swift in Sources */,
 				5BE7C9B81E3FF05900775DBD /* SearchCollectionFlowDelegate.swift in Sources */,
