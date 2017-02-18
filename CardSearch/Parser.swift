@@ -9,8 +9,36 @@
 import UIKit
 
 
+
+
+
+
+
 class JSONParser {
     static let parser = JSONParser()
+    
+    func getBlocksFromSetData(sets: [CardSet]) -> [Block] {
+        var bloxDict = [String:[SetInfo]]()
+        var blocks = [Block]()
+        
+        for set in sets {
+            let setInfo = SetInfo(name: set.name, code: set.code)
+            if !bloxDict.keys.contains(set.block) {
+                bloxDict.updateValue([], forKey: set.block)
+            }
+            if bloxDict[set.block] != nil {
+                bloxDict[set.block]?.append(setInfo)
+            }
+        }
+        
+        for dict in bloxDict {
+            let block = Block(name: dict.key, sets: dict.value)
+            blocks.append(block)
+        }
+        
+        return blocks
+        
+    }
     
     
     func parseSetsJSONData(json: JSONResults) -> [CardSet]? {
@@ -72,55 +100,47 @@ class JSONParser {
     }
     
     
-    func getImageNoQueue(imageURL: String) -> UIImage? {
-        
-        print("beginning getImage")
-        
-        if let url = URL(string: imageURL) {
-            do {
-                
-                let imageData = try Data(contentsOf: url)
-                
-                let image = UIImage(data: imageData)
-                
-                print("image set")
-                return image
-                
-            } catch {
-                print("bad image data")
-                return nil
-                
-            }
-        }
-        
-        print("returning nil")
-        return nil
-        
-    }
+//    func getImageNoQueue(imageURL: String) -> UIImage? {
+//        
+//        print("beginning getImage")
+//        
+//        if let url = URL(string: imageURL) {
+//            do {
+//                
+//                let imageData = try Data(contentsOf: url)
+//                
+//                let image = UIImage(data: imageData)
+//                
+//                print("image set")
+//                return image
+//                
+//            } catch {
+//                print("bad image data")
+//                return nil
+//                
+//            }
+//        }
+//        
+//        print("returning nil")
+//        return nil
+//        
+//    }
     
-    
-    
-    
-    
-    // * IS USED *//
     func sortJSONByRemovingDuplicateNames(json: [String:Any]) -> [String:Any] {
         
         var uniqueData = [[String:Any]]()
         
-        var uniqueNames = [String]()
-        
-        
+        var uniqueIDs = [String]()
         
         if let cards = json["cards"] as? [[String:Any]] {
             
             for card in cards {
                 
                 if let name = card["id"] as? String {
-                    if !uniqueNames.contains(name) {
+                    if !uniqueIDs.contains(name) {
                         if let set = card["set"] as? String  {
                             if !set.contains("p") {
-                                uniqueNames.append(name)
-                                
+                                uniqueIDs.append(name)
                                 uniqueData.append(card)
                             }
                         }
@@ -139,9 +159,6 @@ class JSONParser {
         print("sortJSONByRemovingDuplicateNames success: returning package")
         return package
     }
-    
-    //**ISUSED8**/
-    
     
     func createCardsFromCardsData(data: JSONCardData) -> [Card] {
         

@@ -18,7 +18,7 @@ struct MTGAPIService {
     
     func downloadSetsData(completion: @escaping (JSONResults) -> Void) {
         
-        guard let url = URL(string: "https://api.magicthegathering.io/v1/sets?pageSize=20") else {
+        guard let url = URL(string: "https://api.magicthegathering.io/v1/sets") else {
             print("MTGAPIService:downloadSetsData - url failed")
             return
         }

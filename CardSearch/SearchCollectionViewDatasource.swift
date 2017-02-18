@@ -11,11 +11,7 @@ import UIKit
 
 class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-    
-    
-    var cells = [CardCell]()
-    
+    private let reuseIdentifier = "CardCellID"
     
     let cardsPerRow: CGFloat = 2
     let sectionInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
@@ -24,12 +20,9 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICo
         return cardSize.height/cardSize.width
     }
     
-    
-    
     var cardManager: CardManager = CardManager()
     
-    
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cardManager.cards.count
     }
@@ -69,7 +62,6 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICo
         cell.cardNameLabel.isHidden = true
         cell.backgroundColor = UIColor.lightGray
         
-      
         return cell
     }
     
@@ -81,8 +73,7 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICo
         let cardCell = (cell as! CardCell)
         
         let card = cardManager.cards[indexPath.row]
-        
-        guard card.image == nil else { return }
+
         
         if let img = card.image {
             cardCell.setImage(image: img, andDisplay: true) {
@@ -97,20 +88,17 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICo
         indicator.startAnimating()
         
         DispatchQueue.global(qos: .background).async {
-            print("willDisplayItem \(card.name): image downloading")
-            
             JSONParser.parser.createCardImageFor(card) {
                 cardImage in
-                
-                print("willDisplayCell \(card.name): image finished downloading")
-                                
                 DispatchQueue.main.async {
                     guard let img = card.image else { print("guard return") ; return }
                     cardCell.setImage(image: img, andDisplay: true) {
                         indicator.stopAnimating()
                         print("willDisplayItem \(card.name): image has been set")
                     }
+               
                 }
+           
             }
 
         }

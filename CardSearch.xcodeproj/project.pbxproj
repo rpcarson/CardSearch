@@ -10,12 +10,15 @@
 		5B04C0281E304AAA00CFD58A /* CardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B04C0271E304AAA00CFD58A /* CardManager.swift */; };
 		5B06D8CC1E4EA68700059C92 /* GoldStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B06D8CA1E4EA68700059C92 /* GoldStar.png */; };
 		5B06D8CD1E4EA68700059C92 /* GreyStar.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B06D8CB1E4EA68700059C92 /* GreyStar.png */; };
+		5B12B7891E57BA12002F22CF /* DevSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B12B7881E57BA12002F22CF /* DevSettings.swift */; };
 		5B20D1BB1E56174C00469996 /* PeekAndPop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B20D1BA1E56174C00469996 /* PeekAndPop.swift */; };
 		5B37F2831E2C6EB4007442B2 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B37F2821E2C6EB4007442B2 /* SearchManager.swift */; };
 		5B67281E1E4CE4AB00F35639 /* PreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B67281D1E4CE4AB00F35639 /* PreviewVC.swift */; };
 		5B8811841E292A1B00647253 /* CardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8811831E292A1B00647253 /* CardModel.swift */; };
 		5B8811861E292E4B00647253 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B8811851E292E4B00647253 /* Parser.swift */; };
 		5B88BA6B1E511C64004EE9A5 /* DetailBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B88BA6A1E511C64004EE9A5 /* DetailBorder.swift */; };
+		5B90C0761E57D0010082745A /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B90C0751E57D0010082745A /* DataManager.swift */; };
+		5B90C0781E57D7620082745A /* RealmModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B90C0771E57D7620082745A /* RealmModels.swift */; };
 		5BA8AAAB1E2D756700B895B5 /* CardSorter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA8AAAA1E2D756700B895B5 /* CardSorter.swift */; };
 		5BA8AAAD1E2D7E4C00B895B5 /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA8AAAC1E2D7E4C00B895B5 /* CardDetailViewController.swift */; };
 		5BD1DDF31E29B81B00D52C8B /* 8.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BD1DDF21E29B81B00D52C8B /* 8.png */; };
@@ -69,6 +72,7 @@
 		5B04C0271E304AAA00CFD58A /* CardManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardManager.swift; sourceTree = "<group>"; };
 		5B06D8CA1E4EA68700059C92 /* GoldStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GoldStar.png; sourceTree = "<group>"; };
 		5B06D8CB1E4EA68700059C92 /* GreyStar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreyStar.png; sourceTree = "<group>"; };
+		5B12B7881E57BA12002F22CF /* DevSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DevSettings.swift; sourceTree = "<group>"; };
 		5B20D1BA1E56174C00469996 /* PeekAndPop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeekAndPop.swift; sourceTree = "<group>"; };
 		5B37F2821E2C6EB4007442B2 /* SearchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
 		5B67281D1E4CE4AB00F35639 /* PreviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewVC.swift; sourceTree = "<group>"; };
@@ -77,6 +81,8 @@
 		5B8811831E292A1B00647253 /* CardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardModel.swift; sourceTree = "<group>"; };
 		5B8811851E292E4B00647253 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
 		5B88BA6A1E511C64004EE9A5 /* DetailBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailBorder.swift; sourceTree = "<group>"; };
+		5B90C0751E57D0010082745A /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		5B90C0771E57D7620082745A /* RealmModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmModels.swift; sourceTree = "<group>"; };
 		5BA8AAAA1E2D756700B895B5 /* CardSorter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSorter.swift; sourceTree = "<group>"; };
 		5BA8AAAC1E2D7E4C00B895B5 /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
 		5BD1DDF21E29B81B00D52C8B /* 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 8.png; sourceTree = "<group>"; };
@@ -177,9 +183,11 @@
 		5BA8AAAF1E2D7E6C00B895B5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5B90C0751E57D0010082745A /* DataManager.swift */,
 				5BF0B1A41E4564E10015C6FD /* CollectionsManager.swift */,
 				5BFE720A1E284BA2003666B5 /* CardCell.swift */,
 				5BF2665C1E4DC6A50052D474 /* RealmDB.swift */,
+				5B90C0771E57D7620082745A /* RealmModels.swift */,
 				5BA8AAAA1E2D756700B895B5 /* CardSorter.swift */,
 				5B04C0271E304AAA00CFD58A /* CardManager.swift */,
 				5B5C0E3D1E5468C400662983 /* REST */,
@@ -250,6 +258,7 @@
 		5BFE71F31E284AF3003666B5 /* CardSearch */ = {
 			isa = PBXGroup;
 			children = (
+				5B12B7881E57BA12002F22CF /* DevSettings.swift */,
 				5BFE71F41E284AF3003666B5 /* AppDelegate.swift */,
 				5BFE71F81E284AF3003666B5 /* Main.storyboard */,
 				5BFE71FB1E284AF3003666B5 /* Assets.xcassets */,
@@ -380,6 +389,7 @@
 				5BF266651E4E0EF00052D474 /* SavedCardsLayout.swift in Sources */,
 				5BFC78921E359085009960B5 /* OptionsPicker.swift in Sources */,
 				5BDE0B0D1E52A6CF00B71286 /* TypesAndKinds.swift in Sources */,
+				5B90C0761E57D0010082745A /* DataManager.swift in Sources */,
 				5BEB60FC1E341991009A81EB /* NetworkServices.swift in Sources */,
 				5BA8AAAB1E2D756700B895B5 /* CardSorter.swift in Sources */,
 				5BFE71F51E284AF3003666B5 /* AppDelegate.swift in Sources */,
@@ -389,7 +399,9 @@
 				5BF0B1A51E4564E10015C6FD /* CollectionsManager.swift in Sources */,
 				5BFC78981E36B09A009960B5 /* ParameteTableViewExtensionCSVC.swift in Sources */,
 				5B8811841E292A1B00647253 /* CardModel.swift in Sources */,
+				5B12B7891E57BA12002F22CF /* DevSettings.swift in Sources */,
 				5BF07CE61E44243300C11C6D /* CollectionsTBVC.swift in Sources */,
+				5B90C0781E57D7620082745A /* RealmModels.swift in Sources */,
 				5BD32DE81E314E4000A1E070 /* ConfigSearchVC.swift in Sources */,
 				5B67281E1E4CE4AB00F35639 /* PreviewVC.swift in Sources */,
 			);

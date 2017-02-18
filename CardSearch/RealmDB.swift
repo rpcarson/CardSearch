@@ -18,35 +18,13 @@ enum RealmError: Error {
 }
 
 
-class CardModel: Object {
-    
-   dynamic var collection: String = ""
-    
-    dynamic var name: String = ""
-    dynamic var colors: String = ""
-    dynamic var manaCost: String = ""
-    dynamic var cmc: Int = 0
-    dynamic var power: String = ""
-    dynamic var toughness: String = ""
-    dynamic var type: String = ""
-    dynamic var types: String = ""
-    dynamic var subtypes: String = ""
-    dynamic var flavor: String = ""
-    dynamic var imageURL: String = ""
-    dynamic var rarity: String = ""
-    dynamic var id: String = ""
-    dynamic var set: String = ""
-    dynamic var otherVersionIDs: String = ""
-    dynamic var imageData: NSData = NSData()
-    
-}
 
 
 final class RealmManager {
     static let sharedManager = RealmManager()
     private init() {}
     
-    var savedCards: List<CardModel> = List()
+    var cardModels: List<CardModel> = List()
     var modelsToRemove: List<CardModel> = List()
     
     private func createRealm() throws -> Realm? {
@@ -80,11 +58,16 @@ final class RealmManager {
             }
             for d in dataResults {
                 print("RMAN:loadData loaded: \(d.name)")
-                savedCards.append(d)
+                cardModels.append(d)
             }
         } else {
             throw RealmError.noData
         }
+    }
+    
+    
+    func saveSetAndBlockModels() throws {
+        
     }
     
      func saveCardModels() throws {
@@ -97,7 +80,7 @@ final class RealmManager {
                         }
                     }
                 }
-                self.realm?.add(savedCards)
+                self.realm?.add(cardModels)
                 print("SHIT SAVED")
             }
         } catch {
@@ -107,54 +90,46 @@ final class RealmManager {
     }
 
     func getCardsFromResults() -> [Card] {
-        var cards = [Card]()
-        for model in savedCards {
-            cards.append(createCardFrom(model: model))
-            print("getcardfromresults: \(model.name)")
-        }
-        return cards
+//        var cards = [Card]()
+//        for model in cardModels {
+//            cards.append(createCardFrom(model: model))
+//            print("getcardfromresults: \(model.name)")
+//        }
+        return loadCardsFromModels()
     }
     
     func removeCardModel(card: Card) {
         print("Removing \(card.name)")
-        for (i, model) in savedCards.enumerated() {
+        for (i, model) in cardModels.enumerated() {
             if model.name == card.name {
-                savedCards.remove(objectAtIndex: i)
+                cardModels.remove(objectAtIndex: i)
                 modelsToRemove.append(model)
                 print("RMAN: card removed \(model.name)")
             }
         }
     }
-    
-//    func saveCollection(collection: CardCollection) {
-//        var modelList: List<CardModel> = List()
-//        for c in collection.cards {
-//            let model = createModelFrom(card: c)
-//            modelList.append(model)
-//        }
-//        
-//        savedCards.removeAll()
-//        savedCards = modelList
-//        print("RMAN: savedCards updated")
-//    }
+   private func loadCardsFromModels() -> [Card] {
+        var cards = [Card]()
+        for model in cardModels {
+            cards.append(model.cardStruct)
+        }
+        return cards
+    }
     
     func saveCardAsModel(card: Card, inCollection: String) {
         
-        let model = createModelFrom(card: card)
-        model.collection = inCollection
-        
-        savedCards.append(model)
-        
-       // saveCardModels()
-        
-      //  print("RMAN:saveCardAsModel - appended \(model)\n")
-        
-      //  print("RMAN: savedCards count - \(savedCards.count)")
+//        let model = createModelFrom(card: card)
+//        model.collection = inCollection
+//        savedCards.append(model)
+        cardModels.append(card.realmModel)
         
     }
     
+    /*
     private func createCardFrom(model: CardModel) -> Card {
         
+        
+        let separator = "-"
         var card = Card()
         
         card.name = model.name
@@ -189,13 +164,13 @@ final class RealmManager {
             print("RealmManager:createCardFromModel - image from data fail")
         }
         
-        
-       // print("RMAN:createCardfrommodel: \(card)")
         return card
+        
     }
     
     private func createModelFrom(card: Card) -> CardModel {
         
+        let separator = "-"
         let model: CardModel = CardModel()
         
         model.name = card.name
@@ -223,25 +198,11 @@ final class RealmManager {
             }
         }
         
-       // print("RMAN: create model form card: \(model)")
-        
         return model
     }
-    
-    private let separator = "-"
-}
-
-
-//MARK: - card helpers
-extension RealmManager {
-    
+ */
     
 }
-
-
-
-
-
 
 
 //

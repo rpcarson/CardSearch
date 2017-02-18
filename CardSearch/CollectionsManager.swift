@@ -36,16 +36,11 @@ struct CollectionsManager {
         defaultCollection.cards = RealmManager.sharedManager.getCardsFromResults()
     }
     
-    func updateRealmData() {
-       // RealmManager.sharedManager.saveCollection(collection: defaultCollection)
-    }
-    
     mutating func removeFromCollection(card: Card) {
         for (i, c) in defaultCollection.cards.enumerated() {
             if c == card {
                 defaultCollection.cards.remove(at: i)
                 RealmManager.sharedManager.removeCardModel(card: card)
-                // updateRealmData()
                 print("Card removed from default collecitn: \(c.name)")
             }
         }
@@ -55,10 +50,7 @@ struct CollectionsManager {
         if collection == "Favorites" {
             defaultCollection.addCard(card)
             RealmManager.sharedManager.saveCardAsModel(card: card, inCollection: "Favorites")
-            //updateRealmData()
             print("card added to default collection \(card.name)")
-          //  RealmManager.sharedManager.saveCardAsModel(card: card, inCollection: "Favorites")
-            
         } else {
             for (i, c) in customCollections.enumerated() {
                 if collection == c.name {
@@ -67,7 +59,6 @@ struct CollectionsManager {
             }
         }
                 
-      //  print("Card: \(card) added to \(collection)")
     }
     
     mutating func createCollection(name: String) {
@@ -75,16 +66,12 @@ struct CollectionsManager {
         customCollections.append(collection)
         availableCollections.append(name)
     }
-    
-    
-    
 }
 
 
 struct CardCollection {
     
     let name: String
-    
     var cards: [Card]
     
     func getCard(index: Int) -> Card? {

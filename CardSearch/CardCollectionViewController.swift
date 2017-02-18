@@ -8,36 +8,7 @@
 
 import UIKit
 
-
-//MARK: - dev settings
-
-var testCard: Card = {
-    var card = Card()
-    card.name = "Allosaurus"
-    card.set = "Worst"
-    card.colors = ["Blue"]
-    card.rulings = [["date":"10-11-12","text":"something more appropriate"],["date":"11-12-13","text":"cant do this or that rule "],["date":"11-12222-13","text":"cant 1212212use to wipe"],["date":"33-12-13","text":"cant useTHISRULING IS ULTRA LONG AND PRObably reflects the elgnth of the average ruling im gonna get back form the json results 3333to"],["date":"11-112122-13","text":"cant use to randomtext randomt radnomdd"]]
-    card.image = UIImage(named: "8.png")
-
-    return card
-}()
-
-let testingSets = false
-
-let testingPageSize = "100"
-let testingResultsToDisplay = 100
-
-
-let autoLoad = false
-
-let useDummyData = false
-
-let useDebuggerCells = true
-
-let useImages = true
-
-let reuseIdentifier = "CardCellID"
-let configSearchSegueID = "ConfigSearchSegue"
+private let configSearchSegueID = "ConfigSearchSegue"
 
 class CardCollectionViewController: UICollectionViewController  {
     
@@ -54,11 +25,11 @@ class CardCollectionViewController: UICollectionViewController  {
     
     var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
     
-   // var configVC: ConfigSearchVC?
-    
     var searchManager = SearchManager()
     
     var dataSource = SearchCollectionViewDatasource()
+    
+    let peekAndPopDelegate = PeekAndPopDelegate()
     
     @IBOutlet weak var searchField: UITextField!
     
@@ -75,8 +46,6 @@ class CardCollectionViewController: UICollectionViewController  {
    
     @IBAction func loadData() {
         
-    
-        
         if !useDummyData {
             searchField.addSubview(activityIndicator)
             activityIndicator.frame = searchField.bounds
@@ -90,23 +59,6 @@ class CardCollectionViewController: UICollectionViewController  {
             self.collectionView?.reloadData()
             return
         }
-        
-        if testingSets {
-            
-            mtgAPISerivce.downloadSetsData {
-                data in
-                
-                if let sets = JSONParser.parser.parseSetsJSONData(json: data) {
-                    print("SETS: \(sets)")
-                }
-                
-            }
-            
-            
-            return
-        }
-        
-        
         
         performSearch {
             
@@ -135,7 +87,6 @@ class CardCollectionViewController: UICollectionViewController  {
             return
         }
         
-        
         // guard let url = testURL else { print("BAD URL") ; return }
         
         mtgAPISerivce.performSearch(url: url) {
@@ -148,7 +99,57 @@ class CardCollectionViewController: UICollectionViewController  {
         }
     }
     
-    let peekAndPopDelegate = PeekAndPopDelegate()
+    
+    private func downloadSets() {
+        mtgAPISerivce.downloadSetsData { (results) in
+            var names = [String]()
+            var code = [String]()
+            var blox = [String]()
+            
+            
+            let sets = JSONParser.parser.parseSetsJSONData(json: results)
+            
+            guard let data = JSONParser.parser.parseSetsJSONData(json: results) else { return }
+            
+            let blocks = JSONParser.parser.getBlocksFromSetData(sets: data)
+           
+            for b in blocks {
+                print("Blocks - \n Name: \(b.name) \n Sets: \(b.sets)")
+
+            }
+            
+            return
+            
+            if let set = results["sets"] as? [[String:Any]] {
+                print("sets")
+                for s in set {
+                    print(s.description)
+                    if let blok = s["block"] as? String {
+                        print("BLOK \(blok)")
+                    }
+                }
+            }
+            
+            
+            for set in sets! {
+                
+                names.append(set.name)
+                code.append(set.code)
+                
+                if set.block != "" {
+                    print(set.block)
+                    blox.append(set.block)
+                }
+                
+            }
+            
+            // print(results)
+            print(blox)
+            print(blox.count)
+        }
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -156,6 +157,8 @@ class CardCollectionViewController: UICollectionViewController  {
         if autoLoad && useDummyData {
             loadData()
         }
+        
+    
         
         peekAndPopDelegate.collectionVC = self
         
@@ -166,6 +169,8 @@ class CardCollectionViewController: UICollectionViewController  {
         searchField.delegate = self
         collectionView?.dataSource = dataSource
         collectionView?.delegate = dataSource
+        
+        if testingSets {  downloadSets() }
     
     }
     
@@ -190,8 +195,6 @@ class CardCollectionViewController: UICollectionViewController  {
         if segue.identifier == configSearchSegueID {
             let destinationVC = segue.destination as! ConfigSearchVC
             destinationVC.collectionView = self
-          //  configVC = destinationVC
-            
             let parameters = searchManager.search.parameters
             if !parameters.isEmpty {
                 destinationVC.parameters = parameters

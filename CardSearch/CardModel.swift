@@ -8,30 +8,22 @@
 
 import UIKit
 
-extension Card: Equatable {
-    public static func ==(lhs: Card, rhs: Card) -> Bool {
-        return lhs.id == rhs.id
-    }
-}
-
 
 struct Card {
     
     var name: String
-    
     var colors: [String]
-    
-    var color: String {
-        var string = ""
-        for c in colors {
-            if c == colors[0] {
-                string += c
-            } else {
-                string += ", \(c)"
-            }
-        }
-        return string
-    }
+//    var color: String {
+//        var string = ""
+//        for c in colors {
+//            if c == colors[0] {
+//                string += c
+//            } else {
+//                string += ", \(c)"
+//            }
+//        }
+//        return string
+//    }
     
     var cardColor: CardColor {
         guard self.colors.count >= 1 else { print("colorlesss") ; return .colorless }
@@ -86,7 +78,8 @@ struct Card {
                 }
             }
             print("\(name): No Associated Image Found")
-            return UIImage(named: "Magic_card_back")
+           // return UIImage(named: "Magic_card_back")
+            return nil
         }
         set {
             let img = CardImage(image: newValue!, associatedCardID: self.id)
@@ -122,7 +115,65 @@ struct Card {
         rulings = [["none":"none"]]
         printings = ["blank"]
     }
+
+}
+
+
+extension Card: Equatable {
+    public static func ==(lhs: Card, rhs: Card) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+
+extension Card {
     
+     var realmModel: CardModel {
+        return convertToRealmModel()
+    }
+    
+    private func convertToRealmModel() -> CardModel {
+        
+        let separator = "-"
+        let model: CardModel = CardModel()
+        
+        model.name = self.name
+        model.colors = self.colors.joined(separator: separator)
+        model.manaCost = self.manaCost
+        model.cmc = self.cmc
+        model.power = self.power
+        model.toughness = self.toughness
+        model.type = self.type
+        model.types = self.types.joined(separator: separator)
+        model.subtypes = self.subtypes.joined(separator: separator)
+        model.flavor = self.flavor
+        model.imageURL = self.imageURL
+        model.rarity = self.rarity
+        model.id = self.id
+        model.set = self.set
+        
+        model.otherVersionIDs = (self.otherVersionIDs.map({String($0)}) as [String]).joined(separator: separator)
+        
+        if let image = self.image {
+            if let data: Data = UIImageJPEGRepresentation(image, 1.0) {
+                model.imageData = data as NSData
+            } else {
+                print("RealmManager:saveCardAsModel - data from image failed ")
+            }
+        }
+        
+        return model
+    }
     
 }
+
+
+
+
+
+
+
+
+
+//
 
