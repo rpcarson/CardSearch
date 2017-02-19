@@ -37,11 +37,12 @@ let currentStandard = "BFZ|OGW|SOI|EMN|KLD|AER"
 
 
 enum SearchParameter: String {
-    case name
-    case color
+    case name = "Name"
+    case color = "Color"
     case cmc
-    case set
-    case type
+    case set = "Set"
+    case type = "Type"
+  //  case subtype = "Subtype"
 }
 
 struct Search {

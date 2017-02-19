@@ -9,10 +9,11 @@
 import UIKit
 
 enum PickerType: String {
-    case color
+    case color = "Color"
     case cmc
-    case set
-    case type
+    case set = "Set"
+    case type = "Type"
+   // case subtype = "Subtype"
 }
 
 class OptionsPicker: UIPickerView, UIPickerViewDelegate, UIPickerViewDataSource {

@@ -94,6 +94,11 @@ extension ConfigSearchVC: UITableViewDelegate, UITableViewDataSource, LogicDeleg
 
         }
         
+        if parameter.parameterType == .set || parameter.parameterType == .type {
+            cell.andSelector.isHidden = true
+            cell.orSelector.isHidden = true
+        }
+        
         cell.backgroundColor = UIColor.lightGray
         
         cell.logicDelegate = self

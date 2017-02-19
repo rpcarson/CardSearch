@@ -22,7 +22,7 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICo
     
     var cardManager: CardManager = CardManager()
     
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return cardManager.cards.count
     }
@@ -38,14 +38,14 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICo
         
         let card = cardManager.cards[indexPath.row]
         
-        cell.cardImageView.image = nil
+        cell.cardImageView.image = CardImage.placeholder
         cell.cardData = card
         
-
+        
         if let img = card.image {
             cell.setImage(image: img, andDisplay: true, completion: nil)
         }
-
+        
         
         if useDummyData {
             cell.cardNameLabel.text = String(describing: indexPath.row)
@@ -70,19 +70,29 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICo
         
         guard useImages else { return }
         
+        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        
         let cardCell = (cell as! CardCell)
         
         let card = cardManager.cards[indexPath.row]
-
         
-        if let img = card.image {
-            cardCell.setImage(image: img, andDisplay: true) {
-                print("already has image - returning from func")
+        for img in ImageStore.images {
+            if card.id == img.associatedCardID {
+                print("\(card.name) image ID match - returning from willDisplay")
                 return
             }
         }
         
-        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        //        if let img = card.image {
+        //            cardCell.setImage(image: img, andDisplay: true) {
+        //                print("already has image - returning from func")
+        //                if indicator.isAnimating {
+        //                    indicator.stopAnimating()
+        //                }
+        //                return
+        //            }
+        //        }
+        
         cell.addSubview(indicator)
         indicator.frame = cell.bounds
         indicator.startAnimating()
@@ -91,16 +101,17 @@ class SearchCollectionViewDatasource: NSObject, UICollectionViewDataSource, UICo
             JSONParser.parser.createCardImageFor(card) {
                 cardImage in
                 DispatchQueue.main.async {
-                    guard let img = card.image else { print("guard return") ; return }
+                    indicator.stopAnimating()
+                    guard let img = card.image else { print("DispatchQueue willDisplay \(card.name) card image error")
+                        return }
                     cardCell.setImage(image: img, andDisplay: true) {
-                        indicator.stopAnimating()
                         print("willDisplayItem \(card.name): image has been set")
                     }
-               
+                    
                 }
-           
+                
             }
-
+            
         }
         
     }

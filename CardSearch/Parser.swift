@@ -89,12 +89,15 @@ class JSONParser {
         do {
             let data = try Data(contentsOf: url)
             if let image = UIImage(data: data) {
-                let cardImage = CardImage(image: image, associatedCardID: card.id)
-                ImageStore.images.append(cardImage)
+                let cardImage = CardImage(image: image, cardID: card.id)
+               // ImageStore.addToStoreIgnoringDuplicates(cardImage)
                 completion(cardImage)
             }
         } catch {
             print("getCardImageFrom(:) error: \(error) ")
+            let placeHolderImage = CardImage(image: CardImage.placeholder, cardID: card.id)
+           // ImageStore.addToStoreIgnoringDuplicates(placeHolderImage)
+            completion(placeHolderImage)
         }
         
     }

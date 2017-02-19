@@ -26,7 +26,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CardCellID" id="7gl-zO-Mth" customClass="CardCell" customModule="CardSearch" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="0.0" width="200" height="200"/>
+                                <rect key="frame" x="88" y="0.0" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -225,7 +225,7 @@
                                         <rect key="frame" x="0.0" y="28" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="F6k-pw-c1Y" id="JLG-Fm-7vG">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ls-ak-tnb">
@@ -310,7 +310,7 @@
                             <constraint firstItem="pky-g1-OGe" firstAttribute="leading" secondItem="y7x-Y4-6od" secondAttribute="leadingMargin" id="gEL-Zg-R7d"/>
                             <constraint firstAttribute="trailingMargin" secondItem="pky-g1-OGe" secondAttribute="trailing" id="iE5-Ra-36K"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aL0-cP-REA" secondAttribute="trailing" id="k2q-dd-aI2"/>
-                            <constraint firstItem="Bja-lP-4cA" firstAttribute="top" secondItem="aL0-cP-REA" secondAttribute="bottom" constant="4.5" id="lPG-ae-SfY"/>
+                            <constraint firstItem="Bja-lP-4cA" firstAttribute="top" secondItem="aL0-cP-REA" secondAttribute="bottom" constant="5" id="lPG-ae-SfY"/>
                             <constraint firstItem="kYN-4b-yUl" firstAttribute="top" secondItem="FJs-BY-q6c" secondAttribute="bottom" constant="20" id="mBn-vS-JrS"/>
                             <constraint firstItem="FJs-BY-q6c" firstAttribute="leading" secondItem="y7x-Y4-6od" secondAttribute="leadingMargin" id="qEz-xa-Fvo"/>
                             <constraint firstItem="P7W-20-zEF" firstAttribute="leading" secondItem="y7x-Y4-6od" secondAttribute="leadingMargin" id="uVP-YL-qlS"/>
@@ -471,7 +471,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gyp-Au-KnR" id="ZWN-CD-S52">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5lY-Ei-pgM">
@@ -507,7 +507,7 @@
         <scene sceneID="CZ0-Ey-onf">
             <objects>
                 <collectionViewController id="IXn-V9-nmd" customClass="SavedCollectionsCVC" customModule="CardSearch" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="xA5-ok-7hn">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="xA5-ok-7hn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

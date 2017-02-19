@@ -82,9 +82,9 @@ struct Card {
             return nil
         }
         set {
-            let img = CardImage(image: newValue!, associatedCardID: self.id)
+            let img = CardImage(image: newValue!, cardID: self.id)
             if !ImageStore.images.contains(img) {
-                print("\(name): Adding image to ImageStore")
+               // print("\(name): Adding image to ImageStore")
                 ImageStore.images.append(img)
             }
         

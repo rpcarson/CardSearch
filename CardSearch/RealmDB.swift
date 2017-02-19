@@ -57,7 +57,7 @@ final class RealmManager {
                 return
             }
             for d in dataResults {
-                print("RMAN:loadData loaded: \(d.name)")
+              //  print("RMAN:loadData loaded: \(d.name)")
                 cardModels.append(d)
             }
         } else {
