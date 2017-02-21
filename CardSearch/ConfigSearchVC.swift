@@ -31,59 +31,46 @@ class ConfigSearchVC: UIViewController {
     
     var collectionView: CardCollectionViewController?
 
-    
     @IBOutlet weak var parameterTableView: UITableView!
+    
+    @IBOutlet var parameterPickers: [OptionsPicker]!
 
-    
-    @IBOutlet weak var colorPicker: OptionsPicker!
-    @IBOutlet weak var typePicker: OptionsPicker!
-    @IBOutlet weak var cmcPicker: OptionsPicker!
-    @IBOutlet weak var setPicker: OptionsPicker!
-    
-    @IBOutlet var addParameterButtons: [ParameterButton]!
-    @IBOutlet var removeParameterButtons: [ParameterButton]!
-    
-    @IBOutlet weak var colorButton: ParameterButton!
-    @IBOutlet weak var typeButton: ParameterButton!
-    @IBOutlet weak var setButton: ParameterButton!
-    @IBOutlet weak var cmcButton: ParameterButton!
-    
+    @IBOutlet weak var addParamOne: ParameterButton!
+    @IBOutlet weak var addParamTwo: ParameterButton!
+    @IBOutlet weak var addParamThree: ParameterButton!
+    @IBOutlet weak var addParamFour: ParameterButton!
+
     @IBAction func clearParameters() {
         parameters.removeAll()
         parameterTableView.reloadData()
     }
     
-   
     @IBAction func addParameter(sender: ParameterButton) {
         
         var parameter = Parameter()
-        
+
         guard let picker = sender.associatedPicker else {
             print("addParamter: bad picker")
             return
         }
         
         let pickerIndex = picker.selectedRow(inComponent: 0)
-        
         let value = (picker.data[pickerIndex]) as String
         parameter.parameterType = picker.parameterType
         parameter.value = value
         
         parameters.append(parameter)
-                
         parameterTableView.reloadData()
 
     }
     
     
     func updateLogicStateForParameters() {
-        
         for (i, _) in parameters.enumerated() {
             let indexPath = IndexPath(row: i, section: 0)
             if let cell = parameterTableView.cellForRow(at: indexPath) as? ParameterCell {
                 let state = cell.logicState
                 parameters[i].logicState = state
-               // print("state set")
             }
            
         }  
@@ -100,22 +87,6 @@ class ConfigSearchVC: UIViewController {
     
     }
     
-    func configPickers() {
-        colorPicker.configPicker(pickerType: .color)
-        typePicker.configPicker(pickerType: .type)
-        cmcPicker.configPicker(pickerType: .cmc)
-        setPicker.configPicker(pickerType: .set)
-   }
-   
-    func configButtons() {
-        colorButton.setPicker(picker: colorPicker)
-        setButton.setPicker(picker: setPicker)
-        cmcButton.setPicker(picker: cmcPicker)
-        typeButton.setPicker(picker: typePicker)
-    }
-        
-        
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -123,12 +94,14 @@ class ConfigSearchVC: UIViewController {
         
         parameterTableView.backgroundColor = UIColor.darkGray
         
-        configButtons()
-        configPickers()
-        
+        addParamOne.associatedPicker = OptionsPicker.pickerOrder[0]
+        addParamTwo.associatedPicker = OptionsPicker.pickerOrder[1]
+        addParamThree.associatedPicker = OptionsPicker.pickerOrder[2]
+        addParamFour.associatedPicker = OptionsPicker.pickerOrder[3]
+
         parameterTableView.allowsSelection = false
         
-        
+
     }
 
 }

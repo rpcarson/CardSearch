@@ -8,16 +8,15 @@
 
 import UIKit
 
-enum ButtonFunc {
-    case add
-    case remove
-}
 
 @IBDesignable class ParameterButton: UIButton {
     
+    
+    var associatedPicker: OptionsPicker?
+
+    
     @IBInspectable var cornerRad: CGFloat = 1
-    
-    
+
     override func draw(_ rect: CGRect) {
         
         let context = UIGraphicsGetCurrentContext()
@@ -42,28 +41,46 @@ enum ButtonFunc {
         context?.setLineWidth(5)
         
         context?.strokePath()
-        
-        
-       // context?.setLineWidth(5)
-       // context?.strokeEllipse(in: insetRect)
-       // context?.strokeEllipse(in: insetRect)
-        
-       // context?.strokeEllipse(in: insetRect)
-        
-      //  layer.cornerRadius = cornerRad
+
         clipsToBounds = true
         
         backgroundColor = UIColor.clear
         
     }
     
+//    static private var buttons = [ParameterButton]()
+//    static private var buttonOrder: [ParameterButton] {
+//        return ParameterButton.buttons.sorted{
+//            $0.0.yPosition > $0.1.yPosition
+//        }
+////        return ParameterButton.buttons.sorted { $0.0.frame.origin.y > $0.1.frame.origin.y }
+//    }
+ 
+//    required init?(coder aDecoder: NSCoder) {
+//        super.init(coder: aDecoder)
+//        print(ParameterButton.buttons.count)
+//        print(self.frame.origin.y)
+//        ParameterButton.buttons.append(self)
+//        
+//    }
     
-    var associatedPicker: OptionsPicker?
+  //  var yPosition: CGFloat = 0
     
-    func setPicker(picker: OptionsPicker) {
-        associatedPicker = picker
-    }
+//    var buttonID: Int {
+//        var id = 0
+//        for (i, button) in ParameterButton.buttonOrder.enumerated() {
+//            if self == button {
+//                print(i)
+//                id = i
+//            }
+//        }
+//        return id
+//    }
+    
+    
+//    func setPicker(picker: OptionsPicker) {
+//        associatedPicker = picker
+//    }
 
-    var buttonFunc: ButtonFunc = .add
 
 }

@@ -24,7 +24,7 @@ var testCard: Card = {
 
 let testingSets = false
 
-let testingPageSize = "100"
+let testingPageSize = "6"
 let testingResultsToDisplay = 100
 
 let autoLoad = false
